@@ -39,9 +39,16 @@ export default class Level extends Phaser.Scene {
 		penguin.scaleX = 2;
 		penguin.scaleY = 2;
 
+		// sprite_1
+		const sprite_1 = this.add.nineslice(630, 283, "_MISSING", 20, 20, 10, 10, 10, 10);
+		sprite_1.scaleX = 4.629283821894623;
+		sprite_1.scaleY = 6.738034889532861;
+		sprite_1.visible = false;
+
 		this.welcome = welcome;
 		this.body = body;
 		this.penguin = penguin;
+		this.sprite_1 = sprite_1;
 
 		this.events.emit("scene-awake");
 	}
@@ -52,6 +59,8 @@ export default class Level extends Phaser.Scene {
 	body;
 	/** @type {Phaser.GameObjects.Sprite} */
 	penguin;
+	/** @type {Phaser.GameObjects.NineSlice} */
+	sprite_1;
 
 	/* START-USER-CODE */
 
@@ -61,7 +70,7 @@ export default class Level extends Phaser.Scene {
 
 		this.editorCreate();
 
-		this.penguin.on("pointerover", () => {
+		this.sprite_1.on("pointerover", () => {
 			this.welcome.text = "Penguin!";
 			this.sit = true;
 		});
@@ -87,8 +96,8 @@ export default class Level extends Phaser.Scene {
 				}
 				else 
 				{
-					let direction = Math.round(angle / 90) + 1;
-					directionId = ((direction > 8) ? 1 : direction) + 10;
+					let direction = Math.round(angle / 45);
+					directionId = ((direction > 7) ? 1 : direction) + 9;
 					walkFrame = (this.count % 8) + 1;
 				}
 

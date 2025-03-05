@@ -56,6 +56,19 @@
             "y": 310,
             "scaleX": 2,
             "scaleY": 2
+        },
+        {
+            "type": "NineSlice",
+            "id": "56393f93-e0b7-4e59-83d2-7843e773097e",
+            "label": "sprite_1",
+            "scope": "CLASS",
+            "x": 630,
+            "y": 283,
+            "scaleX": 4.629283821894623,
+            "scaleY": 6.738034889532861,
+            "visible": false,
+            "width": 20,
+            "height": 20
         }
     ],
     "plainObjects": [],
