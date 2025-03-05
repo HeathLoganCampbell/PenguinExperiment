@@ -1,0 +1,68 @@
+{
+    "id": "01aefa93-6044-4159-8358-7e91310aa05f",
+    "sceneType": "SCENE",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "importFileExtension": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Level",
+        "borderWidth": 1280,
+        "borderHeight": 720
+    },
+    "displayList": [
+        {
+            "type": "Text",
+            "id": "b2b3dbd5-2106-41fa-8a04-9b511e3401a9",
+            "label": "welcome",
+            "scope": "CLASS",
+            "x": 640,
+            "y": 478,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Phaser 3 + Phaser Editor v4",
+            "fontFamily": "Arial",
+            "fontSize": "30px"
+        },
+        {
+            "type": "Sprite",
+            "id": "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
+            "label": "body",
+            "scope": "CLASS",
+            "texture": {
+                "key": "penguin_1",
+                "frame": "body/1_1"
+            },
+            "x": 626,
+            "y": 310,
+            "scaleX": 2,
+            "scaleY": 2,
+            "tintTopLeft": "#660099",
+            "tintTopRight": "#660099",
+            "tintBottomLeft": "#660099",
+            "tintBottomRight": "#660099"
+        },
+        {
+            "type": "Sprite",
+            "id": "9c00cea4-22fd-4b27-a4e0-35c931691599",
+            "label": "penguin",
+            "scope": "CLASS",
+            "texture": {
+                "key": "penguin_1",
+                "frame": "penguin/1_1"
+            },
+            "x": 626,
+            "y": 310,
+            "scaleX": 2,
+            "scaleY": 2
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
