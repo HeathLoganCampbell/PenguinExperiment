@@ -96,6 +96,8 @@ export default class Pool extends Phaser.Scene {
 			this.otherPenguins = this.otherPenguins.filter(item => item.id !== data.id);
 		})
 
+		game.network.send("init");
+
 		this.matter.world.setBounds(0, 0, 1520, 960);
 		var body = this.matter.add.fromPhysicsEditor(0, 0, this.cache.json.get('cave-physics')["Walls"])
 		console.log(this.cache.json.get('cave-physics')["Walls"])

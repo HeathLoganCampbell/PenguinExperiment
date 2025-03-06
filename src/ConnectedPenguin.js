@@ -11,21 +11,6 @@ export default class ConnectedPenguin extends Penguin
         this.setupMovement();
     }
 
-    createPenguin() {
-        this.body = this.scene.add.sprite(777, 537, "penguin_1", "body/1_1");
-        this.body.tintTopLeft = 6684825;
-		this.body.tintTopRight = 6684825;
-		this.body.tintBottomLeft = 6684825;
-		this.body.tintBottomRight = 6684825;
-        this.penguin = this.scene.add.sprite(777, 537, "penguin_1", "penguin/1_1");
-        this.nametag = this.scene.add.text(777, 532, "Penguin", {
-            align: "center", 
-            color: "#000000", 
-            fontFamily: "Arial", 
-            fontSize: "24px"
-        }).setOrigin(0.5, -0.8);
-    }
-
     setupMovement() {
         this.scene.time.addEvent({
 			delay: 50,
@@ -34,16 +19,6 @@ export default class ConnectedPenguin extends Penguin
 			},
 			loop: true 
 		});
-    }
-
-    updatePosition(x, y)
-    {
-        this.penguin.x = x;
-        this.penguin.y = y;
-        this.body.x = x;
-        this.body.y = y;
-        this.nametag.x = x;
-        this.nametag.y = y;
     }
 
     moveTo(targetX, targetY) {

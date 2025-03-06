@@ -42,6 +42,22 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.body.y = y;
     }
 
+    removePenguin()
+    {
+        if (this.body) {
+            this.body.destroy();
+            this.body = null;
+        }
+        if (this.penguin) {
+            this.penguin.destroy();
+            this.penguin = null;
+        }
+        if (this.nametag) {
+            this.nametag.destroy();
+            this.nametag = null;
+        }
+    }
+
     moveTo(targetX, targetY) {
         if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY)) return;
 
