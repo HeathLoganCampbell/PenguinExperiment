@@ -63,6 +63,10 @@ export default class Level extends Phaser.Scene {
 		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
 		image_4.setOrigin(0, 0);
 
+		// image_7
+		const image_7 = this.add.image(500, 587, "cave", "water/water_1");
+		image_7.setOrigin(0, 0);
+
 		// lists
 		const displayList = [sprite_1, image_1, image_2, image_3];
 		const penguinList = [penguin, body];
@@ -172,6 +176,7 @@ export default class Level extends Phaser.Scene {
 			const rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
 			const angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
 			let directionId = Math.round(angle / 45) + 9;
+			if(directionId > 16) directionId = 16;
 
 			// Update the penguin texture at the start of the tween
 			this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);

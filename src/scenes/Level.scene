@@ -143,6 +143,19 @@
             "y": 688,
             "originX": 0,
             "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "5a37ab3b-965c-44f5-a193-fc59b53900ea",
+            "label": "image_7",
+            "texture": {
+                "key": "cave",
+                "frame": "water/water_1"
+            },
+            "x": 500,
+            "y": 587,
+            "originX": 0,
+            "originY": 0
         }
     ],
     "plainObjects": [],
