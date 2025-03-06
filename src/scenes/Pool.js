@@ -61,10 +61,15 @@ export default class Pool extends Phaser.Scene {
 		// chat_button_icon
 		const chat_button_icon = this.add.image(1050, 924, "main", "chat-icon");
 
+		// chat_text
+		const chat_text = this.add.text(515, 912, "", {});
+		chat_text.text = "New text";
+		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
+
 		// lists
 		const displayList = [sprite_1, image_1, image_2, ceiling];
 		const penguinList = [];
-		const chatList = [chat_button_icon, chat_button, chat_input, dock];
+		const chatList = [chat_button_icon, chat_button, chat_input, dock, chat_text];
 
 		this.ceiling = ceiling;
 		this.left_corner_ice = left_corner_ice;
@@ -72,6 +77,7 @@ export default class Pool extends Phaser.Scene {
 		this.chat_input = chat_input;
 		this.chat_button = chat_button;
 		this.chat_button_icon = chat_button_icon;
+		this.chat_text = chat_text;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 		this.chatList = chatList;
@@ -91,11 +97,13 @@ export default class Pool extends Phaser.Scene {
 	chat_button;
 	/** @type {Phaser.GameObjects.Image} */
 	chat_button_icon;
+	/** @type {Phaser.GameObjects.Text} */
+	chat_text;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
 	/** @type {Array<any>} */
 	penguinList;
-	/** @type {Phaser.GameObjects.Image[]} */
+	/** @type {Array<Phaser.GameObjects.Image|Phaser.GameObjects.Text>} */
 	chatList;
 
 	/* START-USER-CODE */
@@ -112,6 +120,47 @@ export default class Pool extends Phaser.Scene {
 		this.chat_input.setDepth(1001);
 		this.chat_button.setDepth(1002);
 		this.chat_button_icon.setDepth(1002);
+		this.chat_text.setDepth(1003);
+
+		this.chat_text.setInteractive();
+		this.chat_input.setInteractive();
+
+		var inputText = "";
+		this.focusedOnChat = false;
+		var _this = this;
+		this.chat_input.on('pointerdown', function() {
+			_this.focusedOnChat = true;
+		});
+
+		this.chat_text.on('pointerdown', function() {
+			_this.focusedOnChat = true;
+		});
+
+		this.input.on('pointerdown', function(event) {
+			if (!_this.chat_input.getBounds().contains(event.x, event.y) && !_this.chat_text.getBounds().contains(event.x, event.y)) {
+				_this.focusedOnChat = false;  // Remove focus when clicking outside
+			}
+		});
+
+		this.input.keyboard.on('keydown', function(event) {
+			if (!_this.focusedOnChat) return;
+
+			if (event.key === 'Backspace')
+			{
+				inputText = inputText.slice(0, -1);
+			} 
+			else if (event.key === 'Enter')
+			{
+				// send
+				inputText = "";
+			}
+			else if (event.key.length === 1)
+			{
+				inputText += event.key;
+			}
+			
+			_this.chat_text.text = inputText;
+		});
 
 		// self
 		this.penguin = new Penguin(this);

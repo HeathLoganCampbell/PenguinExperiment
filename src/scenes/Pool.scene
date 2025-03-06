@@ -155,6 +155,18 @@
             },
             "x": 1050,
             "y": 924
+        },
+        {
+            "type": "Text",
+            "id": "153bed29-3c27-4deb-9c21-ed6ca3b5ac4d",
+            "label": "chat_text",
+            "displayName": "chat_text",
+            "scope": "CLASS",
+            "x": 515,
+            "y": 912,
+            "text": "New text",
+            "fontFamily": "Arial",
+            "fontSize": "24px"
         }
     ],
     "plainObjects": [],
@@ -186,7 +198,8 @@
                 "c29d3e2a-effa-4208-b179-52a8b367ad33",
                 "711ba0e2-965f-4e47-a454-00f697ba2424",
                 "422c9b13-452f-48c6-891f-01fb50825c31",
-                "92076d69-3a07-432d-9c1c-97f8551ac9d0"
+                "92076d69-3a07-432d-9c1c-97f8551ac9d0",
+                "153bed29-3c27-4deb-9c21-ed6ca3b5ac4d"
             ]
         }
     ]
