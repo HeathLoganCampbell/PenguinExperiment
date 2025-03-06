@@ -15,7 +15,7 @@ export default class Penguin extends Phaser.GameObjects.Container
 		this.body.tintBottomLeft = 6684825;
 		this.body.tintBottomRight = 6684825;
         this.penguin = this.scene.add.sprite(777, 537, "penguin_1", "penguin/1_1");
-        this.nametag = this.scene.add.text(777, 532, "Penguin", {
+        this.nametag = this.scene.add.text(777, 537, "Penguin", {
             align: "center", 
             color: "#000000", 
             fontFamily: "Arial", 
@@ -40,6 +40,8 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.penguin.y = y;
         this.body.x = x;
         this.body.y = y;
+        this.nametag.x = x;
+        this.nametag.y = y;
     }
 
     removePenguin()
