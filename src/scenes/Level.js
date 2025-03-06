@@ -63,13 +63,20 @@ export default class Level extends Phaser.Scene {
 		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
 		image_4.setOrigin(0, 0);
 
+		// nametag
+		const nametag = this.add.text(777, 532, "", {});
+		nametag.setOrigin(0.5, -0.8);
+		nametag.text = "New text";
+		nametag.setStyle({ "align": "center", "color": "#000000", "fontFamily": "Arial", "fontSize": "24px" });
+
 		// lists
 		const displayList = [sprite_1, image_1, image_2, image_3];
-		const penguinList = [penguin, body];
+		const penguinList = [penguin, body, nametag];
 
 		this.welcome = welcome;
 		this.body = body;
 		this.penguin = penguin;
+		this.nametag = nametag;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 
@@ -82,9 +89,11 @@ export default class Level extends Phaser.Scene {
 	body;
 	/** @type {Phaser.GameObjects.Sprite} */
 	penguin;
+	/** @type {Phaser.GameObjects.Text} */
+	nametag;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
-	/** @type {Phaser.GameObjects.Sprite[]} */
+	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Text>} */
 	penguinList;
 
 	/* START-USER-CODE */
@@ -100,6 +109,7 @@ export default class Level extends Phaser.Scene {
 		// });
 
 		this.count = 0; // Initialize count
+		this.nametag.text = "Penguin";
 
 		this.time.addEvent({
 			delay: 100,
@@ -179,7 +189,7 @@ export default class Level extends Phaser.Scene {
 
 			// Start the tween for moving the penguin
 			this.currentTween = this.tweens.add({
-				targets: [this.penguin, this.body],
+				targets: this.penguinList,
 				x: targetX,
 				y: targetY,
 				duration: duration, 

@@ -143,6 +143,22 @@
             "y": 688,
             "originX": 0,
             "originY": 0
+        },
+        {
+            "type": "Text",
+            "id": "5e4811a1-8bab-4a17-b0c3-3520188bc2ab",
+            "label": "nametag",
+            "displayName": "NameTag",
+            "scope": "CLASS",
+            "x": 777,
+            "y": 532,
+            "originX": 0.5,
+            "originY": -0.8,
+            "text": "New text",
+            "align": "center",
+            "fontFamily": "Arial",
+            "fontSize": "24px",
+            "color": "#000000"
         }
     ],
     "plainObjects": [],
@@ -168,7 +184,8 @@
             "label": "PenguinList",
             "objectIds": [
                 "9c00cea4-22fd-4b27-a4e0-35c931691599",
-                "ef7ac2ad-23bd-4e85-b41b-793101cc665c"
+                "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
+                "5e4811a1-8bab-4a17-b0c3-3520188bc2ab"
             ]
         }
     ]
