@@ -24,8 +24,8 @@ window.addEventListener('load', function () {
 			default: 'matter',
 			matter: {
 				debug: {
-					renderFill: true,
-					renderLine: true,
+					renderFill: false,
+					renderLine: false,
 					showInternalEdges: true,
 				},
 				gravity: false,

@@ -34,7 +34,8 @@ export default class Level extends Phaser.Scene {
 		sprite_1.setOrigin(0, 0);
 
 		// image_2
-		const image_2 = this.add.image(-594, -7, "cave", "door");
+		const image_2 = this.add.image(103, 282, "cave", "door");
+		image_2.setOrigin(0, 0);
 
 		// body
 		const body = this.add.sprite(777, 537, "penguin_1", "body/1_1");
@@ -135,9 +136,26 @@ export default class Level extends Phaser.Scene {
 			this.lastMouseY = pointer.y;
 		});
 
+		this.matter.world.setBounds(0, 0, 1520, 960);
+		var body = this.matter.add.fromPhysicsEditor(0, 0, this.cache.json.get('cave-physics')["Walls"])
+		console.log(this.cache.json.get('cave-physics')["Walls"])
+		body.isStatic = true;
+		this.matter.body.setPosition(body, body.centerOffset)
+        // body.render.lineColor = 0xFF0000;
+        // body.render.fillColor = 0xFF0000;
+        // body.render.fillOpacity = 0.5;
+		this.walls = body;
+
+		// this.matter.world.createDebugGraphic();
+
 		this.input.on('pointerdown', (pointer) => {
 			const targetX = pointer.x;
 			const targetY = pointer.y;
+
+			if(this.matter.containsPoint(this.walls, targetX, targetY))
+			{
+				return;
+			}
 
 			if (this.currentTween) {
 				this.currentTween.remove();
@@ -149,8 +167,6 @@ export default class Level extends Phaser.Scene {
 
 			// Calculate duration based on distance
 			const duration = (distance / 155) * 1000;
-			console.log(duration + "  1 " + (distance / 70))
-			console.log(duration + "  2 " + (distance / 215))
 
 			// Calculate direction ID based on the target position
 			const rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);

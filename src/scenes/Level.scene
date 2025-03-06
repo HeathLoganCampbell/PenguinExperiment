@@ -59,8 +59,10 @@
                 "key": "cave",
                 "frame": "door"
             },
-            "x": -594,
-            "y": -7
+            "x": 103,
+            "y": 282,
+            "originX": 0,
+            "originY": 0
         },
         {
             "type": "Sprite",

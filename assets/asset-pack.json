@@ -8,6 +8,11 @@
                 "key": "cave"
             },
             {
+                "url": "assets/cave-physics.json",
+                "type": "json",
+                "key": "cave-physics"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"
