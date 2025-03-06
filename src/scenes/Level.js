@@ -36,18 +36,6 @@ export default class Level extends Phaser.Scene {
 		// image_2
 		const image_2 = this.add.image(-594, -7, "cave", "door");
 
-		// image_5
-		const image_5 = this.add.image(-6, 97, "cave", "fg_1");
-		image_5.setOrigin(0, 0);
-
-		// image_4
-		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
-		image_4.setOrigin(0, 0);
-
-		// image_3
-		const image_3 = this.add.image(-5, -11, "cave", "ceiling");
-		image_3.setOrigin(0, 0);
-
 		// body
 		const body = this.add.sprite(777, 537, "penguin_1", "body/1_1");
 		body.tintTopLeft = 6684825;
@@ -61,6 +49,18 @@ export default class Level extends Phaser.Scene {
 		// image_6
 		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
 		image_6.setOrigin(0, 0);
+
+		// image_5
+		const image_5 = this.add.image(-6, 97, "cave", "fg_1");
+		image_5.setOrigin(0, 0);
+
+		// image_3
+		const image_3 = this.add.image(-5, -11, "cave", "ceiling");
+		image_3.setOrigin(0, 0);
+
+		// image_4
+		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
+		image_4.setOrigin(0, 0);
 
 		// lists
 		const displayList = [sprite_1, image_1, image_2, image_3];

@@ -63,45 +63,6 @@
             "y": -7
         },
         {
-            "type": "Image",
-            "id": "88345e6e-2773-467e-90df-750a1eb4d21f",
-            "label": "image_5",
-            "texture": {
-                "key": "cave",
-                "frame": "fg_1"
-            },
-            "x": -6,
-            "y": 97,
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "e20c25cb-89f3-448c-8056-2077c629a3ac",
-            "label": "image_4",
-            "texture": {
-                "key": "cave",
-                "frame": "fg_3"
-            },
-            "x": -3,
-            "y": 688,
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
-            "id": "856c1132-ba40-409c-ab43-8b932ae066ba",
-            "label": "image_3",
-            "texture": {
-                "key": "cave",
-                "frame": "ceiling"
-            },
-            "x": -5,
-            "y": -11,
-            "originX": 0,
-            "originY": 0
-        },
-        {
             "type": "Sprite",
             "id": "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
             "label": "body",
@@ -139,6 +100,45 @@
             },
             "x": 1369,
             "y": 699,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "88345e6e-2773-467e-90df-750a1eb4d21f",
+            "label": "image_5",
+            "texture": {
+                "key": "cave",
+                "frame": "fg_1"
+            },
+            "x": -6,
+            "y": 97,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "856c1132-ba40-409c-ab43-8b932ae066ba",
+            "label": "image_3",
+            "texture": {
+                "key": "cave",
+                "frame": "ceiling"
+            },
+            "x": -5,
+            "y": -11,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "e20c25cb-89f3-448c-8056-2077c629a3ac",
+            "label": "image_4",
+            "texture": {
+                "key": "cave",
+                "frame": "fg_3"
+            },
+            "x": -3,
+            "y": 688,
             "originX": 0,
             "originY": 0
         }
