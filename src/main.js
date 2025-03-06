@@ -1,4 +1,4 @@
-import Level from "./scenes/Level.js";
+import Pool from "./scenes/Pool.js";
 import Preload from "./scenes/Preload.js";
 
 window.addEventListener('load', function () {
@@ -34,7 +34,7 @@ window.addEventListener('load', function () {
 	});
 
 	game.scene.add("Preload", Preload);
-	game.scene.add("Level", Level);
+	game.scene.add("Pool", Pool);
 	game.scene.add("Boot", Boot, true);
 });
 

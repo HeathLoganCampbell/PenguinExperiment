@@ -70,7 +70,7 @@ export default class Preload extends Phaser.Scene {
 
 	create() {
 
-		this.scene.start("Level");
+		this.scene.start("Pool");
 	}
 
 	/* END-USER-CODE */

@@ -7,7 +7,7 @@
         "importFileExtension": true,
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
-        "sceneKey": "Level",
+        "sceneKey": "Pool",
         "borderWidth": 1520,
         "borderHeight": 960,
         "box2dSceneGenerateDebugCode": true

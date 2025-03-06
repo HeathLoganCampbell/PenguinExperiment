@@ -7,10 +7,10 @@
 import Penguin from '../Penguin.js'
 /* END-USER-IMPORTS */
 
-export default class Level extends Phaser.Scene {
+export default class Pool extends Phaser.Scene {
 
 	constructor() {
-		super("Level");
+		super("Pool");
 
 		/* START-USER-CTR-CODE */
 
@@ -71,8 +71,6 @@ export default class Level extends Phaser.Scene {
 		this.editorCreate();
 
 		this.penguin = new Penguin(this);
-
-		this.count = 0; 
 
 		this.matter.world.setBounds(0, 0, 1520, 960);
 		var body = this.matter.add.fromPhysicsEditor(0, 0, this.cache.json.get('cave-physics')["Walls"])
