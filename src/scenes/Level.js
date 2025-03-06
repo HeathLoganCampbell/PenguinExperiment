@@ -105,27 +105,27 @@ export default class Level extends Phaser.Scene {
 			callback: () => {
 				this.count++;
 
-				let dx = this.lastMouseX - 626;
-				let dy = (this.lastMouseY + 80) - 310;
-				let rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
-				let angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
-				var directionId;
-				let walkFrame = 1;
-				if (this.sit)
-				{
-					let direction = Math.round(angle / 45) + 1;
-					directionId = ((direction > 8) ? 1 : direction) + 16;
-					walkFrame = 1;
-				}
-				else 
-				{
-					let direction = Math.round(angle / 45);
-					directionId = ((direction > 7) ? 1 : direction) + 9;
-					walkFrame = (this.count % 8) + 1;
-				}
+				// let dx = this.lastMouseX - 626;
+				// let dy = (this.lastMouseY + 80) - 310;
+				// let rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
+				// let angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
+				// var directionId;
+				// let walkFrame = 1;
+				// if (this.sit)
+				// {
+				// 	let direction = Math.round(angle / 45) + 1;
+				// 	directionId = ((direction > 8) ? 1 : direction) + 16;
+				// 	walkFrame = 1;
+				// }
+				// else 
+				// {
+				// 	let direction = Math.round(angle / 45);
+				// 	directionId = ((direction > 7) ? 1 : direction) + 9;
+				// 	walkFrame = (this.count % 8) + 1;
+				// }
 
-				this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
-				this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
+				// this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
+				// this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
 			},
 			loop: true 
 		});
@@ -135,7 +135,41 @@ export default class Level extends Phaser.Scene {
 			this.lastMouseY = pointer.y;
 		});
 
+		this.input.on('pointerdown', (pointer) => {
+			const targetX = pointer.x;
+			const targetY = pointer.y;
 
+			const dx = targetX - this.penguin.x;
+			const dy = targetY - this.penguin.y;
+			const distance = Math.sqrt(dx * dx + dy * dy);
+
+			// Calculate duration based on distance
+			const duration = (distance / 155) * 1000;
+			console.log(duration + "  1 " + (distance / 70))
+			console.log(duration + "  2 " + (distance / 215))
+
+			// Calculate direction ID based on the target position
+			const rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
+			const angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
+			let directionId = Math.round(angle / 45) + 9;
+
+			// Update the penguin texture at the start of the tween
+			this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
+
+			// Start the tween for moving the penguin
+			this.tweens.add({
+				targets: [this.penguin, this.body],
+				x: targetX,
+				y: targetY,
+				duration: duration, 
+				ease: 'Linear',
+				onUpdate: () => {
+					const walkFrame = (this.count % 8) + 1;
+					this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
+					this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
+				}
+			});
+		});
 	}
 
 	/* END-USER-CODE */
