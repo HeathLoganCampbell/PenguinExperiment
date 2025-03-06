@@ -46,6 +46,7 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     removePenguin()
     {
+        this.currentTween.remove();
         if (this.body) {
             this.body.destroy();
             this.body = null;
@@ -74,7 +75,7 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
-        this.scene.tweens.add({
+        this.currentTween = this.scene.tweens.add({
             targets: [this.penguin, this.body, this.nametag],
             x: targetX, y: targetY,
             duration: duration, ease: 'Linear',

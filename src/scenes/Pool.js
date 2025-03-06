@@ -92,6 +92,7 @@ export default class Pool extends Phaser.Scene {
 
 		game.network.events.on("removePenguin", (data) => {
 			console.log("removed penguin");
+			this.otherPenguinsMap[data.id].removePenguin();
 			delete this.otherPenguinsMap[data.id];
 			this.otherPenguins = this.otherPenguins.filter(item => item.id !== data.id);
 		})
