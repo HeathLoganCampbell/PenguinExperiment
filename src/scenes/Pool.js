@@ -40,24 +40,30 @@ export default class Pool extends Phaser.Scene {
 		const image_5 = this.add.image(-6, 97, "cave", "fg_1");
 		image_5.setOrigin(0, 0);
 
-		// image_3
-		const image_3 = this.add.image(-5, -11, "cave", "ceiling");
-		image_3.setOrigin(0, 0);
+		// ceiling
+		const ceiling = this.add.image(-5, -11, "cave", "ceiling");
+		ceiling.setOrigin(0, 0);
 
-		// image_4
-		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
-		image_4.setOrigin(0, 0);
+		// left_corner_ice
+		const left_corner_ice = this.add.image(-3, 688, "cave", "fg_3");
+		left_corner_ice.setOrigin(0, 0);
 
 		// lists
-		const displayList = [sprite_1, image_1, image_2, image_3];
+		const displayList = [sprite_1, image_1, image_2, ceiling];
 		const penguinList = [];
 
+		this.ceiling = ceiling;
+		this.left_corner_ice = left_corner_ice;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.GameObjects.Image} */
+	ceiling;
+	/** @type {Phaser.GameObjects.Image} */
+	left_corner_ice;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
 	/** @type {Array<any>} */
@@ -69,6 +75,9 @@ export default class Pool extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
+
+		this.ceiling.setDepth(99);
+		this.left_corner_ice.setDepth(99);
 
 		// self
 		this.penguin = new Penguin(this);

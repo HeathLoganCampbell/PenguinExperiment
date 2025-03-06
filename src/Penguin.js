@@ -95,6 +95,9 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         this.sendMovedPacket(targetX, targetY)
 
+        this.penguin.setDepth(50);
+        this.body.setDepth(50);
+
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
         this.currentTween = this.scene.tweens.add({

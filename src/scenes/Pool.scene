@@ -80,7 +80,9 @@
         {
             "type": "Image",
             "id": "856c1132-ba40-409c-ab43-8b932ae066ba",
-            "label": "image_3",
+            "label": "ceiling",
+            "displayName": "ceiling",
+            "scope": "CLASS",
             "texture": {
                 "key": "cave",
                 "frame": "ceiling"
@@ -93,7 +95,8 @@
         {
             "type": "Image",
             "id": "e20c25cb-89f3-448c-8056-2077c629a3ac",
-            "label": "image_4",
+            "label": "left_corner_ice",
+            "scope": "CLASS",
             "texture": {
                 "key": "cave",
                 "frame": "fg_3"
