@@ -63,10 +63,6 @@ export default class Level extends Phaser.Scene {
 		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
 		image_4.setOrigin(0, 0);
 
-		// image_7
-		const image_7 = this.add.image(500, 587, "cave", "water/water_1");
-		image_7.setOrigin(0, 0);
-
 		// lists
 		const displayList = [sprite_1, image_1, image_2, image_3];
 		const penguinList = [penguin, body];
