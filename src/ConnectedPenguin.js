@@ -1,8 +1,11 @@
-export default class Penguin extends Phaser.GameObjects.Container
+import Penguin from "./Penguin.js"
+
+export default class ConnectedPenguin extends Penguin
 {
-    constructor(scene)
+    constructor(id, scene)
     {
         super(scene)
+        this.id = id;
         this.count = 0;
         this.createPenguin();
         this.setupMovement();
@@ -31,7 +34,6 @@ export default class Penguin extends Phaser.GameObjects.Container
 			},
 			loop: true 
 		});
-        this.scene.input.on('pointerdown', (pointer) => this.moveTo(pointer.x, pointer.y));
     }
 
     updatePosition(x, y)
@@ -40,19 +42,16 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.penguin.y = y;
         this.body.x = x;
         this.body.y = y;
+        this.nametag.x = x;
+        this.nametag.y = y;
     }
 
     moveTo(targetX, targetY) {
-        if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY)) return;
-
         const dx = targetX - this.penguin.x;
         const dy = targetY - this.penguin.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const duration = (distance / 155) * 1000;
         const directionId = Math.min(16, Math.round((Math.atan2(dy, dx) * (180 / Math.PI) - 90 + 360) % 360 / 45) + 9);
-
-        var game = this.scene.sys.game;
-        game.network.send("move", { x: targetX, y: targetY })
 
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);

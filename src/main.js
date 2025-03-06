@@ -7,6 +7,8 @@ window.addEventListener('load', function () {
 	var network = new Network();
 	network.connect();
 
+	network.send("hello_world", {});
+
 	var game = new Phaser.Game({
 		width: 1520,
 		height: 960,
@@ -34,8 +36,10 @@ window.addEventListener('load', function () {
 				},
 				gravity: false,
 			},
-		},
+		}
 	});
+	
+	game.network = network;
 
 	game.scene.add("Preload", Preload);
 	game.scene.add("Pool", Pool);
@@ -45,7 +49,6 @@ window.addEventListener('load', function () {
 class Boot extends Phaser.Scene {
 
 	preload() {
-		
 		this.load.pack("pack", "assets/preload-asset-pack.json");
 	}
 

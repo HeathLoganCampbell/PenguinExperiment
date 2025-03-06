@@ -63,13 +63,11 @@ export default class Preload extends Phaser.Scene {
 		const width =  this.progressBar.width;
 
 		this.load.on("progress", (progress) => {
-
 			this.progressBar.width = progress * width;
 		});
 	}
 
 	create() {
-
 		this.scene.start("Pool");
 	}
 

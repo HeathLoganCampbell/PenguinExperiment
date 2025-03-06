@@ -5,6 +5,7 @@
 
 /* START-USER-IMPORTS */
 import Penguin from '../Penguin.js'
+import ConnectedPenguin from '../ConnectedPenguin.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -13,7 +14,6 @@ export default class Pool extends Phaser.Scene {
 		super("Pool");
 
 		/* START-USER-CTR-CODE */
-
 		/* END-USER-CTR-CODE */
 	}
 
@@ -70,7 +70,31 @@ export default class Pool extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
+		// self
 		this.penguin = new Penguin(this);
+		this.otherPenguins = [];
+		this.otherPenguinsMap = {};
+
+		var game = this.sys.game;
+		game.network.events.on("spawnPenguin", (data) => {
+			console.log("spawned new penguin");
+			var newPenguin = new ConnectedPenguin(data.id, this);
+			newPenguin.updatePosition(data.x, data.y)
+			this.otherPenguins.push(newPenguin);
+			this.otherPenguinsMap[data.id] = newPenguin;
+		})
+
+		game.network.events.on("movePenguin", (data) => {
+			console.log("moved penguin");
+			var movedPenguin = this.otherPenguinsMap[data.id];
+			movedPenguin.moveTo(data.x, data.y)
+		})
+
+		game.network.events.on("removePenguin", (data) => {
+			console.log("removed penguin");
+			delete this.otherPenguinsMap[data.id];
+			this.otherPenguins = this.otherPenguins.filter(item => item.id !== data.id);
+		})
 
 		this.matter.world.setBounds(0, 0, 1520, 960);
 		var body = this.matter.add.fromPhysicsEditor(0, 0, this.cache.json.get('cave-physics')["Walls"])
