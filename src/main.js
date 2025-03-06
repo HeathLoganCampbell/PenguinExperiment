@@ -1,7 +1,11 @@
 import Pool from "./scenes/Pool.js";
 import Preload from "./scenes/Preload.js";
+import Network from "./Network.js"
 
 window.addEventListener('load', function () {
+	
+	var network = new Network();
+	network.connect();
 
 	var game = new Phaser.Game({
 		width: 1520,
