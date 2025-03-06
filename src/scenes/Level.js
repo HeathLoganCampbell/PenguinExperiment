@@ -94,35 +94,13 @@ export default class Level extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
-		this.count = 0; // Initialize count
+		this.count = 0; 
 		this.nametag.text = "Penguin";
 
 		this.time.addEvent({
 			delay: 100,
 			callback: () => {
 				this.count++;
-
-				// let dx = this.lastMouseX - 626;
-				// let dy = (this.lastMouseY + 80) - 310;
-				// let rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
-				// let angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
-				// var directionId;
-				// let walkFrame = 1;
-				// if (this.sit)
-				// {
-				// 	let direction = Math.round(angle / 45) + 1;
-				// 	directionId = ((direction > 8) ? 1 : direction) + 16;
-				// 	walkFrame = 1;
-				// }
-				// else 
-				// {
-				// 	let direction = Math.round(angle / 45);
-				// 	directionId = ((direction > 7) ? 1 : direction) + 9;
-				// 	walkFrame = (this.count % 8) + 1;
-				// }
-
-				// this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
-				// this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
 			},
 			loop: true 
 		});
@@ -137,12 +115,7 @@ export default class Level extends Phaser.Scene {
 		console.log(this.cache.json.get('cave-physics')["Walls"])
 		body.isStatic = true;
 		this.matter.body.setPosition(body, body.centerOffset)
-        // body.render.lineColor = 0xFF0000;
-        // body.render.fillColor = 0xFF0000;
-        // body.render.fillOpacity = 0.5;
 		this.walls = body;
-
-		// this.matter.world.createDebugGraphic();
 
 		this.input.on('pointerdown', (pointer) => {
 			const targetX = pointer.x;
@@ -161,19 +134,16 @@ export default class Level extends Phaser.Scene {
 			const dy = targetY - this.penguin.y;
 			const distance = Math.sqrt(dx * dx + dy * dy);
 
-			// Calculate duration based on distance
 			const duration = (distance / 155) * 1000;
 
-			// Calculate direction ID based on the target position
 			const rawAngle = Math.floor((Math.atan2(dy, dx) * (180 / Math.PI)) - 90);
 			const angle = (rawAngle < 0) ? rawAngle + 360 : rawAngle;
 			let directionId = Math.round(angle / 45) + 9;
 			if(directionId > 16) directionId = 16;
 
-			// Update the penguin texture at the start of the tween
 			this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
+			this.body.setTexture("penguin_1", `body/${directionId}_1`);
 
-			// Start the tween for moving the penguin
 			this.currentTween = this.tweens.add({
 				targets: this.penguinList,
 				x: targetX,
