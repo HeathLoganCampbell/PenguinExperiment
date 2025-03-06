@@ -23,12 +23,6 @@ export default class Level extends Phaser.Scene {
 		const image_1 = this.add.image(514, 250, "cave", "window");
 		image_1.setOrigin(0, 0);
 
-		// welcome
-		const welcome = this.add.text(640, 478, "", {});
-		welcome.setOrigin(0.5, 0.5);
-		welcome.text = "Phaser 3 + Phaser Editor v4";
-		welcome.setStyle({ "fontFamily": "Arial", "fontSize": "30px" });
-
 		// sprite_1
 		const sprite_1 = this.add.sprite(0, -29, "cave", "bg");
 		sprite_1.setOrigin(0, 0);
@@ -73,7 +67,6 @@ export default class Level extends Phaser.Scene {
 		const displayList = [sprite_1, image_1, image_2, image_3];
 		const penguinList = [penguin, body, nametag];
 
-		this.welcome = welcome;
 		this.body = body;
 		this.penguin = penguin;
 		this.nametag = nametag;
@@ -83,8 +76,6 @@ export default class Level extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
-	/** @type {Phaser.GameObjects.Text} */
-	welcome;
 	/** @type {Phaser.GameObjects.Sprite} */
 	body;
 	/** @type {Phaser.GameObjects.Sprite} */
@@ -102,11 +93,6 @@ export default class Level extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
-
-		// this.sprite_1.on("pointerover", () => {
-		// 	this.welcome.text = "Penguin!";
-		// 	this.sit = true;
-		// });
 
 		this.count = 0; // Initialize count
 		this.nametag.text = "Penguin";
