@@ -139,6 +139,10 @@ export default class Level extends Phaser.Scene {
 			const targetX = pointer.x;
 			const targetY = pointer.y;
 
+			if (this.currentTween) {
+				this.currentTween.remove();
+			}
+
 			const dx = targetX - this.penguin.x;
 			const dy = targetY - this.penguin.y;
 			const distance = Math.sqrt(dx * dx + dy * dy);
@@ -157,7 +161,7 @@ export default class Level extends Phaser.Scene {
 			this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
 
 			// Start the tween for moving the penguin
-			this.tweens.add({
+			this.currentTween = this.tweens.add({
 				targets: [this.penguin, this.body],
 				x: targetX,
 				y: targetY,
