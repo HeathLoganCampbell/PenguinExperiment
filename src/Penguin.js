@@ -81,6 +81,11 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     moveTo(targetX, targetY) {
         if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY)) return;
+        if (this.currentTween)
+        {
+            this.currentTween.remove();
+            this.currentTween = null;
+        }
 
         const dx = targetX - this.penguin.x;
         const dy = targetY - this.penguin.y;
