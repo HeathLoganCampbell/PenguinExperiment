@@ -4,8 +4,8 @@
 /* START OF COMPILED CODE */
 
 /* START-USER-IMPORTS */
+import Penguin from '../Penguin.js'
 /* END-USER-IMPORTS */
-import Penguin from '../Penguin.js';
 
 export default class Level extends Phaser.Scene {
 
@@ -13,7 +13,7 @@ export default class Level extends Phaser.Scene {
 		super("Level");
 
 		/* START-USER-CTR-CODE */
-		// Write your code here.
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -32,7 +32,6 @@ export default class Level extends Phaser.Scene {
 		const image_2 = this.add.image(103, 282, "cave", "door");
 		image_2.setOrigin(0, 0);
 
-		this.penguin = new Penguin(this);
 		// image_6
 		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
 		image_6.setOrigin(0, 0);
@@ -51,16 +50,18 @@ export default class Level extends Phaser.Scene {
 
 		// lists
 		const displayList = [sprite_1, image_1, image_2, image_3];
+		const penguinList = [];
 
 		this.displayList = displayList;
+		this.penguinList = penguinList;
 
 		this.events.emit("scene-awake");
 	}
 
-	/** @type {Penguin} */
-	penguin;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
+	/** @type {Array<any>} */
+	penguinList;
 
 	/* START-USER-CODE */
 
@@ -68,6 +69,8 @@ export default class Level extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
+
+		this.penguin = new Penguin(this);
 
 		this.count = 0; 
 

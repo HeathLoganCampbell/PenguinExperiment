@@ -27,19 +27,6 @@
             "originY": 0
         },
         {
-            "type": "Text",
-            "id": "b2b3dbd5-2106-41fa-8a04-9b511e3401a9",
-            "label": "welcome",
-            "scope": "CLASS",
-            "x": 640,
-            "y": 478,
-            "originX": 0.5,
-            "originY": 0.5,
-            "text": "Phaser 3 + Phaser Editor v4",
-            "fontFamily": "Arial",
-            "fontSize": "30px"
-        },
-        {
             "type": "Sprite",
             "id": "b24e25f4-5707-4b8e-b8c6-706e9675fb14",
             "label": "sprite_1",
@@ -63,34 +50,6 @@
             "y": 282,
             "originX": 0,
             "originY": 0
-        },
-        {
-            "type": "Sprite",
-            "id": "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
-            "label": "body",
-            "scope": "CLASS",
-            "texture": {
-                "key": "penguin_1",
-                "frame": "body/1_1"
-            },
-            "x": 777,
-            "y": 537,
-            "tintTopLeft": "#660099",
-            "tintTopRight": "#660099",
-            "tintBottomLeft": "#660099",
-            "tintBottomRight": "#660099"
-        },
-        {
-            "type": "Sprite",
-            "id": "9c00cea4-22fd-4b27-a4e0-35c931691599",
-            "label": "penguin",
-            "scope": "CLASS",
-            "texture": {
-                "key": "penguin_1",
-                "frame": "penguin/1_1"
-            },
-            "x": 777,
-            "y": 537
         },
         {
             "type": "Image",
@@ -143,22 +102,6 @@
             "y": 688,
             "originX": 0,
             "originY": 0
-        },
-        {
-            "type": "Text",
-            "id": "5e4811a1-8bab-4a17-b0c3-3520188bc2ab",
-            "label": "nametag",
-            "displayName": "NameTag",
-            "scope": "CLASS",
-            "x": 777,
-            "y": 532,
-            "originX": 0.5,
-            "originY": -0.8,
-            "text": "New text",
-            "align": "center",
-            "fontFamily": "Arial",
-            "fontSize": "24px",
-            "color": "#000000"
         }
     ],
     "plainObjects": [],
@@ -181,12 +124,7 @@
         },
         {
             "id": "ea564967-e287-4c54-9eb7-803730242db4",
-            "label": "PenguinList",
-            "objectIds": [
-                "9c00cea4-22fd-4b27-a4e0-35c931691599",
-                "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
-                "5e4811a1-8bab-4a17-b0c3-3520188bc2ab"
-            ]
+            "label": "PenguinList"
         }
     ]
 }
