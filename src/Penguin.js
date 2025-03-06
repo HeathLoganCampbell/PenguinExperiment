@@ -46,19 +46,37 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     removePenguin()
     {
-        this.currentTween.remove();
-        if (this.body) {
+        if(this.currentTween)
+        {
+            this.currentTween.stop();
+            this.currentTween.remove();
+            this.currentTween = null;
+        }
+        
+
+        if (this.body) 
+        {
             this.body.destroy();
             this.body = null;
         }
-        if (this.penguin) {
+
+        if (this.penguin) 
+        {
             this.penguin.destroy();
             this.penguin = null;
         }
-        if (this.nametag) {
+
+        if (this.nametag) 
+        {
             this.nametag.destroy();
             this.nametag = null;
         }
+    }
+
+    sendMovedPacket(targetX, targetY)
+    {
+        var game = this.scene.sys.game;
+        game.network.send("move", { x: targetX, y: targetY })
     }
 
     moveTo(targetX, targetY) {
@@ -70,8 +88,7 @@ export default class Penguin extends Phaser.GameObjects.Container
         const duration = (distance / 155) * 1000;
         const directionId = Math.min(16, Math.round((Math.atan2(dy, dx) * (180 / Math.PI) - 90 + 360) % 360 / 45) + 9);
 
-        var game = this.scene.sys.game;
-        game.network.send("move", { x: targetX, y: targetY })
+        this.sendMovedPacket(targetX, targetY)
 
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
@@ -80,6 +97,8 @@ export default class Penguin extends Phaser.GameObjects.Container
             x: targetX, y: targetY,
             duration: duration, ease: 'Linear',
             onUpdate: () => {
+                if(!this.penguin) return;
+                if(!this.body) return;
                 const walkFrame = (this.count % 8) + 1;
                 this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
                 this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
