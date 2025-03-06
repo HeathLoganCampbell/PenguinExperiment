@@ -48,14 +48,33 @@ export default class Pool extends Phaser.Scene {
 		const left_corner_ice = this.add.image(-3, 688, "cave", "fg_3");
 		left_corner_ice.setOrigin(0, 0);
 
+		// dock
+		const dock = this.add.image(780, 918, "main", "dock");
+		dock.scaleX = 0.6;
+
+		// chat_input
+		const chat_input = this.add.image(772, 925, "main", "chat-box");
+
+		// chat_button
+		const chat_button = this.add.image(1050, 925, "main", "blue-button");
+
+		// chat_button_icon
+		const chat_button_icon = this.add.image(1050, 924, "main", "chat-icon");
+
 		// lists
 		const displayList = [sprite_1, image_1, image_2, ceiling];
 		const penguinList = [];
+		const chatList = [chat_button_icon, chat_button, chat_input, dock];
 
 		this.ceiling = ceiling;
 		this.left_corner_ice = left_corner_ice;
+		this.dock = dock;
+		this.chat_input = chat_input;
+		this.chat_button = chat_button;
+		this.chat_button_icon = chat_button_icon;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
+		this.chatList = chatList;
 
 		this.events.emit("scene-awake");
 	}
@@ -64,10 +83,20 @@ export default class Pool extends Phaser.Scene {
 	ceiling;
 	/** @type {Phaser.GameObjects.Image} */
 	left_corner_ice;
+	/** @type {Phaser.GameObjects.Image} */
+	dock;
+	/** @type {Phaser.GameObjects.Image} */
+	chat_input;
+	/** @type {Phaser.GameObjects.Image} */
+	chat_button;
+	/** @type {Phaser.GameObjects.Image} */
+	chat_button_icon;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
 	/** @type {Array<any>} */
 	penguinList;
+	/** @type {Phaser.GameObjects.Image[]} */
+	chatList;
 
 	/* START-USER-CODE */
 
@@ -78,6 +107,11 @@ export default class Pool extends Phaser.Scene {
 
 		this.ceiling.setDepth(99);
 		this.left_corner_ice.setDepth(99);
+
+		this.dock.setDepth(1000);
+		this.chat_input.setDepth(1001);
+		this.chat_button.setDepth(1002);
+		this.chat_button_icon.setDepth(1002);
 
 		// self
 		this.penguin = new Penguin(this);

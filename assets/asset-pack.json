@@ -18,6 +18,12 @@
                 "type": "image"
             },
             {
+                "type": "multiatlas",
+                "url": "assets/main.json",
+                "path": "assets",
+                "key": "main"
+            },
+            {
                 "url": "assets/penguin.png",
                 "type": "image",
                 "key": "penguin"
