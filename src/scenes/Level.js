@@ -19,36 +19,58 @@ export default class Level extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
+		// image_1
+		const image_1 = this.add.image(514, 250, "cave", "window");
+		image_1.setOrigin(0, 0);
+
 		// welcome
 		const welcome = this.add.text(640, 478, "", {});
 		welcome.setOrigin(0.5, 0.5);
 		welcome.text = "Phaser 3 + Phaser Editor v4";
 		welcome.setStyle({ "fontFamily": "Arial", "fontSize": "30px" });
 
+		// sprite_1
+		const sprite_1 = this.add.sprite(0, -29, "cave", "bg");
+		sprite_1.setOrigin(0, 0);
+
+		// image_2
+		const image_2 = this.add.image(-594, -7, "cave", "door");
+
+		// image_5
+		const image_5 = this.add.image(-6, 97, "cave", "fg_1");
+		image_5.setOrigin(0, 0);
+
+		// image_4
+		const image_4 = this.add.image(-3, 688, "cave", "fg_3");
+		image_4.setOrigin(0, 0);
+
+		// image_3
+		const image_3 = this.add.image(-5, -11, "cave", "ceiling");
+		image_3.setOrigin(0, 0);
+
 		// body
-		const body = this.add.sprite(626, 310, "penguin_1", "body/1_1");
-		body.scaleX = 2;
-		body.scaleY = 2;
+		const body = this.add.sprite(777, 537, "penguin_1", "body/1_1");
 		body.tintTopLeft = 6684825;
 		body.tintTopRight = 6684825;
 		body.tintBottomLeft = 6684825;
 		body.tintBottomRight = 6684825;
 
 		// penguin
-		const penguin = this.add.sprite(626, 310, "penguin_1", "penguin/1_1");
-		penguin.scaleX = 2;
-		penguin.scaleY = 2;
+		const penguin = this.add.sprite(777, 537, "penguin_1", "penguin/1_1");
 
-		// sprite_1
-		const sprite_1 = this.add.nineslice(630, 283, "_MISSING", 20, 20, 10, 10, 10, 10);
-		sprite_1.scaleX = 4.629283821894623;
-		sprite_1.scaleY = 6.738034889532861;
-		sprite_1.visible = false;
+		// image_6
+		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
+		image_6.setOrigin(0, 0);
+
+		// lists
+		const displayList = [sprite_1, image_1, image_2, image_3];
+		const penguinList = [penguin, body];
 
 		this.welcome = welcome;
 		this.body = body;
 		this.penguin = penguin;
-		this.sprite_1 = sprite_1;
+		this.displayList = displayList;
+		this.penguinList = penguinList;
 
 		this.events.emit("scene-awake");
 	}
@@ -59,21 +81,22 @@ export default class Level extends Phaser.Scene {
 	body;
 	/** @type {Phaser.GameObjects.Sprite} */
 	penguin;
-	/** @type {Phaser.GameObjects.NineSlice} */
-	sprite_1;
+	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
+	displayList;
+	/** @type {Phaser.GameObjects.Sprite[]} */
+	penguinList;
 
 	/* START-USER-CODE */
 
 	// Write more your code here
 
 	create() {
-
 		this.editorCreate();
 
-		this.sprite_1.on("pointerover", () => {
-			this.welcome.text = "Penguin!";
-			this.sit = true;
-		});
+		// this.sprite_1.on("pointerover", () => {
+		// 	this.welcome.text = "Penguin!";
+		// 	this.sit = true;
+		// });
 
 		this.count = 0; // Initialize count
 
@@ -107,12 +130,11 @@ export default class Level extends Phaser.Scene {
 			loop: true 
 		});
 
-
-
 		this.input.on('pointermove', (pointer) => {
 			this.lastMouseX = pointer.x;
 			this.lastMouseY = pointer.y;
 		});
+
 
 	}
 

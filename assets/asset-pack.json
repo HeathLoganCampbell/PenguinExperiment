@@ -2,6 +2,12 @@
     "section1": {
         "files": [
             {
+                "type": "multiatlas",
+                "url": "assets/cave.json",
+                "path": "assets",
+                "key": "cave"
+            },
+            {
                 "url": "assets/dino.png",
                 "key": "dino",
                 "type": "image"

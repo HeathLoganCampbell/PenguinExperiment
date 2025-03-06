@@ -8,10 +8,24 @@
         "preloadPackFiles": [],
         "createMethodName": "editorCreate",
         "sceneKey": "Level",
-        "borderWidth": 1280,
-        "borderHeight": 720
+        "borderWidth": 1520,
+        "borderHeight": 960,
+        "box2dSceneGenerateDebugCode": true
     },
     "displayList": [
+        {
+            "type": "Image",
+            "id": "43cb8d12-d136-49b6-a403-a1b14d670273",
+            "label": "image_1",
+            "texture": {
+                "key": "cave",
+                "frame": "window"
+            },
+            "x": 514,
+            "y": 250,
+            "originX": 0,
+            "originY": 0
+        },
         {
             "type": "Text",
             "id": "b2b3dbd5-2106-41fa-8a04-9b511e3401a9",
@@ -27,6 +41,68 @@
         },
         {
             "type": "Sprite",
+            "id": "b24e25f4-5707-4b8e-b8c6-706e9675fb14",
+            "label": "sprite_1",
+            "texture": {
+                "key": "cave",
+                "frame": "bg"
+            },
+            "y": -29,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "408866c3-7157-424a-8be5-f0a62798fe5b",
+            "label": "image_2",
+            "texture": {
+                "key": "cave",
+                "frame": "door"
+            },
+            "x": -594,
+            "y": -7
+        },
+        {
+            "type": "Image",
+            "id": "88345e6e-2773-467e-90df-750a1eb4d21f",
+            "label": "image_5",
+            "texture": {
+                "key": "cave",
+                "frame": "fg_1"
+            },
+            "x": -6,
+            "y": 97,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "e20c25cb-89f3-448c-8056-2077c629a3ac",
+            "label": "image_4",
+            "texture": {
+                "key": "cave",
+                "frame": "fg_3"
+            },
+            "x": -3,
+            "y": 688,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Image",
+            "id": "856c1132-ba40-409c-ab43-8b932ae066ba",
+            "label": "image_3",
+            "texture": {
+                "key": "cave",
+                "frame": "ceiling"
+            },
+            "x": -5,
+            "y": -11,
+            "originX": 0,
+            "originY": 0
+        },
+        {
+            "type": "Sprite",
             "id": "ef7ac2ad-23bd-4e85-b41b-793101cc665c",
             "label": "body",
             "scope": "CLASS",
@@ -34,10 +110,8 @@
                 "key": "penguin_1",
                 "frame": "body/1_1"
             },
-            "x": 626,
-            "y": 310,
-            "scaleX": 2,
-            "scaleY": 2,
+            "x": 777,
+            "y": 537,
             "tintTopLeft": "#660099",
             "tintTopRight": "#660099",
             "tintBottomLeft": "#660099",
@@ -52,23 +126,21 @@
                 "key": "penguin_1",
                 "frame": "penguin/1_1"
             },
-            "x": 626,
-            "y": 310,
-            "scaleX": 2,
-            "scaleY": 2
+            "x": 777,
+            "y": 537
         },
         {
-            "type": "NineSlice",
-            "id": "56393f93-e0b7-4e59-83d2-7843e773097e",
-            "label": "sprite_1",
-            "scope": "CLASS",
-            "x": 630,
-            "y": 283,
-            "scaleX": 4.629283821894623,
-            "scaleY": 6.738034889532861,
-            "visible": false,
-            "width": 20,
-            "height": 20
+            "type": "Image",
+            "id": "c6882653-ddec-4ac9-bcdc-4532c8c4c301",
+            "label": "image_6",
+            "texture": {
+                "key": "cave",
+                "frame": "fg_2"
+            },
+            "x": 1369,
+            "y": 699,
+            "originX": 0,
+            "originY": 0
         }
     ],
     "plainObjects": [],
@@ -77,5 +149,25 @@
         "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
-    }
+    },
+    "lists": [
+        {
+            "id": "ab9fb7e0-e42e-49bd-bcc8-f98b8a00e766",
+            "label": "DisplayList",
+            "objectIds": [
+                "b24e25f4-5707-4b8e-b8c6-706e9675fb14",
+                "43cb8d12-d136-49b6-a403-a1b14d670273",
+                "408866c3-7157-424a-8be5-f0a62798fe5b",
+                "856c1132-ba40-409c-ab43-8b932ae066ba"
+            ]
+        },
+        {
+            "id": "ea564967-e287-4c54-9eb7-803730242db4",
+            "label": "PenguinList",
+            "objectIds": [
+                "9c00cea4-22fd-4b27-a4e0-35c931691599",
+                "ef7ac2ad-23bd-4e85-b41b-793101cc665c"
+            ]
+        }
+    ]
 }

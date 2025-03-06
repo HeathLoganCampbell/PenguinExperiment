@@ -1,0 +1,24 @@
+{
+    "section1": {
+        "files": [
+            {
+                "type": "multiatlas",
+                "url": "assets/media/rooms/cave/cave.json",
+                "path": "assets/media/rooms/cave/",
+                "key": "cave"
+            },
+            {
+                "url": "assets/media/rooms/cave/cave-physics.json",
+                "type": "json",
+                "key": "cave-physics"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}
