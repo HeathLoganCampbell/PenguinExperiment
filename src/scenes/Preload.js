@@ -25,11 +25,6 @@ export default class Preload extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// guapen
-		const guapen = this.add.image(505.0120544433594, 360, "guapen");
-		guapen.scaleX = 0.32715486817515643;
-		guapen.scaleY = 0.32715486817515643;
-
 		// progressBar
 		const progressBar = this.add.rectangle(553, 361, 256, 20);
 		progressBar.setOrigin(0, 0);
