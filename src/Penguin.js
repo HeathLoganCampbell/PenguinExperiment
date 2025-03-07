@@ -54,7 +54,6 @@ export default class Penguin extends Phaser.GameObjects.Container
             this.currentTween.remove();
             this.currentTween = null;
         }
-        
 
         if (this.body) 
         {
@@ -86,7 +85,15 @@ export default class Penguin extends Phaser.GameObjects.Container
         if(this.chatBubble)
         {
             this.chatBubble.remove();
+            this.chatBubbleTimer.remove();
+            this.chatBubble = null;
+            this.chatBubbleTimer = null;
         }
+
+        this.chatBubbleTimer = this.scene.time.delayedCall(4000, () => {
+            this.chatBubble.remove();
+            this.chatBubble = null;
+        }, [], this);
 
         this.chatBubble = new ChatBubble(this.scene, this);
         this.chatBubble.spawn();
