@@ -7,7 +7,7 @@ export default class Network
 
     connect()
     {
-        this.socket = io('http://localhost:3000');
+        this.socket = io('http://209.38.89.49:80');
 
         // Client
         var _this = this;
