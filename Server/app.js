@@ -13,9 +13,7 @@ let penguins = {};
 
 io.on('connection', (socket) => {
     console.log(`Player connected: ${socket.id}`);
-    penguins[socket.id] = { username: 'Penguin1', x: 777, y: 537 };
-    io.emit('message', { action: "connected", payload: { id: socket.id, username: penguins[socket.id].username, x:penguins[socket.id].x, y: penguins[socket.id].y }});
-
+   
     socket.on('disconnect', () => {
         console.log(`Player disconnected: ${socket.id}`);
         delete penguins[socket.id];
@@ -23,10 +21,17 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', (message) => {
+        if(message.action === 'login')
+        {
+            penguins[socket.id] = { username: message.payload.username, x: 777, y: 537 };
+            io.emit('message', { action: "connected", payload: { id: socket.id, username: penguins[socket.id].username, x:penguins[socket.id].x, y: penguins[socket.id].y }});        
+        }
+
         if(message.action === 'move')
         {
             console.log("recieved moved event");
-            penguins[socket.id] = { x: message.payload.x, y: message.payload.y }
+            penguins[socket.id].x = message.payload.x;
+            penguins[socket.id].y = message.payload.y;
             console.log("Updated Penguin pos")
             console.log(penguins[socket.id])
             console.log("Current list")

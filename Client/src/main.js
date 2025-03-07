@@ -3,9 +3,11 @@ import Preload from "./scenes/Preload.js";
 import Network from "./Network.js"
 
 window.addEventListener('load', function () {
+
+	var username = this.prompt("What would you like your username to be?");
 	
 	var network = new Network();
-	network.connect();
+	network.connect(username);
 
 	network.send("hello_world", {});
 
@@ -40,6 +42,7 @@ window.addEventListener('load', function () {
 	});
 	
 	game.network = network;
+	game.username = username;
 
 	game.scene.add("Preload", Preload);
 	game.scene.add("Pool", Pool);

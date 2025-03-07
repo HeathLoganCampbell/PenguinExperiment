@@ -199,6 +199,7 @@ export default class Pool extends Phaser.Scene {
 
 		// self
 		this.penguin = new Penguin(this);
+		this.penguin.setUsername(this.game.username);
 		this.otherPenguins = [];
 		this.otherPenguinsMap = {};
 

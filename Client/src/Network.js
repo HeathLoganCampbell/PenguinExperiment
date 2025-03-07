@@ -5,7 +5,7 @@ export default class Network
         this.events = new Phaser.Events.EventEmitter()
     }
 
-    connect()
+    connect(username)
     {
         this.socket = io('http://209.38.89.49:80');
 
@@ -14,6 +14,8 @@ export default class Network
         this.socket.on('connect', () => 
         {
             console.log('Connected as:', _this.socket.id);
+
+            _this.send('login', { username: username })
             this.socket.on('message', (message) => 
             {
                 if(message.action === 'connected')
