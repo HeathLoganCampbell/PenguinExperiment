@@ -107,7 +107,7 @@
             "originY": 0
         },
         {
-            "type": "Image",
+            "type": "Sprite",
             "id": "92076d69-3a07-432d-9c1c-97f8551ac9d0",
             "label": "dock",
             "displayName": "Dock",
@@ -121,7 +121,7 @@
             "scaleX": 0.6
         },
         {
-            "type": "Image",
+            "type": "Sprite",
             "id": "422c9b13-452f-48c6-891f-01fb50825c31",
             "label": "chat_input",
             "scope": "CLASS",
@@ -133,7 +133,7 @@
             "y": 925
         },
         {
-            "type": "Image",
+            "type": "Sprite",
             "id": "711ba0e2-965f-4e47-a454-00f697ba2424",
             "label": "chat_button",
             "scope": "CLASS",
@@ -145,7 +145,7 @@
             "y": 925
         },
         {
-            "type": "Image",
+            "type": "Sprite",
             "id": "c29d3e2a-effa-4208-b179-52a8b367ad33",
             "label": "chat_button_icon",
             "scope": "CLASS",

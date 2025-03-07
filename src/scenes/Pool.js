@@ -50,17 +50,17 @@ export default class Pool extends Phaser.Scene {
 		left_corner_ice.setOrigin(0, 0);
 
 		// dock
-		const dock = this.add.image(780, 918, "main", "dock");
+		const dock = this.add.sprite(780, 918, "main", "dock");
 		dock.scaleX = 0.6;
 
 		// chat_input
-		const chat_input = this.add.image(772, 925, "main", "chat-box");
+		const chat_input = this.add.sprite(772, 925, "main", "chat-box");
 
 		// chat_button
-		const chat_button = this.add.image(1050, 925, "main", "blue-button");
+		const chat_button = this.add.sprite(1050, 925, "main", "blue-button");
 
 		// chat_button_icon
-		const chat_button_icon = this.add.image(1050, 924, "main", "chat-icon");
+		const chat_button_icon = this.add.sprite(1050, 924, "main", "chat-icon");
 
 		// chat_text
 		const chat_text = this.add.text(515, 912, "", {});
@@ -90,13 +90,13 @@ export default class Pool extends Phaser.Scene {
 	ceiling;
 	/** @type {Phaser.GameObjects.Image} */
 	left_corner_ice;
-	/** @type {Phaser.GameObjects.Image} */
+	/** @type {Phaser.GameObjects.Sprite} */
 	dock;
-	/** @type {Phaser.GameObjects.Image} */
+	/** @type {Phaser.GameObjects.Sprite} */
 	chat_input;
-	/** @type {Phaser.GameObjects.Image} */
+	/** @type {Phaser.GameObjects.Sprite} */
 	chat_button;
-	/** @type {Phaser.GameObjects.Image} */
+	/** @type {Phaser.GameObjects.Sprite} */
 	chat_button_icon;
 	/** @type {Phaser.GameObjects.Text} */
 	chat_text;
@@ -104,7 +104,7 @@ export default class Pool extends Phaser.Scene {
 	displayList;
 	/** @type {Array<any>} */
 	penguinList;
-	/** @type {Array<Phaser.GameObjects.Image|Phaser.GameObjects.Text>} */
+	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Text>} */
 	chatList;
 
 	/* START-USER-CODE */
@@ -125,6 +125,7 @@ export default class Pool extends Phaser.Scene {
 
 		this.chat_text.setInteractive();
 		this.chat_input.setInteractive();
+		this.dock.setInteractive();
 
 		var inputText = "";
 		this.focusedOnChat = false;

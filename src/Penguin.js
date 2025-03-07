@@ -33,7 +33,14 @@ export default class Penguin extends Phaser.GameObjects.Container
 			},
 			loop: true 
 		});
-        this.scene.input.on('pointerdown', (pointer) => this.moveTo(pointer.x, pointer.y));
+        this.scene.input.on('pointerup', (pointer, currentlyOver) => {
+            if (currentlyOver[0])
+            {
+                return;
+            }
+
+            this.moveTo(pointer.x, pointer.y);
+        });
     }
 
     updatePosition(x, y)
