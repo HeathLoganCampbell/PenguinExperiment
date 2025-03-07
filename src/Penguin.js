@@ -1,3 +1,5 @@
+import ChatBubble from './ChatBubble.js'
+
 export default class Penguin extends Phaser.GameObjects.Container
 {
     constructor(scene)
@@ -77,6 +79,13 @@ export default class Penguin extends Phaser.GameObjects.Container
     {
         var game = this.scene.sys.game;
         game.network.send("move", { x: targetX, y: targetY })
+    }
+
+    sendMessage(message)
+    {
+        this.chatBubble = new ChatBubble(this.scene, this);
+        this.chatBubble.spawn();
+        this.chatBubble.setContent(message);
     }
 
     moveTo(targetX, targetY) {
