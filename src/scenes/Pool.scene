@@ -167,56 +167,6 @@
             "text": "New text",
             "fontFamily": "Arial",
             "fontSize": "24px"
-        },
-        {
-            "type": "NineSlice",
-            "id": "c51c3e44-d2ec-4e29-9f87-f483427ce3ab",
-            "label": "image_3",
-            "texture": {
-                "key": "main",
-                "frame": "balloon"
-            },
-            "x": 749,
-            "y": 768,
-            "originY": 1,
-            "leftWidth": 19,
-            "rightWidth": 19,
-            "topHeight": 19,
-            "bottomHeight": 19,
-            "width": 300,
-            "height": 67
-        },
-        {
-            "type": "NineSlice",
-            "id": "72ca27e1-97e8-420f-9416-f6573098cf01",
-            "label": "image_4",
-            "texture": {
-                "key": "main",
-                "frame": "balloon-emote"
-            },
-            "x": 749,
-            "y": 768,
-            "originY": 0,
-            "leftWidth": 40,
-            "rightWidth": 110,
-            "topHeight": 0,
-            "bottomHeight": 15,
-            "width": 300,
-            "height": 40
-        },
-        {
-            "type": "Text",
-            "id": "ea4b23f4-5359-40e7-8302-a31fc2fcc56e",
-            "label": "text_1",
-            "x": 640,
-            "y": 730,
-            "text": "New text",
-            "fixedWidth": 228,
-            "align": "center",
-            "fontFamily": "Arial",
-            "fontSize": "24px",
-            "color": "#000000",
-            "wordWrapUseAdvanced": true
         }
     ],
     "plainObjects": [],

@@ -67,20 +67,6 @@ export default class Pool extends Phaser.Scene {
 		chat_text.text = "New text";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
-		// image_3
-		const image_3 = this.add.nineslice(749, 768, "main", "balloon", 300, 67, 19, 19, 19, 19);
-		image_3.setOrigin(0.5, 1);
-
-		// image_4
-		const image_4 = this.add.nineslice(749, 768, "main", "balloon-emote", 300, 40, 40, 110, 0, 15);
-		image_4.setOrigin(0.5, 0);
-
-		// text_1
-		const text_1 = this.add.text(640, 730, "", {});
-		text_1.text = "New text";
-		text_1.setStyle({ "align": "center", "color": "#000000", "fixedWidth": 228, "fontFamily": "Arial", "fontSize": "24px" });
-		text_1.setWordWrapWidth(text_1.style.wordWrapWidth, true);
-
 		// lists
 		const displayList = [sprite_1, image_1, image_2, ceiling];
 		const penguinList = [];
