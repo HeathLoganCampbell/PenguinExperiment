@@ -129,13 +129,24 @@ export default class Pool extends Phaser.Scene {
 
 		var inputText = "";
 		this.focusedOnChat = false;
+		this.firstFocus = true;
 		var _this = this;
 		this.chat_input.on('pointerdown', function() {
 			_this.focusedOnChat = true;
+			if(_this.firstFocus)
+			{
+				_this.chat_text.text = "";
+				_this.firstFocus = false;
+			}
 		});
 
 		this.chat_text.on('pointerdown', function() {
 			_this.focusedOnChat = true;
+			if(_this.firstFocus)
+			{
+				_this.chat_text.text = "";
+				_this.firstFocus = false;
+			}
 		});
 
 		this.input.on('pointerdown', function(event) {
@@ -156,6 +167,7 @@ export default class Pool extends Phaser.Scene {
 					cursor.setVisible(false);
 					return;
 				}
+				cursor.setPosition(_this.chat_text.x + _this.chat_text.width + 2, _this.chat_text.y + 10);
 				this.cursorVisible = !this.cursorVisible;
 				cursor.setVisible(this.cursorVisible);
 			}
