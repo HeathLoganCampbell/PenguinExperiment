@@ -22,6 +22,7 @@ export default class Network
 
                     var data = {
                         id: message.payload.id,
+                        username: message.payload.username,
                         x: message.payload.x,
                         y: message.payload.y
                     }

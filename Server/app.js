@@ -13,8 +13,8 @@ let penguins = {};
 
 io.on('connection', (socket) => {
     console.log(`Player connected: ${socket.id}`);
-    penguins[socket.id] = { x: 777, y: 537 };
-    io.emit('message', { action: "connected", payload: { id: socket.id, x:penguins[socket.id].x, y: penguins[socket.id].y }});
+    penguins[socket.id] = { username: 'Penguin1', x: 777, y: 537 };
+    io.emit('message', { action: "connected", payload: { id: socket.id, username: penguins[socket.id].username, x:penguins[socket.id].x, y: penguins[socket.id].y }});
 
     socket.on('disconnect', () => {
         console.log(`Player disconnected: ${socket.id}`);
@@ -42,6 +42,7 @@ io.on('connection', (socket) => {
                 socket.emit('message', { action: "connected", payload: 
                     { 
                         id: key, 
+                        username: penguins[key].username,
                         x: penguins[key].x, 
                         y: penguins[key].y 
                     }});
