@@ -64,7 +64,7 @@ export default class Pool extends Phaser.Scene {
 
 		// chat_text
 		const chat_text = this.add.text(515, 912, "", {});
-		chat_text.text = "New text";
+		chat_text.text = "send a message...";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
 		// lists
@@ -144,6 +144,23 @@ export default class Pool extends Phaser.Scene {
 			}
 		});
 
+		this.cursorVisible = false;
+		let cursor = this.add.rectangle(this.chat_text.x + this.chat_text.width + 2, this.chat_text.y + 10, 2, this.chat_text.height + 10, 0xFFFFFF); 
+		cursor.setDepth(100000)
+		this.time.addEvent({
+			delay: 500,
+			loop: true,
+			callback: () => {
+				if (!_this.focusedOnChat) 
+				{
+					cursor.setVisible(false);
+					return;
+				}
+				this.cursorVisible = !this.cursorVisible;
+				cursor.setVisible(this.cursorVisible);
+			}
+		});
+
 		var _this = this;
 		this.input.keyboard.on('keydown', function(event) {
 			if (!_this.focusedOnChat) return;
@@ -165,6 +182,7 @@ export default class Pool extends Phaser.Scene {
 			}
 
 			_this.chat_text.text = inputText;
+			cursor.setPosition(_this.chat_text.x + _this.chat_text.width + 2, _this.chat_text.y + 10);
 		});
 
 		// self
