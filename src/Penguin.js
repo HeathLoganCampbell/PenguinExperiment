@@ -100,16 +100,23 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
+        var _this = this;
         this.currentTween = this.scene.tweens.add({
             targets: [this.penguin, this.body, this.nametag],
             x: targetX, y: targetY,
             duration: duration, ease: 'Linear',
             onUpdate: () => {
-                if(!this.penguin) return;
-                if(!this.body) return;
+                if(!_this.penguin) return;
+                if(!_this.body) return;
+
                 const walkFrame = (this.count % 8) + 1;
-                this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
-                this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
+                _this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
+                _this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
+
+                if(_this.chatBubble)
+                {
+                    _this.chatBubble.updatePosition()
+                }
             }
         });
     }

@@ -140,10 +140,6 @@ export default class Pool extends Phaser.Scene {
 		this.chat_text.setInteractive();
 		this.chat_input.setInteractive();
 
-		var bubble = new ChatBubble(this);
-		bubble.spawn();
-		bubble.setContent("XXXXXXXXXXXXXX XX XX. XX XXasdasdjkdasjkdsajasdjhdsadjsakkhjdsakhja. asjdhahka kahjs hjkads hkja sjkh asdk");
-
 		var inputText = "";
 		this.focusedOnChat = false;
 		var _this = this;
@@ -209,6 +205,10 @@ export default class Pool extends Phaser.Scene {
 		})
 
 		game.network.send("init");
+
+		var bubble = new ChatBubble(this, this.penguin);
+		bubble.spawn();
+		bubble.setContent("XXXXXXXXXXXXXX XX XX. XX XXasdasdjkdasjkdsajasdjhdsadjsakkhjdsakhja. asjdhahka kahjs hjkads hkja sjkh asdk");
 
 		this.matter.world.setBounds(0, 0, 1520, 960);
 		var body = this.matter.add.fromPhysicsEditor(0, 0, this.cache.json.get('cave-physics')["Walls"])

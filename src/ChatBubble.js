@@ -2,24 +2,39 @@
 
 export default class ChatBubble extends Phaser.GameObjects.Container
 {
-    constructor(scene)
+    constructor(scene, penguin)
     {
         super(scene)
+        this.yOffset = -95;
+        this.xOffset = -50;
+
+        this.penguin = penguin;
+        this.x = penguin.penguin.x + this.xOffset;
+        this.y = penguin.penguin.y + this.yOffset;
+        this.penguin.chatBubble = this;
+
         this.count = 0;
     }
     
     spawn()
     {
-		const balloon = this.scene.add.nineslice(396, 552, "main", "balloon", 300, 67, 19, 19, 19, 19);
+		const balloon = this.scene.add.nineslice(this.x, this.y, "main", "balloon", 300, 67, 19, 19, 19, 19);
 		balloon.setOrigin(0.5, 1);
 
-		const pin = this.scene.add.nineslice(396, 552, "main", "balloon-emote", 300, 40, 40, 110, 0, 15);
+		const pin = this.scene.add.nineslice(this.x, this.y, "main", "balloon-emote", 300, 40, 40, 110, 0, 15);
 		pin.setOrigin(0.5, 0);
 
-		const chatContent = this.scene.add.text(287, 514, "", {});
+        var textWidth = 228;
+		const chatContent = this.scene.add.text(this.x, this.y, "", {});
 		chatContent.text = "New text";
-		chatContent.setStyle({ "align": "center", "color": "#000000", "fixedWidth": 228, "fontFamily": "Arial", "fontSize": "24px" });
-		chatContent.setWordWrapWidth(chatContent.style.wordWrapWidth, true);
+		chatContent.setStyle({ 
+            "align": "center", 
+            "color": "#000000", 
+            "fontFamily": "Arial", 
+            "fontSize": "24px",
+            wordWrap: { width: textWidth, useAdvancedWrap: true },
+        });
+        chatContent.setOrigin(0.5, 1);
 
         balloon.setDepth(1010)
         pin.setDepth(1011)
@@ -33,5 +48,20 @@ export default class ChatBubble extends Phaser.GameObjects.Container
     setContent(message)
     {
         this.chatContent.text = message;
+
+        this.balloon.height = this.chatContent.height + 24;
+    }
+
+    updatePosition()
+    {
+        this.x = this.penguin.penguin.x + this.xOffset;
+        this.y = this.penguin.penguin.y + this.yOffset;
+
+        this.balloon.x = this.x;
+        this.balloon.y = this.y;
+        this.pin.x = this.x;
+        this.pin.y = this.y;
+        this.chatContent.x = this.x;
+        this.chatContent.y = this.y;
     }
 }
