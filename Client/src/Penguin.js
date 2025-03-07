@@ -7,8 +7,6 @@ export default class Penguin extends Phaser.GameObjects.Container
         super(scene)
         this.count = 0;
         this.tempUsername = "Penguin";
-        this.createPenguin();
-        this.setupMovement();
     }
 
     createPenguin() {
