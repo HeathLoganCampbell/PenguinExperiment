@@ -7,7 +7,7 @@ const io = new Server(server, {
     cors: { origin: '*' } // Allow connections from any client
 });
 
-app.use(express.static('../client'));
+app.use(express.static('../Client'));
 
 let penguins = {};
 
