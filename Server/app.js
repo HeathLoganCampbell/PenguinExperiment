@@ -1,8 +1,13 @@
+const express = require('express');
 const { Server } = require('socket.io');
 
-const io = new Server(3000, {
+const app = express();
+const server = require('http').Server(app);
+const io = new Server(server, {
     cors: { origin: '*' } // Allow connections from any client
 });
+
+app.use(express.static('../client'));
 
 let penguins = {};
 
@@ -11,19 +16,11 @@ io.on('connection', (socket) => {
     penguins[socket.id] = { x: 777, y: 537 };
     io.emit('message', { action: "connected", payload: { id: socket.id, x:penguins[socket.id].x, y: penguins[socket.id].y }});
 
-    // Object.keys(penguins).forEach(key => {
-    //     if(key == socket.id) return;
-    //     socket.emit('message', { action: "connected", payload: { id: key, x: penguins[key].x, y: penguins[key].y }});
-    // });
-
     socket.on('disconnect', () => {
         console.log(`Player disconnected: ${socket.id}`);
         delete penguins[socket.id];
         io.emit('message',{ action: "disconnected", payload: { id: socket.id } });
     });
-    // Message
-    //  Action
-    //  payload
 
     socket.on('message', (message) => {
         if(message.action === 'move')
@@ -56,10 +53,9 @@ io.on('connection', (socket) => {
             console.log("Recieved chat! " + message.payload.msg)
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
         }
-
-        // console.log(`Pong: ${socket.id}`);
-        // io.emit('pong', socket.id);
     });
 });
 
-console.log('WebSocket server running on port 3000');
+server.listen(3000, () => {
+    console.log('WebSocket server running on port 3000');
+});
