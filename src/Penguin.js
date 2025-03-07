@@ -83,6 +83,11 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     sendMessage(message)
     {
+        if(this.chatBubble)
+        {
+            this.chatBubble.remove();
+        }
+
         this.chatBubble = new ChatBubble(this.scene, this);
         this.chatBubble.spawn();
         this.chatBubble.setContent(message);

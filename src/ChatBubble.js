@@ -64,4 +64,25 @@ export default class ChatBubble extends Phaser.GameObjects.Container
         this.chatContent.x = this.x;
         this.chatContent.y = this.y;
     }
+
+    remove()
+    {
+        if (this.balloon) 
+        {
+            this.balloon.destroy();
+            this.balloon = null;
+        }
+
+        if (this.pin) 
+        {
+            this.pin.destroy();
+            this.pin = null;
+        }
+
+        if (this.chatContent) 
+        {
+            this.chatContent.destroy();
+            this.chatContent = null;
+        }
+    }
 }
