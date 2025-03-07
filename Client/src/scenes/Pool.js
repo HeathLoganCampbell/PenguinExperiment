@@ -199,6 +199,9 @@ export default class Pool extends Phaser.Scene {
 
 		// self
 		this.penguin = new Penguin(this);
+		this.penguin.createPenguin();
+        this.penguin.setupMovement();
+
 		this.penguin.setUsername(this.game.username);
 		this.otherPenguins = [];
 		this.otherPenguinsMap = {};
@@ -207,6 +210,8 @@ export default class Pool extends Phaser.Scene {
 		game.network.events.on("spawnPenguin", (data) => {
 			console.log("spawned new penguin " + data.username);
 			var newPenguin = new ConnectedPenguin(data.id, this);
+			newPenguin.createPenguin();
+        	newPenguin.setupMovement();
 			newPenguin.updatePosition(data.x, data.y)
 			newPenguin.setUsername(data.username);
 			this.otherPenguins.push(newPenguin);

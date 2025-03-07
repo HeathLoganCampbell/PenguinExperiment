@@ -8,8 +8,6 @@ export default class ConnectedPenguin extends Penguin
         this.id = id;
         this.count = 0;
         this.tempUsername = "ConnectedPenguin";
-        this.createPenguin();
-        this.setupMovement();
     }
 
     setupMovement() {

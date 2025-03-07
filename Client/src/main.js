@@ -9,8 +9,6 @@ window.addEventListener('load', function () {
 	var network = new Network();
 	network.connect(username);
 
-	network.send("hello_world", {});
-
 	var game = new Phaser.Game({
 		width: 1520,
 		height: 960,
