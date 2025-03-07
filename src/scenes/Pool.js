@@ -155,6 +155,7 @@ export default class Pool extends Phaser.Scene {
 			{
 				// send
 				_this.penguin.sendMessage(inputText);
+				_this.sys.game.network.send("chat", { msg: inputText });
 				inputText = "";
 			}
 			else if (event.key.length === 1)
@@ -183,6 +184,12 @@ export default class Pool extends Phaser.Scene {
 			console.log("moved penguin");
 			var movedPenguin = this.otherPenguinsMap[data.id];
 			movedPenguin.moveTo(data.x, data.y)
+		})
+
+		game.network.events.on("chatPenguin", (data) => {
+			console.log("chat penguin");
+			var movedPenguin = this.otherPenguinsMap[data.id];
+			movedPenguin.sendMessage(data.msg)
 		})
 
 		game.network.events.on("removePenguin", (data) => {
