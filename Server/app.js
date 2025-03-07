@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
 
         if(message.action === 'move')
         {
+            if(!penguins[socket.id]) return;
             console.log("recieved moved event");
             penguins[socket.id].x = message.payload.x;
             penguins[socket.id].y = message.payload.y;
