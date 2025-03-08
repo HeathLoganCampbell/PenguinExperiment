@@ -12,6 +12,11 @@ app.use(express.static('../Client'));
 let penguins = {};
 let seats = [];
 
+function getClientIp(socket) {
+    const req = socket.request;
+    return req.connection.remoteAddress || req.socket.remoteAddress;
+}
+
 function setSeatStatus(x, y, status, socketId) {
     let seat = seats.find(s => s.x === x && s.y === y);
     if (!seat) {
@@ -42,9 +47,9 @@ function leaveSeat(socketId) {
 }
 
 io.on('connection', (socket) => {
-    console.log(`Player connected: ${socket.id}`);
-    
-   
+    const clientIp = getClientIp(socket);
+    console.log(`Player connected: ${socket.id} with Ip ${clientIp}`);
+
     socket.on('disconnect', () => {
         console.log(`Player disconnected: ${socket.id}`);
         leaveSeat(socket.id);
@@ -153,6 +158,22 @@ io.on('connection', (socket) => {
                 {
                     var key = socket.id;
                     penguins[key].faceItemId = '104';
+                    io.emit('message', { action: "updatePenguin", payload: 
+                        { 
+                            id: key, 
+                            username: penguins[key].username,
+                            x: penguins[key].x, 
+                            y: penguins[key].y,
+                            direction: penguins[key].direction,
+                            color: penguins[key].color,
+                            faceItemId: penguins[key].faceItemId
+                        }});
+                }
+
+                if(msg.startsWith('!party'))
+                {
+                    var key = socket.id;
+                    penguins[key].faceItemId = '413';
                     io.emit('message', { action: "updatePenguin", payload: 
                         { 
                             id: key, 

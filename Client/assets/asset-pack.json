@@ -9,6 +9,12 @@
             },
             {
                 "type": "multiatlas",
+                "url": "assets/cloths/413.json",
+                "path": "assets/cloths",
+                "key": "413"
+            },
+            {
+                "type": "multiatlas",
                 "url": "assets/cave.json",
                 "path": "assets",
                 "key": "cave"
