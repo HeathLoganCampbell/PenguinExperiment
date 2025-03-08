@@ -101,6 +101,21 @@ io.on('connection', (socket) => {
                 {
                     console.log(penguins)
                 }
+
+                if(msg.startsWith('!red'))
+                {
+                    var key = socket.id;
+                    penguins[key].color = '#FF0000';
+                    io.emit('message', { action: "updatePenguin", payload: 
+                        { 
+                            id: key, 
+                            username: penguins[key].username,
+                            x: penguins[key].x, 
+                            y: penguins[key].y,
+                            direction: penguins[key].direction,
+                            color: penguins[key].color
+                        }});
+                }
             }
 
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
