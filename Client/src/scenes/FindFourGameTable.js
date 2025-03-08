@@ -49,7 +49,19 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			// findFourGame.setDepth(10000)
 			// findFourGame.spawn();
 			console.log("clicked!")
-			this.redSeat.sit(this.scene.game.self);
+			if(!this.blueSeat.isFilled)
+			{
+				this.blueSeat.sit(this.scene.game.self);
+			}
+			else if(!this.redSeat.isFilled)
+			{
+				this.redSeat.sit(this.scene.game.self);
+			}
+			else 
+			{
+				// No seats left
+			}
+			
 		});
 
 		scene.add.existing(this)
@@ -59,7 +71,13 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
         var realY = matrix.getY(0, 0) - 56
 
 		this.redSeat = new Seat(this.scene, realX + -30, realY + 50, 7);
-		this.blueSeat = new Seat(this.scene, realX + 68, realY + 94, 3);
+		this.blueSeat = new Seat(this.scene, realX + 41, realY + 134, 3);
+		this.blueSeat.onSat = (peng) => {
+			console.log("Sat!!!")
+		};
+		this.redSeat.onSat = (peng) => {
+			console.log("Sat!!!")
+		};
 
 		this.depth = this.y;
 		console.log("Table depth" + this.depth)
