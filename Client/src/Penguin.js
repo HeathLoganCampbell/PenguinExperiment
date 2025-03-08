@@ -183,7 +183,6 @@ export default class Penguin extends Phaser.GameObjects.Container
                 if(!this.body) return;
                 
                 this.depth = this.y
-                console.log("Penguin depth" + this.depth)
                 const walkFrame = (this.count % 8) + 1;
                 this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
                 this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
