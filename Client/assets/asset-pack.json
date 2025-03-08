@@ -9,9 +9,75 @@
             },
             {
                 "type": "multiatlas",
+                "url": "assets/furniture/143.json",
+                "path": "assets/furniture",
+                "key": "143"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/170.json",
+                "path": "assets/furniture",
+                "key": "170"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/171.json",
+                "path": "assets/furniture",
+                "key": "171"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/172.json",
+                "path": "assets/furniture",
+                "key": "172"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/173.json",
+                "path": "assets/furniture",
+                "key": "173"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/174.json",
+                "path": "assets/furniture",
+                "key": "174"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/176.json",
+                "path": "assets/furniture",
+                "key": "176"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/177.json",
+                "path": "assets/furniture",
+                "key": "177"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/181.json",
+                "path": "assets/furniture",
+                "key": "181"
+            },
+            {
+                "type": "multiatlas",
                 "url": "assets/cloths/413.json",
                 "path": "assets/cloths",
                 "key": "413"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/51.json",
+                "path": "assets/furniture",
+                "key": "51"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/furniture/52.json",
+                "path": "assets/furniture",
+                "key": "52"
             },
             {
                 "type": "multiatlas",
