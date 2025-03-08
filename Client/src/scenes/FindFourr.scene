@@ -94,6 +94,7 @@
                     "type": "Image",
                     "id": "a82ab872-1d6a-4834-ad3c-e2e027151c14",
                     "label": "board",
+                    "scope": "CLASS",
                     "texture": {
                         "key": "four",
                         "frame": "board"

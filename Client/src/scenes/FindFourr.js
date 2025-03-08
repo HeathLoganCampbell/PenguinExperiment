@@ -77,6 +77,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.closebutton = closebutton;
 		this.handle = handle;
 		this.token_red_1 = token_red_1;
+		this.board = board;
 		this.column_1 = column_1;
 		this.column_2 = column_2;
 		this.column_3 = column_3;
@@ -95,6 +96,10 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.column_5.setInteractive();
 		this.column_6.setInteractive();
 		this.column_7.setInteractive();
+
+		this.board.setDepth(100)
+
+		this.state = new Array(6).fill().map(() => new Array(7).fill(0));
 		/* END-USER-CTR-CODE */
 	}
 
@@ -106,6 +111,8 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	handle;
 	/** @type {Phaser.GameObjects.Sprite} */
 	token_red_1;
+	/** @type {Phaser.GameObjects.Sprite} */
+	board;
 	/** @type {Phaser.GameObjects.Image} */
 	column_1;
 	/** @type {Phaser.GameObjects.Image} */
@@ -163,7 +170,16 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				this.token_red_1.y = -54;
 				this.token_red_1.x = -165 - (columnIndex * -48.5);
 
-				this.dropToken(this.token_red_1, 5);
+				console.log(this.state)
+				var heightFreeYPosition = -1;
+				for (let row = this.state.length - 1; row >= 0; row--) {
+					if (this.state[row][columnIndex] === 0) {
+						heightFreeYPosition = row;
+						break;
+					}
+				}
+
+				this.dropToken(this.token_red_1, columnIndex, heightFreeYPosition);
 			});
 
 			column.on('pointerover', () => {
@@ -173,7 +189,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		});
 	}
 
-	dropToken(token, y) {
+	dropToken(token, x, y) {
         let i = 0
 		var _this = this;
         let timer = this.scene.time.addEvent({
@@ -184,6 +200,15 @@ export default class FindFourr extends Phaser.GameObjects.Container {
                 if (i === y) 
 				{
                     _this.scene.time.removeEvent(timer)
+
+					this.state[y][x] = 1;
+					var renderX = -165 - (x * -48.5);
+					var renderY = -54 + ((y+1) * 49);
+					const token_red = this.scene.add.sprite(renderX, renderY, "four", "counter_1");
+					this.add(token_red);
+					console.log("board depth " + this.board.depth)
+					console.log("token depth " + token_red.depth)
+					this.scene.children.bringToTop(this.board);
                 }
 
                 i++
