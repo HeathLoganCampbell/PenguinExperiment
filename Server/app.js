@@ -60,6 +60,7 @@ io.on('connection', (socket) => {
             if(!penguins[socket.id]) return;
             leaveSeat(socket.id);
             console.log("recieved moved event");
+            penguins[socket.id].direction = null;
             penguins[socket.id].x = message.payload.x;
             penguins[socket.id].y = message.payload.y;
             io.emit('message', { action: "move", payload: { id: socket.id, x: message.payload.x, y: message.payload.y }});
@@ -69,6 +70,7 @@ io.on('connection', (socket) => {
         {
             if(!penguins[socket.id]) return;
             console.log("recieved sit event");
+            penguins[socket.id].direction = message.payload.direction;
             io.emit('message', { action: "sit", payload: { id: socket.id, direction: message.payload.direction }});
         }
 
@@ -82,7 +84,8 @@ io.on('connection', (socket) => {
                         id: key, 
                         username: penguins[key].username,
                         x: penguins[key].x, 
-                        y: penguins[key].y 
+                        y: penguins[key].y,
+                        direction: penguins[key].direction
                     }});
             });
         }

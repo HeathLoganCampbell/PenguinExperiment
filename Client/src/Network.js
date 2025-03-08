@@ -26,7 +26,8 @@ export default class Network
                         id: message.payload.id,
                         username: message.payload.username,
                         x: message.payload.x,
-                        y: message.payload.y
+                        y: message.payload.y,
+                        direction: message.payload.direction
                     }
                     this.events.emit("spawnPenguin", data)
                 }

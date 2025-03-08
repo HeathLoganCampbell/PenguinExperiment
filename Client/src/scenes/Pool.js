@@ -219,6 +219,7 @@ export default class Pool extends Phaser.Scene {
         	newPenguin.setupMovement();
 			newPenguin.updatePosition(data.x, data.y)
 			newPenguin.setUsername(data.username);
+			if(data.direction) newPenguin.sit(data.direction)
 			this.otherPenguins.push(newPenguin);
 			this.otherPenguinsMap[data.id] = newPenguin;
 		})
