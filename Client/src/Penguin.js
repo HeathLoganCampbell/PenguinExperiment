@@ -47,6 +47,25 @@ export default class Penguin extends Phaser.GameObjects.Container
 
             this.moveTo(pointer.x, pointer.y);
         });
+
+        var _this = this;
+        this.scene.input.keyboard.on('keydown', (event) => {
+            var game = _this.scene.sys.game;
+
+            if (event.key === 'ArrowLeft') {
+                _this.sit(2);
+                game.network.send("sit", { direction: 2 })
+            } else if (event.key === 'ArrowRight') {
+                _this.sit(6);
+                 game.network.send("sit", { direction: 6 })
+            } else if (event.key === 'ArrowUp') {
+                _this.sit(4);
+                 game.network.send("sit", { direction: 4 })
+            } else if (event.key === 'ArrowDown') {
+                _this.sit(0);
+                 game.network.send("sit", { direction: 0 })
+            }
+        });
     }
 
     updatePosition(x, y)
@@ -111,6 +130,21 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.chatBubble = new ChatBubble(this.scene, this);
         this.chatBubble.spawn();
         this.chatBubble.setContent(message);
+    }
+
+    sit(direction)
+    {
+        // cancel walking
+        if (this.currentTween)
+        {
+            this.currentTween.remove();
+            this.currentTween = null;
+        }
+
+        // 17, 18, 19, 20, 21, 22, 23, 24
+        var directionId = 17 + (direction % 8);
+        this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
+        this.body.setTexture("penguin_1", `body/${directionId}_1`);
     }
 
     moveTo(targetX, targetY) {

@@ -40,6 +40,13 @@ io.on('connection', (socket) => {
             io.emit('message', { action: "move", payload: { id: socket.id, x: message.payload.x, y: message.payload.y }});
         }
 
+        if(message.action === 'sit')
+        {
+            if(!penguins[socket.id]) return;
+            console.log("recieved sit event");
+            io.emit('message', { action: "sit", payload: { id: socket.id, direction: message.payload.direction }});
+        }
+
         if(message.action === 'init')
         {
             console.log("Recieved init!")

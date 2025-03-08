@@ -263,6 +263,12 @@ export default class Pool extends Phaser.Scene {
 			movedPenguin.moveTo(data.x, data.y)
 		})
 
+		game.network.events.on("sitPenguin", (data) => {
+			console.log("moved penguin");
+			var movedPenguin = this.otherPenguinsMap[data.id];
+			movedPenguin.sit(data.direction)
+		})
+
 		game.network.events.on("chatPenguin", (data) => {
 			console.log("chat penguin");
 			var movedPenguin = this.otherPenguinsMap[data.id];

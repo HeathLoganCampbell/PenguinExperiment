@@ -53,6 +53,17 @@ export default class Network
                     this.events.emit("movePenguin", data)
                 }
 
+                if(message.action === 'sit')
+                {
+                    if(_this.socket.id === message.payload.id) return;
+
+                    var data = {
+                        id: message.payload.id,
+                        direction: message.payload.direction
+                    }
+                    this.events.emit("sitPenguin", data)
+                }
+
                 if(message.action === 'chat')
                 {
                     if(_this.socket.id === message.payload.id) return;
