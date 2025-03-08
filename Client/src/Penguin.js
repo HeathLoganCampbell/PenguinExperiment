@@ -10,26 +10,32 @@ export default class Penguin extends Phaser.GameObjects.Container
     }
 
     createPenguin() {
-        this.body = this.scene.add.sprite(777, 537, "penguin_1", "body/1_1");
+        this.body = this.scene.add.sprite(0, 0, "penguin_1", "body/1_1");
         this.body.tintTopLeft = 6684825;
 		this.body.tintTopRight = 6684825;
 		this.body.tintBottomLeft = 6684825;
 		this.body.tintBottomRight = 6684825;
-        this.penguin = this.scene.add.sprite(777, 537, "penguin_1", "penguin/1_1");
-        this.nametag = this.scene.add.text(777, 537, this.tempUsername, {
+        this.penguin = this.scene.add.sprite(0, 0, "penguin_1", "penguin/1_1");
+        this.nametag = this.scene.add.text(0, 0, this.tempUsername, {
             align: "center", 
             color: "#000000", 
             fontFamily: "Arial", 
             fontSize: "24px"
         }).setOrigin(0.5, -0.8);
-        this.depth = this.penguin.y
+        this.add(this.body)
+        this.add(this.penguin)
+        this.add(this.nametag)
+        this.depth = this.y
+        this.x = 777;
+        this.y = 537;
+        this.scene.add.existing(this);
     }
 
     setUsername(username)
     {
         this.nametag.text = username;
-        this.nametag.x = this.body.x;
-        this.nametag.y = this.body.y;
+        this.nametag.x = this.x;
+        this.nametag.y = this.y;
     }
 
     setupMovement() {
@@ -71,12 +77,8 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     updatePosition(x, y)
     {
-        this.penguin.x = x;
-        this.penguin.y = y;
-        this.body.x = x;
-        this.body.y = y;
-        this.nametag.x = x;
-        this.nametag.y = y;
+        this.x = x;
+        this.y = y;
     }
 
     removePenguin()
@@ -164,8 +166,8 @@ export default class Penguin extends Phaser.GameObjects.Container
             this.afterMove = null;
         }
 
-        const dx = targetX - this.penguin.x;
-        const dy = targetY - this.penguin.y;
+        const dx = targetX - this.x;
+        const dy = targetY - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         const duration = (distance / 155) * 1000;
         const directionId = Math.min(16, Math.round((Math.atan2(dy, dx) * (180 / Math.PI) - 90 + 360) % 360 / 45) + 9);
@@ -175,14 +177,14 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
         this.currentTween = this.scene.tweens.add({
-            targets: [this.penguin, this.body, this.nametag],
+            targets: [this],
             x: targetX, y: targetY,
             duration: duration, ease: 'Linear',
             onUpdate: () => {
                 if(!this.penguin) return;
                 if(!this.body) return;
                 
-                this.depth = this.penguin.y
+                this.depth = this.y
                 console.log("Penguin depth" + this.depth)
                 const walkFrame = (this.count % 8) + 1;
                 this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
