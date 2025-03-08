@@ -6,7 +6,7 @@
 /* START-USER-IMPORTS */
 import Penguin from '../Penguin.js'
 import ConnectedPenguin from '../ConnectedPenguin.js'
-import FindFourGame from './FindFourGame.js'
+import FindFourGame from './FindFourr.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -28,6 +28,11 @@ export default class Pool extends Phaser.Scene {
 		// sprite_1
 		const sprite_1 = this.add.sprite(0, -29, "cave", "bg");
 		sprite_1.setOrigin(0, 0);
+		sprite_1.alpha = 0.2;
+		sprite_1.alphaTopLeft = 0.2;
+		sprite_1.alphaTopRight = 0.2;
+		sprite_1.alphaBottomLeft = 0.2;
+		sprite_1.alphaBottomRight = 0.2;
 
 		// image_6
 		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
@@ -187,7 +192,10 @@ export default class Pool extends Phaser.Scene {
 		});
 
 		this.findFourTableContainer.on("pointerdown", () => {
-			_this.scene.add("FindFourGame", FindFourGame, true);
+			var findFourGame = new FindFourGame(_this);
+			_this.add.existing(findFourGame);
+			findFourGame.setDepth(10000)
+			findFourGame.spawn();
 		});
 
 
