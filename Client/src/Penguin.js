@@ -152,10 +152,8 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     setColor(color)
     {
-        this.body.tintTopLeft = color;
-		this.body.tintTopRight = color;
-		this.body.tintBottomLeft = color;
-		this.body.tintBottomRight = color;
+        var realColorValue = Phaser.Display.Color.HexStringToColor(color).color
+        this.body.setTint(realColorValue);
     }
 
     moveTo(targetX, targetY) {
