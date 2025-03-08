@@ -39,7 +39,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.add(token_red_1);
 
 		// board
-		const board = scene.add.image(-20, 117, "four", "board");
+		const board = scene.add.sprite(-20, 117, "four", "board");
 		this.add(board);
 
 		// column_1
@@ -70,6 +70,10 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		const column_7 = scene.add.image(126, 105, "four", "button/button");
 		this.add(column_7);
 
+		// token_blue_1
+		const token_blue_1 = scene.add.sprite(-165, -5, "four", "counter_2");
+		this.add(token_blue_1);
+
 		// lists
 		const columns = [column_7, column_6, column_5, column_4, column_3, column_2, column_1];
 
@@ -85,6 +89,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.column_5 = column_5;
 		this.column_6 = column_6;
 		this.column_7 = column_7;
+		this.token_blue_1 = token_blue_1;
 		this.columns = columns;
 
 		/* START-USER-CTR-CODE */
@@ -127,12 +132,15 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	column_6;
 	/** @type {Phaser.GameObjects.Image} */
 	column_7;
+	/** @type {Phaser.GameObjects.Sprite} */
+	token_blue_1;
 	/** @type {Phaser.GameObjects.Image[]} */
 	columns;
 
 	/* START-USER-CODE */
 	spawn()
 	{
+		this.isRedTurn = true;
 		const draggableWindow = new DraggableWindow(this);
         draggableWindow.setHandle(this.handle);
 
@@ -163,33 +171,77 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 
 		draggableWindow.start();
 
+		this.isRedTurn = true;
+		this.blockedPlacing = false;
+		this.updateVisibleTokens();
+
 		this.columns.forEach((column, index) => {
-			
 			var columnIndex = 6 - index;
 			column.on('pointerdown', () => {
-				this.token_red_1.y = -54;
-				this.token_red_1.x = -165 - (columnIndex * -48.5);
+				if(this.isRedTurn) 
+				{
+					this.token_red_1.y = -54;
+					this.token_red_1.x = -165 - (columnIndex * -48.5);
 
-				console.log(this.state)
-				var heightFreeYPosition = -1;
-				for (let row = this.state.length - 1; row >= 0; row--) {
-					if (this.state[row][columnIndex] === 0) {
-						heightFreeYPosition = row;
-						break;
-					}
+					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
+					this.dropToken(this.token_red_1, columnIndex, heightFreeYPosition, 1);
 				}
+				else 
+				{
+					this.token_blue_1.y = -54;
+					this.token_blue_1.x = -165 - (columnIndex * -48.5);
 
-				this.dropToken(this.token_red_1, columnIndex, heightFreeYPosition);
+					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
+					this.dropToken(this.token_blue_1, columnIndex, heightFreeYPosition, 2);
+				}
 			});
 
 			column.on('pointerover', () => {
-				this.token_red_1.y = -54;
-				this.token_red_1.x = -165 - (columnIndex * -48.5);
+				if(this.blockedPlacing) return;
+				if(this.isRedTurn) 
+				{
+					if(this.getHighestFreeRow(columnIndex) == -1) 
+					{
+						this.token_red_1.visible = false;
+					}
+					else 
+					{
+						this.token_red_1.visible = true;
+					}
+
+					this.token_red_1.y = -54;
+					this.token_red_1.x = -165 - (columnIndex * -48.5);
+				}
+				else 
+				{
+					if(this.getHighestFreeRow(columnIndex) == -1) 
+					{
+						this.token_blue_1.visible = false;
+					}
+					else 
+					{
+						this.token_blue_1.visible = true;
+					}
+					
+					this.token_blue_1.y = -54;
+					this.token_blue_1.x = -165 - (columnIndex * -48.5);
+				}
 			});
 		});
 	}
 
-	dropToken(token, x, y) {
+	getHighestFreeRow(columnIndex)
+	{
+		for (let row = this.state.length - 1; row >= 0; row--) {
+			if (this.state[row][columnIndex] === 0) {
+				return row;
+			}
+		}
+		return -1;
+	}
+
+	dropToken(token, x, y, value) {
+		this.blockedPlacing = true;
         let i = 0
 		var _this = this;
         let timer = this.scene.time.addEvent({
@@ -201,14 +253,14 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				{
                     _this.scene.time.removeEvent(timer)
 
-					this.state[y][x] = 1;
+					this.state[y][x] = value;
 					var renderX = -165 - (x * -48.5);
 					var renderY = -54 + ((y+1) * 49);
-					const token_red = this.scene.add.sprite(renderX, renderY, "four", "counter_1");
-					this.add(token_red);
-					console.log("board depth " + this.board.depth)
-					console.log("token depth " + token_red.depth)
-					this.scene.children.bringToTop(this.board);
+					const tokenPlaced = this.scene.add.sprite(renderX, renderY, "four", this.isRedTurn ?  "counter_1" : "counter_2");
+					this.add(tokenPlaced);
+					this.isRedTurn = !this.isRedTurn;
+					this.blockedPlacing = false;
+					this.updateVisibleTokens();
                 }
 
                 i++
@@ -216,6 +268,22 @@ export default class FindFourr extends Phaser.GameObjects.Container {
             repeat: y
         })
     }
+
+	updateVisibleTokens()
+	{
+		if(this.isRedTurn)
+		{
+			// reds turn
+			this.token_red_1.visible = true;
+			this.token_blue_1.visible = false;
+		}
+		else 
+		{
+			// blues turn
+			this.token_red_1.visible = false;
+			this.token_blue_1.visible = true;
+		}
+	}
 
 	/* END-USER-CODE */
 }

@@ -91,7 +91,7 @@
                     "y": -5
                 },
                 {
-                    "type": "Image",
+                    "type": "Sprite",
                     "id": "a82ab872-1d6a-4834-ad3c-e2e027151c14",
                     "label": "board",
                     "scope": "CLASS",
@@ -185,6 +185,18 @@
                     },
                     "x": 126,
                     "y": 105
+                },
+                {
+                    "type": "Sprite",
+                    "id": "38bbae3c-0794-4cca-b488-2da68eef9c84",
+                    "label": "token_blue_1",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "counter_2"
+                    },
+                    "x": -165,
+                    "y": -5
                 }
             ]
         }
