@@ -61,7 +61,7 @@ export default class Pool extends Phaser.Scene {
 
 		// chat_text
 		const chat_text = this.add.text(515, 912, "", {});
-		chat_text.text = "New text";
+		chat_text.text = "Send a message...";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
 		// FindFourTableContainer
