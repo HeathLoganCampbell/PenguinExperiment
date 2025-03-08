@@ -58,6 +58,7 @@
                     "type": "Image",
                     "id": "5be758cb-97c4-4092-a015-78af7d430e14",
                     "label": "closebutton",
+                    "scope": "CLASS",
                     "texture": {
                         "key": "main",
                         "frame": "blue-button"

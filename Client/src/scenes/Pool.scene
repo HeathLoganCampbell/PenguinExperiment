@@ -36,12 +36,7 @@
             },
             "y": -29,
             "originX": 0,
-            "originY": 0,
-            "alpha": 0.2,
-            "alphaTopLeft": 0.2,
-            "alphaTopRight": 0.2,
-            "alphaBottomLeft": 0.2,
-            "alphaBottomRight": 0.2
+            "originY": 0
         },
         {
             "type": "Image",

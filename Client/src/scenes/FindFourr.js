@@ -39,29 +39,53 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.add(handle);
 
 		this.window = window;
+		this.closebutton = closebutton;
 		this.handle = handle;
 
 		/* START-USER-CTR-CODE */
+		this.closebutton.setInteractive();
 		/* END-USER-CTR-CODE */
 	}
 
 	/** @type {Phaser.GameObjects.Sprite} */
 	window;
 	/** @type {Phaser.GameObjects.Image} */
+	closebutton;
+	/** @type {Phaser.GameObjects.Image} */
 	handle;
 
 	/* START-USER-CODE */
 	spawn()
 	{
-		this.window.setDepth(-100000)
-		console.log("creating draggable")
 		const draggableWindow = new DraggableWindow(this);
-		console.log("setting handle")
         draggableWindow.setHandle(this.handle);
 
-		console.log("starting draggable")
+		var _this = this;
+		this.closebutton.on('pointerover', function() {
+			_this.closebutton.setTexture("main", 'blue-button-hover');
+		});
+
+		this.closebutton.on('pointerdown', function() {
+			_this.closebutton.setTexture("main", 'blue-button-active');
+			_this.isCloseButtonDown = true;
+		});
+
+		this.closebutton.on('pointerout', function() {
+			_this.closebutton.setTexture("main", 'blue-button');
+			_this.isCloseButtonDown = false;
+		});
+
+		this.closebutton.on('pointerup', function() 
+		{
+			if(!_this.isCloseButtonDown)
+			{
+				return;
+			}
+
+			_this.destroy();
+		});
+
 		draggableWindow.start();
-		console.log("started draggable")
 	}
 	// Write your code here.
 

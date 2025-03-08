@@ -28,11 +28,6 @@ export default class Pool extends Phaser.Scene {
 		// sprite_1
 		const sprite_1 = this.add.sprite(0, -29, "cave", "bg");
 		sprite_1.setOrigin(0, 0);
-		sprite_1.alpha = 0.2;
-		sprite_1.alphaTopLeft = 0.2;
-		sprite_1.alphaTopRight = 0.2;
-		sprite_1.alphaBottomLeft = 0.2;
-		sprite_1.alphaBottomRight = 0.2;
 
 		// image_6
 		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
