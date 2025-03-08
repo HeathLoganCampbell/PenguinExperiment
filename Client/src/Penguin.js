@@ -34,8 +34,6 @@ export default class Penguin extends Phaser.GameObjects.Container
     setUsername(username)
     {
         this.nametag.text = username;
-        this.nametag.x = this.x;
-        this.nametag.y = this.y;
     }
 
     setupMovement() {
