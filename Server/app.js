@@ -27,6 +27,10 @@ function setSeatStatus(x, y, status, socketId) {
     io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
 }
 
+function isValidHexColor(color) {
+    return /^#([0-9A-F]{3}){1,2}$/i.test(color);
+}
+
 function leaveSeat(socketId) {
     let seat = seats.find(s => s.socketId === socketId);
     if (seat) {
@@ -102,10 +106,16 @@ io.on('connection', (socket) => {
                     console.log(penguins)
                 }
 
-                if(msg.startsWith('!red'))
+                if(msg.startsWith('!color '))
                 {
+                    const args = msg.split(' ');
+                    if(args.length < 1) return;
+                    const color = args[1]; 
+
+                    if(!isValidHexColor(color)) return;
+
                     var key = socket.id;
-                    penguins[key].color = '#FF0000';
+                    penguins[key].color = color;
                     io.emit('message', { action: "updatePenguin", payload: 
                         { 
                             id: key, 
