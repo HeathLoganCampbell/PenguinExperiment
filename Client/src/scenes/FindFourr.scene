@@ -107,12 +107,14 @@
                     "id": "05031a11-2761-4009-8b31-36beb618724f",
                     "label": "column_1",
                     "scope": "CLASS",
+                    "blendMode": 2,
                     "texture": {
                         "key": "four",
                         "frame": "button/button"
                     },
                     "x": -168,
-                    "y": 105
+                    "y": 105,
+                    "tintFill": true
                 },
                 {
                     "type": "Image",

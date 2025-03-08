@@ -44,6 +44,8 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 
 		// column_1
 		const column_1 = scene.add.image(-168, 105, "four", "button/button");
+		column_1.blendMode = Phaser.BlendModes.MULTIPLY;
+		column_1.tintFill = true;
 		this.add(column_1);
 
 		// column_2
@@ -180,18 +182,24 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			column.on('pointerdown', () => {
 				if(this.isRedTurn) 
 				{
+					if(this.blockedPlacing) return;
+					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
+					if(heightFreeYPosition == -1) return;
+
 					this.token_red_1.y = -54;
 					this.token_red_1.x = -165 - (columnIndex * -48.5);
 
-					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
 					this.dropToken(this.token_red_1, columnIndex, heightFreeYPosition, 1);
 				}
 				else 
 				{
+					if(this.blockedPlacing) return;
+					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
+					if(heightFreeYPosition == -1) return;
+					
 					this.token_blue_1.y = -54;
 					this.token_blue_1.x = -165 - (columnIndex * -48.5);
 
-					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
 					this.dropToken(this.token_blue_1, columnIndex, heightFreeYPosition, 2);
 				}
 			});
@@ -222,7 +230,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 					{
 						this.token_blue_1.visible = true;
 					}
-					
+
 					this.token_blue_1.y = -54;
 					this.token_blue_1.x = -165 - (columnIndex * -48.5);
 				}
@@ -241,6 +249,11 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	}
 
 	dropToken(token, x, y, value) {
+		if(this.blockedPlacing) 
+		{
+			console.log("blocked!")
+			return;
+		}
 		this.blockedPlacing = true;
         let i = 0
 		var _this = this;
@@ -258,9 +271,9 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 					var renderY = -54 + ((y+1) * 49);
 					const tokenPlaced = this.scene.add.sprite(renderX, renderY, "four", this.isRedTurn ?  "counter_1" : "counter_2");
 					this.add(tokenPlaced);
-					this.isRedTurn = !this.isRedTurn;
-					this.blockedPlacing = false;
-					this.updateVisibleTokens();
+					_this.isRedTurn = !_this.isRedTurn;
+					_this.blockedPlacing = false;
+					_this.updateVisibleTokens();
                 }
 
                 i++
