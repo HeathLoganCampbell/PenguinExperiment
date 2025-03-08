@@ -4,9 +4,9 @@ import Network from "./Network.js"
 
 window.addEventListener('load', function () {
 
-	const username = localStorage.getItem("username");
+	var username = localStorage.getItem("username");
 	if (username === null) {
-		username = this.prompt("What would you like your username to be?");
+		username = prompt("What would you like your username to be?");
 		localStorage.setItem("username", username);
 	}
 	
