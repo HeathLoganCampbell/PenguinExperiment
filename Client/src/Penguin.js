@@ -20,6 +20,19 @@ export default class Penguin extends Phaser.GameObjects.Container
         {
             this.face.visible = true;
         }
+
+        if(id === "green")
+        {
+            this.penguin.visible = false;
+            this.body.visible = false;
+            this.face.x = -63;
+        }
+        else 
+        {
+            this.penguin.visible = true;
+            this.body.visible = true;
+            this.face.x = 0;
+        }
         
         this.penguin.setTexture("penguin_1", `penguin/1_1`);
         this.body.setTexture("penguin_1", `body/1_1`);

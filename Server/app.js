@@ -185,6 +185,22 @@ io.on('connection', (socket) => {
                             faceItemId: penguins[key].faceItemId
                         }});
                 }
+
+                if(msg.startsWith('!puffle'))
+                {
+                    var key = socket.id;
+                    penguins[key].faceItemId = 'green';
+                    io.emit('message', { action: "updatePenguin", payload: 
+                        { 
+                            id: key, 
+                            username: penguins[key].username,
+                            x: penguins[key].x, 
+                            y: penguins[key].y,
+                            direction: penguins[key].direction,
+                            color: penguins[key].color,
+                            faceItemId: penguins[key].faceItemId
+                        }});
+                }
             }
 
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
