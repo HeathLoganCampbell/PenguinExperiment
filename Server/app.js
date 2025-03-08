@@ -10,12 +10,38 @@ const io = new Server(server, {
 app.use(express.static('../Client'));
 
 let penguins = {};
+let seats = [];
+
+function setSeatStatus(x, y, status, socketId) {
+    let seat = seats.find(s => s.x === x && s.y === y);
+    if (!seat) {
+        seat = { x, y, status, socketId };
+        seats.push(seat);
+    } else {
+        seat.status = status;
+        seat.status = socketId;
+    }
+
+    io.emit('message', { action: "seat", payload: { id: socket.id, ...seat }});
+}
+
+function leaveSeat(socketId) {
+    let seat = seats.find(s => s.socketId === socketId);
+    if (seat) {
+        seat.status = "empty";
+        seat.socketId = null;
+
+        io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
+    }
+}
 
 io.on('connection', (socket) => {
     console.log(`Player connected: ${socket.id}`);
+    
    
     socket.on('disconnect', () => {
         console.log(`Player disconnected: ${socket.id}`);
+        leaveSeat(socket.id);
         delete penguins[socket.id];
         io.emit('message',{ action: "disconnected", payload: { id: socket.id } });
     });
@@ -30,6 +56,7 @@ io.on('connection', (socket) => {
         if(message.action === 'move')
         {
             if(!penguins[socket.id]) return;
+            leaveSeat(socket.id);
             console.log("recieved moved event");
             penguins[socket.id].x = message.payload.x;
             penguins[socket.id].y = message.payload.y;
@@ -71,7 +98,8 @@ io.on('connection', (socket) => {
         if(message.action === 'seat')
         {
             // We should track the status of the seats...
-            io.emit('message', { action: "seat", payload: { id: socket.id, ...message.payload }});
+            console.log("Seat @ (" + message.payload.x + ", " + message.payload.y + ") is " + (message.payload.filled ? "filled" : "empty" ));
+            setSeatStatus(message.payload.x, message.payload.y, true, socket.id)
         }
     });
 });
