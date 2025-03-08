@@ -212,16 +212,25 @@ export default class Pool extends Phaser.Scene {
 		this.otherPenguinsMap = {};
 
 		var game = this.sys.game;
-		game.network.events.on("spawnPenguin", (data) => {
-			console.log("spawned new penguin " + data.username);
-			var newPenguin = new ConnectedPenguin(data.id, this);
-			newPenguin.createPenguin();
-        	newPenguin.setupMovement();
-			newPenguin.updatePosition(data.x, data.y)
-			newPenguin.setUsername(data.username);
-			if(data.direction != null && data.direction != undefined) newPenguin.sit(data.direction)
-			this.otherPenguins.push(newPenguin);
-			this.otherPenguinsMap[data.id] = newPenguin;
+		game.network.events.on("updatePenguin", (data) => {
+			let otherPenguin = this.otherPenguins.find(o => o.Id);
+			if(!otherPenguin)
+			{
+				var newPenguin = new ConnectedPenguin(data.id, this);
+				newPenguin.createPenguin();
+				newPenguin.setupMovement();
+				newPenguin.updatePosition(data.x, data.y)
+				newPenguin.setUsername(data.username);
+				if(data.direction != null && data.direction != undefined) newPenguin.sit(data.direction)
+				this.otherPenguins.push(newPenguin);
+				this.otherPenguinsMap[data.id] = newPenguin;
+			}
+			else 
+			{
+				otherPenguin.updatePosition(data.x, data.y)
+				otherPenguin.setUsername(data.username);
+				if(data.direction != null && data.direction != undefined) newPenguin.sit(data.direction)
+			}
 		})
 
 		game.network.events.on("movePenguin", (data) => {

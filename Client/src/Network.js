@@ -18,18 +18,9 @@ export default class Network
             _this.send('login', { username: username })
             this.socket.on('message', (message) => 
             {
-                if(message.action === 'connected')
+                if(message.action === 'connected' || message.action === 'updatePenguin')
                 {
-                    if(_this.socket.id === message.payload.id) return;
-
-                    var data = {
-                        id: message.payload.id,
-                        username: message.payload.username,
-                        x: message.payload.x,
-                        y: message.payload.y,
-                        direction: message.payload.direction
-                    }
-                    this.events.emit("spawnPenguin", data)
+                    this.events.emit('updatePenguin', message.payload)
                 }
 
                 if(message.action === 'disconnected')
