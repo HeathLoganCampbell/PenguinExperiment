@@ -125,8 +125,10 @@
                     "hitArea.y": -160,
                     "hitArea.width": 340,
                     "hitArea.height": 320,
-                    "x": -168,
+                    "x": -182,
                     "y": 105,
+                    "scaleX": 1.1,
+                    "scaleY": 1.1,
                     "allowAppendChildren": true,
                     "list": [
                         {
@@ -215,6 +217,63 @@
                             "originY": 0.5000001
                         }
                     ]
+                },
+                {
+                    "type": "Text",
+                    "id": "de2afb40-ecfa-4ba7-afa6-8b247ead611a",
+                    "label": "red_username",
+                    "scope": "CLASS",
+                    "x": -99,
+                    "y": 315,
+                    "originY": 0.00001,
+                    "text": "RED USERNAME",
+                    "fixedWidth": 260,
+                    "fontFamily": "Arial",
+                    "fontSize": "32px",
+                    "stroke": "#000",
+                    "strokeThickness": 9
+                },
+                {
+                    "type": "Image",
+                    "id": "8e9afc9c-d8e7-4797-b1e4-58d6ad3d2df0",
+                    "label": "image_1",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/counter_1"
+                    },
+                    "x": -149,
+                    "y": 333,
+                    "originY": 0.500001
+                },
+                {
+                    "type": "Image",
+                    "id": "c7feb28d-7f1d-4915-b6c2-2ec3f7878a77",
+                    "label": "image",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/counter_2"
+                    },
+                    "x": -151,
+                    "y": 403,
+                    "originY": 0.500001
+                },
+                {
+                    "type": "Text",
+                    "id": "47fd24d5-f3de-45a5-84c1-33070627d825",
+                    "label": "blue_username",
+                    "scope": "CLASS",
+                    "x": -98,
+                    "y": 384,
+                    "originY": 0.0001,
+                    "text": "BLUE USERNAME",
+                    "fixedWidth": 260,
+                    "fontFamily": "Arial",
+                    "fontSize": "32px",
+                    "color": "#d5f1ff",
+                    "stroke": "#336699",
+                    "strokeThickness": 9
                 }
             ]
         }
