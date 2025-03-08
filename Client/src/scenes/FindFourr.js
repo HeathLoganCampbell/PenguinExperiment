@@ -160,11 +160,15 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			
 			var columnIndex = 6 - index;
 			column.on('pointerdown', () => {
-				// Reset token's y-position
 				this.token_red_1.y = -54;
 				this.token_red_1.x = -165 - (columnIndex * -48.5);
 
 				this.dropToken(this.token_red_1, 5);
+			});
+
+			column.on('pointerover', () => {
+				this.token_red_1.y = -54;
+				this.token_red_1.x = -165 - (columnIndex * -48.5);
 			});
 		});
 	}
