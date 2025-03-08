@@ -45,17 +45,6 @@
                 },
                 {
                     "type": "Image",
-                    "id": "a82ab872-1d6a-4834-ad3c-e2e027151c14",
-                    "label": "board",
-                    "texture": {
-                        "key": "four",
-                        "frame": "board"
-                    },
-                    "x": -20,
-                    "y": 117
-                },
-                {
-                    "type": "Image",
                     "id": "5be758cb-97c4-4092-a015-78af7d430e14",
                     "label": "closebutton",
                     "scope": "CLASS",
@@ -88,6 +77,29 @@
                     },
                     "x": -21,
                     "y": -150
+                },
+                {
+                    "type": "Sprite",
+                    "id": "52289bc6-b7b6-4853-ac96-1903a264607c",
+                    "label": "token_red_1",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "counter_1"
+                    },
+                    "x": -166,
+                    "y": -5
+                },
+                {
+                    "type": "Image",
+                    "id": "a82ab872-1d6a-4834-ad3c-e2e027151c14",
+                    "label": "board",
+                    "texture": {
+                        "key": "four",
+                        "frame": "board"
+                    },
+                    "x": -20,
+                    "y": 117
                 }
             ]
         }

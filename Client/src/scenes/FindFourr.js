@@ -22,10 +22,6 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		const shadow = scene.add.image(-18, 116, "four", "shadow");
 		this.add(shadow);
 
-		// board
-		const board = scene.add.image(-20, 117, "four", "board");
-		this.add(board);
-
 		// closebutton
 		const closebutton = scene.add.image(163, -94, "main", "blue-button");
 		this.add(closebutton);
@@ -38,9 +34,18 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		const handle = scene.add.image(-21, -150, "main", "tab-2");
 		this.add(handle);
 
+		// token_red_1
+		const token_red_1 = scene.add.sprite(-166, -5, "four", "counter_1");
+		this.add(token_red_1);
+
+		// board
+		const board = scene.add.image(-20, 117, "four", "board");
+		this.add(board);
+
 		this.window = window;
 		this.closebutton = closebutton;
 		this.handle = handle;
+		this.token_red_1 = token_red_1;
 
 		/* START-USER-CTR-CODE */
 		this.closebutton.setInteractive();
@@ -53,6 +58,8 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	closebutton;
 	/** @type {Phaser.GameObjects.Image} */
 	handle;
+	/** @type {Phaser.GameObjects.Sprite} */
+	token_red_1;
 
 	/* START-USER-CODE */
 	spawn()
@@ -86,8 +93,28 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		});
 
 		draggableWindow.start();
+
+		this.dropToken(this.token_red_1, 2);
 	}
-	// Write your code here.
+
+	dropToken(token, y) {
+        let i = 0
+		var _this = this;
+        let timer = this.scene.time.addEvent({
+            delay: 50,
+            callback: () => {
+                token.y = token.y + 49;
+
+                if (i === y) 
+				{
+                    _this.scene.time.removeEvent(timer)
+                }
+
+                i++
+            },
+            repeat: y
+        })
+    }
 
 	/* END-USER-CODE */
 }
