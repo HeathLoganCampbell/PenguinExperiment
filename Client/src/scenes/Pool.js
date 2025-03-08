@@ -29,10 +29,6 @@ export default class Pool extends Phaser.Scene {
 		const sprite_1 = this.add.sprite(0, -29, "cave", "bg");
 		sprite_1.setOrigin(0, 0);
 
-		// image_2
-		const image_2 = this.add.image(103, 282, "cave", "door");
-		image_2.setOrigin(0, 0);
-
 		// image_6
 		const image_6 = this.add.image(1369, 699, "cave", "fg_2");
 		image_6.setOrigin(0, 0);
@@ -64,11 +60,17 @@ export default class Pool extends Phaser.Scene {
 
 		// chat_text
 		const chat_text = this.add.text(515, 912, "", {});
-		chat_text.text = "send a message...";
+		chat_text.text = "New text";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
+		// image_3
+		this.add.image(282, 619, "lodge", "table/table_3");
+
+		// image_2
+		this.add.image(277, 594, "lodge", "table/game_3");
+
 		// lists
-		const displayList = [sprite_1, image_1, image_2, ceiling];
+		const displayList = [sprite_1, image_1, ceiling];
 		const penguinList = [];
 		const chatList = [chat_button_icon, chat_button, chat_input, dock, chat_text];
 

@@ -40,19 +40,6 @@
         },
         {
             "type": "Image",
-            "id": "408866c3-7157-424a-8be5-f0a62798fe5b",
-            "label": "image_2",
-            "texture": {
-                "key": "cave",
-                "frame": "door"
-            },
-            "x": 103,
-            "y": 282,
-            "originX": 0,
-            "originY": 0
-        },
-        {
-            "type": "Image",
             "id": "c6882653-ddec-4ac9-bcdc-4532c8c4c301",
             "label": "image_6",
             "texture": {
@@ -167,6 +154,28 @@
             "text": "New text",
             "fontFamily": "Arial",
             "fontSize": "24px"
+        },
+        {
+            "type": "Image",
+            "id": "bb2092e4-1dbc-448f-b22f-629edadf2b93",
+            "label": "image_3",
+            "texture": {
+                "key": "lodge",
+                "frame": "table/table_3"
+            },
+            "x": 282,
+            "y": 619
+        },
+        {
+            "type": "Image",
+            "id": "71e191b8-733d-4c99-be47-64ffec45f6d5",
+            "label": "image_2",
+            "texture": {
+                "key": "lodge",
+                "frame": "table/game_3"
+            },
+            "x": 277,
+            "y": 594
         }
     ],
     "plainObjects": [],
@@ -183,7 +192,6 @@
             "objectIds": [
                 "b24e25f4-5707-4b8e-b8c6-706e9675fb14",
                 "43cb8d12-d136-49b6-a403-a1b14d670273",
-                "408866c3-7157-424a-8be5-f0a62798fe5b",
                 "856c1132-ba40-409c-ab43-8b932ae066ba"
             ]
         },

@@ -19,6 +19,18 @@
             },
             {
                 "type": "multiatlas",
+                "url": "assets/findfour/four.json",
+                "path": "assets/findfour",
+                "key": "four"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/lodge/lodge.json",
+                "path": "assets/lodge",
+                "key": "lodge"
+            },
+            {
+                "type": "multiatlas",
                 "url": "assets/main.json",
                 "path": "assets",
                 "key": "main"
