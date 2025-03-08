@@ -14,12 +14,15 @@ export default class Seat
             if(data.x == this.x && data.y == this.y)
             {
                 this.isFilled = data.filled;
+                console.log("Seat Satus " + this.isFilled)
             }
 		})
     }
 
     sit(penguin)
     {
+        // taken
+        if(this.isFilled) return;
         penguin.moveTo(this.x, this.y)
         penguin.afterMove = () => {
             // Someone stole your seat lol

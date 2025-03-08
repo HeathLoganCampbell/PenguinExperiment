@@ -75,9 +75,8 @@ export default class Network
                     this.events.emit("chatPenguin", data)
                 }
 
-                if(message.action === 'chat')
+                if(message.action === 'seat')
                 {
-                    if(_this.socket.id === message.payload.id) return;
                     this.events.emit(message.action, message.payload)
                 }
             });

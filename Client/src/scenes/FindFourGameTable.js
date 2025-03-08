@@ -48,7 +48,7 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			// this.scene.add.existing(findFourGame);
 			// findFourGame.setDepth(10000)
 			// findFourGame.spawn();
-			console.log("clicked!")
+			console.log("clicked! " + this.blueSeat.isFilled)
 			if(!this.blueSeat.isFilled)
 			{
 				this.blueSeat.sit(this.scene.game.self);

@@ -15,23 +15,25 @@ let seats = [];
 function setSeatStatus(x, y, status, socketId) {
     let seat = seats.find(s => s.x === x && s.y === y);
     if (!seat) {
-        seat = { x, y, status, socketId };
+        seat = { x, y, filled: status, socketId };
         seats.push(seat);
     } else {
-        seat.status = status;
-        seat.status = socketId;
+        seat.filled = status;
+        seat.socketId = socketId;
     }
 
-    io.emit('message', { action: "seat", payload: { id: socket.id, ...seat }});
+    console.log(seats)
+    console.log("Seat @ (" + x + ", " + y + ") is " + (status ? "filled" : "empty" ));
+    io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
 }
 
 function leaveSeat(socketId) {
     let seat = seats.find(s => s.socketId === socketId);
     if (seat) {
-        seat.status = "empty";
+        seat.status = false;
         seat.socketId = null;
-
-        io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
+        
+        setSeatStatus(seat.x, seat.y, false, null)
     }
 }
 
@@ -60,10 +62,6 @@ io.on('connection', (socket) => {
             console.log("recieved moved event");
             penguins[socket.id].x = message.payload.x;
             penguins[socket.id].y = message.payload.y;
-            console.log("Updated Penguin pos")
-            console.log(penguins[socket.id])
-            console.log("Current list")
-            console.log(penguins)
             io.emit('message', { action: "move", payload: { id: socket.id, x: message.payload.x, y: message.payload.y }});
         }
 
@@ -98,7 +96,6 @@ io.on('connection', (socket) => {
         if(message.action === 'seat')
         {
             // We should track the status of the seats...
-            console.log("Seat @ (" + message.payload.x + ", " + message.payload.y + ") is " + (message.payload.filled ? "filled" : "empty" ));
             setSeatStatus(message.payload.x, message.payload.y, true, socket.id)
         }
     });
