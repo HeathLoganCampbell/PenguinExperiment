@@ -126,6 +126,25 @@ io.on('connection', (socket) => {
                             color: penguins[key].color
                         }});
                 }
+
+                if(msg.startsWith('!username '))
+                {
+                    const args = msg.split(' ');
+                    if(args.length < 1) return;
+                    const username = args[1]; 
+
+                    var key = socket.id;
+                    penguins[key].username = username;
+                    io.emit('message', { action: "updatePenguin", payload: 
+                        { 
+                            id: key, 
+                            username: penguins[key].username,
+                            x: penguins[key].x, 
+                            y: penguins[key].y,
+                            direction: penguins[key].direction,
+                            color: penguins[key].color
+                        }});
+                }
             }
 
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
