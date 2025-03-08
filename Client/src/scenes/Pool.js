@@ -6,7 +6,7 @@
 /* START-USER-IMPORTS */
 import Penguin from '../Penguin.js'
 import ConnectedPenguin from '../ConnectedPenguin.js'
-import ChatBubble from '../ChatBubble.js'
+import FindFourGame from './FindFourGame.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -185,6 +185,11 @@ export default class Pool extends Phaser.Scene {
 		this.findFourTableContainer.on("pointerout", () => {
 			_this.findFourBoard.setTexture("lodge", "table/game_3");
 		});
+
+		this.findFourTableContainer.on("pointerdown", () => {
+			_this.scene.add("FindFourGame", FindFourGame, true);
+		});
+
 
 		this.cursorVisible = false;
 		let cursor = this.add.rectangle(this.chat_text.x + this.chat_text.width + 2, this.chat_text.y + 10, 2, this.chat_text.height + 10, 0xFFFFFF); 
