@@ -90,7 +90,8 @@ io.on('connection', (socket) => {
                         x: penguins[key].x, 
                         y: penguins[key].y,
                         direction: penguins[key].direction,
-                        color: penguins[key].color
+                        color: penguins[key].color,
+                        faceItemId: penguins[key].faceItemId
                     }});
             });
         }
@@ -123,7 +124,8 @@ io.on('connection', (socket) => {
                             x: penguins[key].x, 
                             y: penguins[key].y,
                             direction: penguins[key].direction,
-                            color: penguins[key].color
+                            color: penguins[key].color,
+                            faceItemId: penguins[key].faceItemId
                         }});
                 }
 
@@ -142,7 +144,24 @@ io.on('connection', (socket) => {
                             x: penguins[key].x, 
                             y: penguins[key].y,
                             direction: penguins[key].direction,
-                            color: penguins[key].color
+                            color: penguins[key].color,
+                            faceItemId: penguins[key].faceItemId
+                        }});
+                }
+
+                if(msg.startsWith('!ninja'))
+                {
+                    var key = socket.id;
+                    penguins[key].faceItemId = '104';
+                    io.emit('message', { action: "updatePenguin", payload: 
+                        { 
+                            id: key, 
+                            username: penguins[key].username,
+                            x: penguins[key].x, 
+                            y: penguins[key].y,
+                            direction: penguins[key].direction,
+                            color: penguins[key].color,
+                            faceItemId: penguins[key].faceItemId
                         }});
                 }
             }

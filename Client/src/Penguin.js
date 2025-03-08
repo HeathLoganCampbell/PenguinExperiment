@@ -9,7 +9,26 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.tempUsername = "Penguin";
     }
 
+    setFaceItem(id)
+    {
+        this.faceItem = id;
+        if(id === "0")
+        {
+            this.face.visible = false;
+        }
+        else 
+        {
+            this.face.visible = true;
+        }
+        
+        this.penguin.setTexture("penguin_1", `penguin/1_1`);
+        this.body.setTexture("penguin_1", `body/1_1`);
+        this.face.setTexture(this.faceItem, `1_1`);
+    }
+
     createPenguin() {
+        this.faceItem = "0";
+
         this.body = this.scene.add.sprite(0, 0, "penguin_1", "body/1_1");
         this.body.tintTopLeft = 6684825;
 		this.body.tintTopRight = 6684825;
@@ -22,9 +41,12 @@ export default class Penguin extends Phaser.GameObjects.Container
             fontFamily: "Arial", 
             fontSize: "24px"
         }).setOrigin(0.5, -0.8);
+        this.face = this.scene.add.sprite(0, 0, this.faceItem, "1_1");
+        this.face.visible = false;
         this.add(this.body)
         this.add(this.penguin)
         this.add(this.nametag)
+        this.add(this.face)
         this.depth = this.y
         this.x = 777;
         this.y = 537;
@@ -101,6 +123,12 @@ export default class Penguin extends Phaser.GameObjects.Container
             this.penguin = null;
         }
 
+        if(this.face)
+        {
+            this.face.destroy();
+            this.face = null;
+        }
+
         if (this.nametag) 
         {
             this.nametag.destroy();
@@ -146,6 +174,7 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         // 17, 18, 19, 20, 21, 22, 23, 24
         var directionId = 17 + (direction % 8);
+        this.face.setTexture(this.faceItem, `${directionId}_1`);
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
     }
@@ -179,6 +208,7 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         this.sendMovedPacket(targetX, targetY)
 
+        this.face.setTexture(this.faceItem, `${directionId}_1`);
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
         this.currentTween = this.scene.tweens.add({
@@ -191,6 +221,7 @@ export default class Penguin extends Phaser.GameObjects.Container
                 
                 this.depth = this.y
                 const walkFrame = (this.count % 8) + 1;
+                this.face.setTexture(this.faceItem, `${directionId}_${walkFrame}`);
                 this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
                 this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
 

@@ -219,6 +219,7 @@ export default class Pool extends Phaser.Scene {
 				this.penguin.setUsername(data.username);
 				if(data.color != null && data.color != undefined) this.penguin.setColor(data.color);
 				if(data.direction != null && data.direction != undefined) this.penguin.sit(data.direction)
+				if(data.faceItemId != null && data.faceItemId != undefined) this.penguin.setFaceItem(data.faceItemId)
 				return;
 			}
 
@@ -233,6 +234,7 @@ export default class Pool extends Phaser.Scene {
 				newPenguin.setupMovement();
 				newPenguin.updatePosition(data.x, data.y)
 				newPenguin.setUsername(data.username);
+				if(data.faceItemId != null && data.faceItemId != undefined) newPenguin.setFaceItem(data.faceItemId)
 				if(data.color != null && data.color != undefined) newPenguin.setColor(data.color);
 				if(data.direction != null && data.direction != undefined) newPenguin.sit(data.direction)
 				this.otherPenguins.push(newPenguin);
@@ -244,6 +246,7 @@ export default class Pool extends Phaser.Scene {
 				otherPenguin.setUsername(data.username);
 				if(data.color != null && data.color != undefined) otherPenguin.setColor(data.color);
 				if(data.direction != null && data.direction != undefined) otherPenguin.sit(data.direction)
+				if(data.faceItemId != null && data.faceItemId != undefined) otherPenguin.setFaceItem(data.faceItemId)
 			}
 		})
 

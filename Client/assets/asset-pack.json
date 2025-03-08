@@ -3,6 +3,12 @@
         "files": [
             {
                 "type": "multiatlas",
+                "url": "assets/cloths/104.json",
+                "path": "assets/cloths",
+                "key": "104"
+            },
+            {
+                "type": "multiatlas",
                 "url": "assets/cave.json",
                 "path": "assets",
                 "key": "cave"
