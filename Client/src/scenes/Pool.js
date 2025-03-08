@@ -7,6 +7,7 @@
 import Penguin from '../Penguin.js'
 import ConnectedPenguin from '../ConnectedPenguin.js'
 import FindFourGame from './FindFourr.js'
+import AttachToolTip from '../AttachToolTip.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -177,6 +178,10 @@ export default class Pool extends Phaser.Scene {
 				_this.focusedOnChat = false;  // Remove focus when clicking outside
 			}
 		});
+
+		var toolTip = new AttachToolTip(this, "Play Find Four")
+		toolTip.setHandle(this.findFourTableContainer)
+		toolTip.start();
 
 		this.findFourTableContainer.on('pointerover', function() {
 			_this.findFourBoard.setTexture("lodge", `table/game_3-hover`);

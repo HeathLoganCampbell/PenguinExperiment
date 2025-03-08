@@ -149,7 +149,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.column_7.setInteractive();
 		this.columnscontainer.setInteractive();
 
-		this.board.setDepth(100)
+		this.board.setDepth(1000000)
 
 		this.state = new Array(6).fill().map(() => new Array(7).fill(0));
 		/* END-USER-CTR-CODE */

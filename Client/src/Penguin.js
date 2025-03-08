@@ -185,7 +185,15 @@ export default class Penguin extends Phaser.GameObjects.Container
                 {
                     _this.chatBubble.updatePosition()
                 }
+            },
+            onComplete: () => {
+                this.completedWaddle();
             }
         });
+    }
+
+    completedWaddle()
+    {
+        // get penguins current location
     }
 }
