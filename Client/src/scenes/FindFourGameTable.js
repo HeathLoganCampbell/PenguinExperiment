@@ -6,6 +6,7 @@
 /* START-USER-IMPORTS */
 import FindFourGame from './FindFourr.js'
 import AttachToolTip from '../AttachToolTip.js'
+import Seat from '../Seat.js'
 /* END-USER-IMPORTS */
 
 export default class FindFourGameTable extends Phaser.GameObjects.Container {
@@ -35,24 +36,33 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 		toolTip.start();
 
 		this.on('pointerover', () => {
-			console.log("yeet111")
 			this.findFourBoard.setTexture("lodge", `table/game_3-hover`);
 		});
 
 		this.on("pointerout", () => {
-			console.log("yeet")
 			this.findFourBoard.setTexture("lodge", "table/game_3");
 		});
 
 		this.on("pointerdown", () => {
-			console.log("yeet222")
-			var findFourGame = new FindFourGame(this.scene);
-			this.scene.add.existing(findFourGame);
-			findFourGame.setDepth(10000)
-			findFourGame.spawn();
+			// var findFourGame = new FindFourGame(this.scene);
+			// this.scene.add.existing(findFourGame);
+			// findFourGame.setDepth(10000)
+			// findFourGame.spawn();
+			console.log("clicked!")
+			this.redSeat.sit(this.scene.game.self);
 		});
 
 		scene.add.existing(this)
+
+		let matrix = this.getWorldTransformMatrix()
+		var realX = matrix.getX(0, 0)
+        var realY = matrix.getY(0, 0) - 56
+
+		this.redSeat = new Seat(this.scene, realX + -30, realY + 50, 7);
+		this.blueSeat = new Seat(this.scene, realX + 68, realY + 94, 3);
+
+		this.depth = this.y;
+		console.log("Table depth" + this.depth)
 		/* END-USER-CTR-CODE */
 	}
 

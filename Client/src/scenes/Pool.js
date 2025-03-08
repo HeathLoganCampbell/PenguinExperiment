@@ -3,10 +3,10 @@
 
 /* START OF COMPILED CODE */
 
+import FindFourGameTable from "./FindFourGameTable.js";
 /* START-USER-IMPORTS */
 import Penguin from '../Penguin.js'
 import ConnectedPenguin from '../ConnectedPenguin.js'
-import FindFourGameTable from './FindFourGameTable.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -63,10 +63,15 @@ export default class Pool extends Phaser.Scene {
 		chat_text.text = "Send a message...";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
+		// findFourGameTable
+		const findFourGameTable = new FindFourGameTable(this, 292, 617);
+		this.add.existing(findFourGameTable);
+
 		// lists
 		const displayList = [sprite_1, image_1, ceiling];
 		const penguinList = [];
 		const chatList = [chat_button_icon, chat_button, chat_input, dock, chat_text];
+		const findFourList = [];
 
 		this.ceiling = ceiling;
 		this.left_corner_ice = left_corner_ice;
@@ -78,6 +83,7 @@ export default class Pool extends Phaser.Scene {
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 		this.chatList = chatList;
+		this.findFourList = findFourList;
 
 		this.events.emit("scene-awake");
 	}
@@ -102,6 +108,8 @@ export default class Pool extends Phaser.Scene {
 	penguinList;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Text>} */
 	chatList;
+	/** @type {Array<any>} */
+	findFourList;
 
 	/* START-USER-CODE */
 
@@ -110,8 +118,8 @@ export default class Pool extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
-		this.ceiling.setDepth(99);
-		this.left_corner_ice.setDepth(99);
+		this.ceiling.setDepth(999);
+		this.left_corner_ice.setDepth(999);
 
 		this.dock.setDepth(1000);
 		this.chat_input.setDepth(1001);
@@ -197,8 +205,9 @@ export default class Pool extends Phaser.Scene {
 		this.penguin = new Penguin(this);
 		this.penguin.createPenguin();
         this.penguin.setupMovement();
-
 		this.penguin.setUsername(this.game.username);
+		this.game.self = this.penguin;
+
 		this.otherPenguins = [];
 		this.otherPenguinsMap = {};
 
@@ -251,10 +260,7 @@ export default class Pool extends Phaser.Scene {
 		body.isStatic = true;
 		this.matter.body.setPosition(body, body.centerOffset)
 		this.walls = body;
-
-		var table = new FindFourGameTable(this, 289, 603);
 	}
-
 	/* END-USER-CODE */
 }
 

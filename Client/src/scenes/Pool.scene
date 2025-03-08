@@ -154,6 +154,17 @@
             "text": "Send a message...",
             "fontFamily": "Arial",
             "fontSize": "24px"
+        },
+        {
+            "prefabId": "f40e27e6-73da-4d7b-98c7-961eb123325f",
+            "id": "bd5ebe64-79b1-49ab-a22c-8a8f6288519c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "findFourGameTable",
+            "x": 292,
+            "y": 617
         }
     ],
     "plainObjects": [],

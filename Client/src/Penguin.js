@@ -22,6 +22,7 @@ export default class Penguin extends Phaser.GameObjects.Container
             fontFamily: "Arial", 
             fontSize: "24px"
         }).setOrigin(0.5, -0.8);
+        this.depth = this.penguin.y
     }
 
     setUsername(username)
@@ -139,6 +140,7 @@ export default class Penguin extends Phaser.GameObjects.Container
         {
             this.currentTween.remove();
             this.currentTween = null;
+            this.afterMove = null;
         }
 
         // 17, 18, 19, 20, 21, 22, 23, 24
@@ -148,11 +150,18 @@ export default class Penguin extends Phaser.GameObjects.Container
     }
 
     moveTo(targetX, targetY) {
-        if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY)) return;
+        if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY))
+        {
+            console.log("Cancelled movement to (" + targetX + "," + targetY + ") because of a wall")
+            return;
+        }
+        
+        console.log("Moving to (" + targetX + "," + targetY + ")")
         if (this.currentTween)
         {
             this.currentTween.remove();
             this.currentTween = null;
+            this.afterMove = null;
         }
 
         const dx = targetX - this.penguin.x;
@@ -163,27 +172,25 @@ export default class Penguin extends Phaser.GameObjects.Container
 
         this.sendMovedPacket(targetX, targetY)
 
-        this.penguin.setDepth(50);
-        this.body.setDepth(50);
-
         this.penguin.setTexture("penguin_1", `penguin/${directionId}_1`);
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
-        var _this = this;
         this.currentTween = this.scene.tweens.add({
             targets: [this.penguin, this.body, this.nametag],
             x: targetX, y: targetY,
             duration: duration, ease: 'Linear',
             onUpdate: () => {
-                if(!_this.penguin) return;
-                if(!_this.body) return;
-
+                if(!this.penguin) return;
+                if(!this.body) return;
+                
+                this.depth = this.penguin.y
+                console.log("Penguin depth" + this.depth)
                 const walkFrame = (this.count % 8) + 1;
-                _this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
-                _this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
+                this.penguin.setTexture("penguin_1", `penguin/${directionId}_${walkFrame}`);
+                this.body.setTexture("penguin_1", `body/${directionId}_${walkFrame}`);
 
-                if(_this.chatBubble)
+                if(this.chatBubble)
                 {
-                    _this.chatBubble.updatePosition()
+                    this.chatBubble.updatePosition()
                 }
             },
             onComplete: () => {
@@ -194,6 +201,10 @@ export default class Penguin extends Phaser.GameObjects.Container
 
     completedWaddle()
     {
-        // get penguins current location
+        console.log("Completed waddle!!!")
+        if (this.afterMove) {
+            this.afterMove()
+            this.afterMove = null
+        }
     }
 }
