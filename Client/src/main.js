@@ -4,7 +4,11 @@ import Network from "./Network.js"
 
 window.addEventListener('load', function () {
 
-	var username = this.prompt("What would you like your username to be?");
+	const username = localStorage.getItem("username");
+	if (username === null) {
+		username = this.prompt("What would you like your username to be?");
+		localStorage.setItem("username", username);
+	}
 	
 	var network = new Network();
 	network.connect(username);
