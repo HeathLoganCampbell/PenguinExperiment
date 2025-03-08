@@ -55,31 +55,38 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		// column_1
 		const column_1 = scene.add.image(0, 0, "four", "button/button");
 		column_1.blendMode = Phaser.BlendModes.MULTIPLY;
+		column_1.setOrigin(0.5, 0.5000001);
 		column_1.tintFill = true;
 		columnscontainer.add(column_1);
 
 		// column_2
 		const column_2 = scene.add.image(51, 0, "four", "button/button");
+		column_2.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_2);
 
 		// column_3
 		const column_3 = scene.add.image(101, 0, "four", "button/button");
+		column_3.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_3);
 
 		// column_4
 		const column_4 = scene.add.image(148, 0, "four", "button/button");
+		column_4.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_4);
 
 		// column_5
 		const column_5 = scene.add.image(197, 0, "four", "button/button");
+		column_5.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_5);
 
 		// column_6
 		const column_6 = scene.add.image(246, 0, "four", "button/button");
+		column_6.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_6);
 
 		// column_7
 		const column_7 = scene.add.image(294, 0, "four", "button/button");
+		column_7.setOrigin(0.5, 0.5000001);
 		columnscontainer.add(column_7);
 
 		// lists
@@ -112,13 +119,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.column_7.setInteractive();
 		this.columnscontainer.setInteractive();
 
-		this.column_1.setOrigin(0.5, 0.5);
-		this.column_2.setOrigin(0.5, 0.5);
-		this.column_3.setOrigin(0.5, 0.5);
-		this.column_4.setOrigin(0.5, 0.5);
-		this.column_5.setOrigin(0.5, 0.5);
-		this.column_6.setOrigin(0.5, 0.5);
-		this.column_7.setOrigin(0.5, 0.5);
+		// this.column_1.setOrigin(0.5, 0.5);
+		// this.column_2.setOrigin(0.5, 0.5);
+		// this.column_3.setOrigin(0.5, 0.5);
+		// this.column_4.setOrigin(0.5, 0.5);
+		// this.column_5.setOrigin(0.5, 0.5);
+		// this.column_6.setOrigin(0.5, 0.5);
+		// this.column_7.setOrigin(0.5, 0.5);
 
 		this.board.setDepth(100)
 
@@ -195,18 +202,30 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.blockedPlacing = false;
 		this.updateVisibleTokens();
 
-		// this.columnscontainer.on('pointerout', (pointer) =>
-		// {
-		// 	console.log("hovered off columns");
-		// 	this.token_red_1.visible = false;
-		// 	this.token_blue_1.visible = false;
-		// 	console.log(this.columnscontainer.getBounds())
-		// 	console.log(this.columnscontainer.getBounds().contains(pointer.x, pointer.y))
-		// 	if (!this.columnscontainer.getBounds().contains(pointer.x, pointer.y)) {
-		// 		isHovering = false;
-		// 		console.log("Pointer left the container and its children");
-		// 	}
-		// });
+		let debugGraphics = this.scene.add.graphics();
+		debugGraphics.lineStyle(2, 0xff0000, 1);  // Red outline
+		const bounds = this.columnscontainer.getBounds();  // Get the bounds of the container
+		debugGraphics.strokeRect(bounds.x, bounds.y, bounds.width, bounds.height);  // Draw outline
+		debugGraphics.fillStyle(0xff0000, 0.3);  // Semi-transparent red fill
+		debugGraphics.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		debugGraphics.setDepth(10000)
+
+		this.columnscontainer.on('pointerout', (pointer) =>
+		{
+			console.log("hovered off columns");
+			this.token_red_1.visible = false;
+			this.token_blue_1.visible = false;
+			console.log(this.columnscontainer.getBounds())
+			console.log(this.columnscontainer.getBounds().contains(pointer.x, pointer.y))
+			if (!this.columnscontainer.getBounds().contains(pointer.x, pointer.y)) {
+				console.log("=-=-=-= Pointer left the container and its children");
+			}
+		});
+
+		this.columnscontainer.on('pointerover', (pointer) =>
+		{
+			console.log("ON CONTAINER");
+		});
 
 		this.columns.forEach((column, index) => {
 			var columnIndex = 6 - index;

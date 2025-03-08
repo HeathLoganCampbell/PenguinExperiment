@@ -139,6 +139,7 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
+                            "originY": 0.5000001,
                             "tintFill": true
                         },
                         {
@@ -150,7 +151,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 51
+                            "x": 51,
+                            "originY": 0.5000001
                         },
                         {
                             "type": "Image",
@@ -161,7 +163,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 101
+                            "x": 101,
+                            "originY": 0.5000001
                         },
                         {
                             "type": "Image",
@@ -172,7 +175,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 148
+                            "x": 148,
+                            "originY": 0.5000001
                         },
                         {
                             "type": "Image",
@@ -183,7 +187,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 197
+                            "x": 197,
+                            "originY": 0.5000001
                         },
                         {
                             "type": "Image",
@@ -194,7 +199,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 246
+                            "x": 246,
+                            "originY": 0.5000001
                         },
                         {
                             "type": "Image",
@@ -205,7 +211,8 @@
                                 "key": "four",
                                 "frame": "button/button"
                             },
-                            "x": 294
+                            "x": 294,
+                            "originY": 0.5000001
                         }
                     ]
                 }
