@@ -54,8 +54,8 @@ export default class ChatBubble extends Phaser.GameObjects.Container
 
     updatePosition()
     {
-        this.x = this.penguin.penguin.x + this.xOffset;
-        this.y = this.penguin.penguin.y + this.yOffset;
+        this.x = this.penguin.x + this.xOffset;
+        this.y = this.penguin.y + this.yOffset;
 
         this.balloon.x = this.x;
         this.balloon.y = this.y;
