@@ -1,0 +1,60 @@
+{
+    "id": "f40e27e6-73da-4d7b-98c7-961eb123325f",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "importFileExtension": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1520,
+        "borderHeight": 960
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "41e152e5-07f3-4df6-8ea7-c399541800bd",
+            "label": "container_1",
+            "blendMode": -1,
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.x": -70.5,
+            "hitArea.y": -42,
+            "hitArea.width": 151,
+            "hitArea.height": 134,
+            "x": 409,
+            "y": 330,
+            "list": [
+                {
+                    "type": "Sprite",
+                    "id": "39d5cebb-6753-487d-88c7-61f04156aa98",
+                    "label": "findFourTable",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "lodge",
+                        "frame": "table/table_3"
+                    },
+                    "x": 5,
+                    "y": 25
+                },
+                {
+                    "type": "Sprite",
+                    "id": "22d27b99-735c-4e77-81ff-803a5d9756d5",
+                    "label": "findFourBoard",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "lodge",
+                        "frame": "table/game_3"
+                    }
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

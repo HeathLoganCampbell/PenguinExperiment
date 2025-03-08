@@ -88,7 +88,7 @@
                 "key": "cave",
                 "frame": "fg_3"
             },
-            "x": -3,
+            "x": -2,
             "y": 688,
             "originX": 0,
             "originY": 0
@@ -154,44 +154,6 @@
             "text": "Send a message...",
             "fontFamily": "Arial",
             "fontSize": "24px"
-        },
-        {
-            "type": "Container",
-            "id": "bd969421-5c92-4ffc-9cf0-271ce3b0f964",
-            "label": "FindFourTableContainer",
-            "scope": "CLASS",
-            "blendMode": -1,
-            "hitArea.shape": "RECTANGLE",
-            "hitArea.x": -70.5,
-            "hitArea.y": -42,
-            "hitArea.width": 151,
-            "hitArea.height": 134,
-            "x": 277,
-            "y": 594,
-            "list": [
-                {
-                    "type": "Sprite",
-                    "id": "bb2092e4-1dbc-448f-b22f-629edadf2b93",
-                    "label": "findFourTable",
-                    "scope": "CLASS",
-                    "texture": {
-                        "key": "lodge",
-                        "frame": "table/table_3"
-                    },
-                    "x": 5,
-                    "y": 25
-                },
-                {
-                    "type": "Sprite",
-                    "id": "71e191b8-733d-4c99-be47-64ffec45f6d5",
-                    "label": "findFourBoard",
-                    "scope": "CLASS",
-                    "texture": {
-                        "key": "lodge",
-                        "frame": "table/game_3"
-                    }
-                }
-            ]
         }
     ],
     "plainObjects": [],
@@ -228,12 +190,7 @@
         },
         {
             "id": "23d99d69-7fce-41ce-b5d1-b6f2b14451c9",
-            "label": "FindFourList",
-            "objectIds": [
-                "71e191b8-733d-4c99-be47-64ffec45f6d5",
-                "bb2092e4-1dbc-448f-b22f-629edadf2b93",
-                "bd969421-5c92-4ffc-9cf0-271ce3b0f964"
-            ]
+            "label": "FindFourList"
         }
     ]
 }

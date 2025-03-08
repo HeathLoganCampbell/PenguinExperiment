@@ -6,8 +6,7 @@
 /* START-USER-IMPORTS */
 import Penguin from '../Penguin.js'
 import ConnectedPenguin from '../ConnectedPenguin.js'
-import FindFourGame from './FindFourr.js'
-import AttachToolTip from '../AttachToolTip.js'
+import FindFourGameTable from './FindFourGameTable.js'
 /* END-USER-IMPORTS */
 
 export default class Pool extends Phaser.Scene {
@@ -43,7 +42,7 @@ export default class Pool extends Phaser.Scene {
 		ceiling.setOrigin(0, 0);
 
 		// left_corner_ice
-		const left_corner_ice = this.add.image(-3, 688, "cave", "fg_3");
+		const left_corner_ice = this.add.image(-2, 688, "cave", "fg_3");
 		left_corner_ice.setOrigin(0, 0);
 
 		// dock
@@ -64,24 +63,10 @@ export default class Pool extends Phaser.Scene {
 		chat_text.text = "Send a message...";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
-		// FindFourTableContainer
-		const findFourTableContainer = this.add.container(277, 594);
-		findFourTableContainer.blendMode = Phaser.BlendModes.SKIP_CHECK;
-		findFourTableContainer.setInteractive(new Phaser.Geom.Rectangle(-70.5, -42, 151, 134), Phaser.Geom.Rectangle.Contains);
-
-		// findFourTable
-		const findFourTable = this.add.sprite(5, 25, "lodge", "table/table_3");
-		findFourTableContainer.add(findFourTable);
-
-		// findFourBoard
-		const findFourBoard = this.add.sprite(0, 0, "lodge", "table/game_3");
-		findFourTableContainer.add(findFourBoard);
-
 		// lists
 		const displayList = [sprite_1, image_1, ceiling];
 		const penguinList = [];
 		const chatList = [chat_button_icon, chat_button, chat_input, dock, chat_text];
-		const findFourList = [findFourBoard, findFourTable, findFourTableContainer];
 
 		this.ceiling = ceiling;
 		this.left_corner_ice = left_corner_ice;
@@ -90,13 +75,9 @@ export default class Pool extends Phaser.Scene {
 		this.chat_button = chat_button;
 		this.chat_button_icon = chat_button_icon;
 		this.chat_text = chat_text;
-		this.findFourTable = findFourTable;
-		this.findFourBoard = findFourBoard;
-		this.findFourTableContainer = findFourTableContainer;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 		this.chatList = chatList;
-		this.findFourList = findFourList;
 
 		this.events.emit("scene-awake");
 	}
@@ -115,20 +96,12 @@ export default class Pool extends Phaser.Scene {
 	chat_button_icon;
 	/** @type {Phaser.GameObjects.Text} */
 	chat_text;
-	/** @type {Phaser.GameObjects.Sprite} */
-	findFourTable;
-	/** @type {Phaser.GameObjects.Sprite} */
-	findFourBoard;
-	/** @type {Phaser.GameObjects.Container} */
-	findFourTableContainer;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
 	/** @type {Array<any>} */
 	penguinList;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Text>} */
 	chatList;
-	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Container>} */
-	findFourList;
 
 	/* START-USER-CODE */
 
@@ -149,7 +122,6 @@ export default class Pool extends Phaser.Scene {
 		this.chat_text.setInteractive();
 		this.chat_input.setInteractive();
 		this.dock.setInteractive();
-		this.findFourTableContainer.setInteractive();
 
 		var inputText = "";
 		this.focusedOnChat = false;
@@ -178,26 +150,6 @@ export default class Pool extends Phaser.Scene {
 				_this.focusedOnChat = false;  // Remove focus when clicking outside
 			}
 		});
-
-		var toolTip = new AttachToolTip(this, "Play Find Four")
-		toolTip.setHandle(this.findFourTableContainer)
-		toolTip.start();
-
-		this.findFourTableContainer.on('pointerover', function() {
-			_this.findFourBoard.setTexture("lodge", `table/game_3-hover`);
-		});
-
-		this.findFourTableContainer.on("pointerout", () => {
-			_this.findFourBoard.setTexture("lodge", "table/game_3");
-		});
-
-		this.findFourTableContainer.on("pointerdown", () => {
-			var findFourGame = new FindFourGame(_this);
-			_this.add.existing(findFourGame);
-			findFourGame.setDepth(10000)
-			findFourGame.spawn();
-		});
-
 
 		this.cursorVisible = false;
 		let cursor = this.add.rectangle(this.chat_text.x + this.chat_text.width + 2, this.chat_text.y + 10, 2, this.chat_text.height + 10, 0xFFFFFF); 
@@ -299,6 +251,8 @@ export default class Pool extends Phaser.Scene {
 		body.isStatic = true;
 		this.matter.body.setPosition(body, body.centerOffset)
 		this.walls = body;
+
+		var table = new FindFourGameTable(this, 289, 603);
 	}
 
 	/* END-USER-CODE */
