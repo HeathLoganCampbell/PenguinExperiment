@@ -56,12 +56,8 @@ export default class Network
                 if(message.action === 'sit')
                 {
                     if(_this.socket.id === message.payload.id) return;
-
-                    var data = {
-                        id: message.payload.id,
-                        direction: message.payload.direction
-                    }
-                    this.events.emit("sitPenguin", data)
+                    console.log("[IN]: Sit")
+                    this.events.emit("sitPenguin", message.payload)
                 }
 
                 if(message.action === 'chat')
@@ -85,6 +81,7 @@ export default class Network
 
     send(action, payload = {})
     {
+        console.log("[Out] " + action + ": " + JSON.stringify(payload))
         this.socket.emit('message', { action: action, payload: payload })
     }
 }

@@ -28,8 +28,9 @@ export default class Seat
             // Someone stole your seat lol
             if(this.isFilled) return;
             penguin.sit(this.sitDirection);
-            this.isFilled = true;
             var game = this.scene.sys.game;
+            game.network.send("sit", { direction: this.sitDirection })
+            this.isFilled = true;
             game.network.send("seat", { x: this.x, y: this.y, filled: true })
 
             if(this.onSat)

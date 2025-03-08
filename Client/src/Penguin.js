@@ -136,12 +136,15 @@ export default class Penguin extends Phaser.GameObjects.Container
     sit(direction)
     {
         // cancel walking
+        console.log("1")
         if (this.currentTween)
         {
+            console.log("2")
             this.currentTween.remove();
             this.currentTween = null;
             this.afterMove = null;
         }
+        console.log("3")
 
         // 17, 18, 19, 20, 21, 22, 23, 24
         var directionId = 17 + (direction % 8);
