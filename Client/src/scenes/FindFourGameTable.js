@@ -44,11 +44,6 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 		});
 
 		this.on("pointerdown", () => {
-			// var findFourGame = new FindFourGame(this.scene);
-			// this.scene.add.existing(findFourGame);
-			// findFourGame.setDepth(10000)
-			// findFourGame.spawn();
-			console.log("clicked! " + this.blueSeat.isFilled)
 			if(!this.blueSeat.isFilled)
 			{
 				this.blueSeat.sit(this.scene.game.self);
@@ -73,10 +68,18 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 		this.redSeat = new Seat(this.scene, realX + -30, realY + 50, 7);
 		this.blueSeat = new Seat(this.scene, realX + 41, realY + 134, 3);
 		this.blueSeat.onSat = (peng) => {
-			console.log("Sat!!!")
+			var findFourGame = new FindFourGame(this.scene);
+			findFourGame.blue_username.text = scene.game.username
+			this.scene.add.existing(findFourGame);
+			findFourGame.setDepth(10000)
+			findFourGame.spawn();
 		};
 		this.redSeat.onSat = (peng) => {
-			console.log("Sat!!!")
+			var findFourGame = new FindFourGame(this.scene);
+			this.scene.add.existing(findFourGame);
+			findFourGame.red_username.text = scene.game.username
+			findFourGame.setDepth(10000)
+			findFourGame.spawn();
 		};
 
 		this.depth = this.y;
