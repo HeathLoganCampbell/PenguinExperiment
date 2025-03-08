@@ -87,7 +87,7 @@
                         "key": "four",
                         "frame": "counter_1"
                     },
-                    "x": -166,
+                    "x": -165,
                     "y": -5
                 },
                 {
@@ -100,6 +100,90 @@
                     },
                     "x": -20,
                     "y": 117
+                },
+                {
+                    "type": "Image",
+                    "id": "05031a11-2761-4009-8b31-36beb618724f",
+                    "label": "column_1",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": -168,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "9798def8-dab8-4c14-89c5-63d92f242720",
+                    "label": "column_2",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": -117,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "ba5ebfcf-6c26-48ea-bd9a-ae84a229fdd2",
+                    "label": "column_3",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": -67,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "7d0a8677-4d45-4862-9281-334ca3152634",
+                    "label": "column_4",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": -20,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "7715f271-b0fe-4060-8285-d61425fa9a76",
+                    "label": "column_5",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": 29,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "7cc4fb79-3f91-42d2-8188-e199a8b6e0c5",
+                    "label": "column_6",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": 78,
+                    "y": 105
+                },
+                {
+                    "type": "Image",
+                    "id": "c7cc824b-39a2-4400-876b-87bd6c1e1f9c",
+                    "label": "column_7",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "four",
+                        "frame": "button/button"
+                    },
+                    "x": 126,
+                    "y": 105
                 }
             ]
         }
@@ -110,5 +194,20 @@
         "url": "https://phaser.io/editor",
         "contentType": "phasereditor2d.core.scene.SceneContentType",
         "version": 5
-    }
+    },
+    "lists": [
+        {
+            "id": "2cc6e5a5-fb8d-4a43-bbf3-0825aca9b2ad",
+            "label": "columns",
+            "objectIds": [
+                "c7cc824b-39a2-4400-876b-87bd6c1e1f9c",
+                "7cc4fb79-3f91-42d2-8188-e199a8b6e0c5",
+                "7715f271-b0fe-4060-8285-d61425fa9a76",
+                "7d0a8677-4d45-4862-9281-334ca3152634",
+                "ba5ebfcf-6c26-48ea-bd9a-ae84a229fdd2",
+                "9798def8-dab8-4c14-89c5-63d92f242720",
+                "05031a11-2761-4009-8b31-36beb618724f"
+            ]
+        }
+    ]
 }
