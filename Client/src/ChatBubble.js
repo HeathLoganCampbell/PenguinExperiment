@@ -9,8 +9,8 @@ export default class ChatBubble extends Phaser.GameObjects.Container
         this.xOffset = -50;
 
         this.penguin = penguin;
-        this.x = penguin.penguin.x + this.xOffset;
-        this.y = penguin.penguin.y + this.yOffset;
+        this.x = penguin.x + this.xOffset;
+        this.y = penguin.y + this.yOffset;
         this.penguin.chatBubble = this;
 
         this.count = 0;
