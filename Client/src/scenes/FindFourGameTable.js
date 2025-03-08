@@ -7,6 +7,7 @@
 import FindFourGame from './FindFourr.js'
 import AttachToolTip from '../AttachToolTip.js'
 import Seat from '../Seat.js'
+import ChatBubble from '../ChatBubble.js';
 /* END-USER-IMPORTS */
 
 export default class FindFourGameTable extends Phaser.GameObjects.Container {
@@ -73,6 +74,7 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			this.scene.add.existing(findFourGame);
 			findFourGame.setDepth(10000)
 			findFourGame.spawn();
+			this.sendMessage("Come play!")
 		};
 		this.redSeat.onSat = (peng) => {
 			var findFourGame = new FindFourGame(this.scene);
@@ -80,6 +82,7 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			findFourGame.red_username.text = scene.game.username
 			findFourGame.setDepth(10000)
 			findFourGame.spawn();
+			this.sendMessage("Come play!")
 		};
 
 		this.depth = this.y;
@@ -93,6 +96,26 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 	findFourBoard;
 
 	/* START-USER-CODE */
+
+	sendMessage(message)
+	{
+		if(this.chatBubble)
+		{
+			this.chatBubble.remove();
+			this.chatBubbleTimer.remove();
+			this.chatBubble = null;
+			this.chatBubbleTimer = null;
+		}
+
+		this.chatBubbleTimer = this.scene.time.delayedCall(4000, () => {
+			this.chatBubble.remove();
+			this.chatBubble = null;
+		}, [], this);
+
+		this.chatBubble = new ChatBubble(this.scene, this);
+		this.chatBubble.spawn();
+		this.chatBubble.setContent(message);
+	}
 
 	/* END-USER-CODE */
 }
