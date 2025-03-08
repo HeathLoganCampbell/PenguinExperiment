@@ -150,6 +150,14 @@ export default class Penguin extends Phaser.GameObjects.Container
         this.body.setTexture("penguin_1", `body/${directionId}_1`);
     }
 
+    setColor(color)
+    {
+        this.body.tintTopLeft = color;
+		this.body.tintTopRight = color;
+		this.body.tintBottomLeft = color;
+		this.body.tintBottomRight = color;
+    }
+
     moveTo(targetX, targetY) {
         if (this.scene.matter.containsPoint(this.scene.Walls, targetX, targetY))
         {
