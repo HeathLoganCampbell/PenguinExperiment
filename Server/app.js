@@ -67,6 +67,12 @@ io.on('connection', (socket) => {
             console.log("Recieved chat! " + message.payload.msg)
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
         }
+
+        if(message.action === 'seat')
+        {
+            // We should track the status of the seats...
+            io.emit('message', { action: "seat", payload: { id: socket.id, ...message.payload }});
+        }
     });
 });
 
