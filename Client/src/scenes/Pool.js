@@ -63,16 +63,24 @@ export default class Pool extends Phaser.Scene {
 		chat_text.text = "New text";
 		chat_text.setStyle({ "fontFamily": "Arial", "fontSize": "24px" });
 
-		// image_3
-		this.add.image(282, 619, "lodge", "table/table_3");
+		// FindFourTableContainer
+		const findFourTableContainer = this.add.container(277, 594);
+		findFourTableContainer.blendMode = Phaser.BlendModes.SKIP_CHECK;
+		findFourTableContainer.setInteractive(new Phaser.Geom.Rectangle(-70.5, -42, 151, 134), Phaser.Geom.Rectangle.Contains);
 
-		// image_2
-		this.add.image(277, 594, "lodge", "table/game_3");
+		// findFourTable
+		const findFourTable = this.add.sprite(5, 25, "lodge", "table/table_3");
+		findFourTableContainer.add(findFourTable);
+
+		// findFourBoard
+		const findFourBoard = this.add.sprite(0, 0, "lodge", "table/game_3");
+		findFourTableContainer.add(findFourBoard);
 
 		// lists
 		const displayList = [sprite_1, image_1, ceiling];
 		const penguinList = [];
 		const chatList = [chat_button_icon, chat_button, chat_input, dock, chat_text];
+		const findFourList = [findFourBoard, findFourTable, findFourTableContainer];
 
 		this.ceiling = ceiling;
 		this.left_corner_ice = left_corner_ice;
@@ -81,9 +89,13 @@ export default class Pool extends Phaser.Scene {
 		this.chat_button = chat_button;
 		this.chat_button_icon = chat_button_icon;
 		this.chat_text = chat_text;
+		this.findFourTable = findFourTable;
+		this.findFourBoard = findFourBoard;
+		this.findFourTableContainer = findFourTableContainer;
 		this.displayList = displayList;
 		this.penguinList = penguinList;
 		this.chatList = chatList;
+		this.findFourList = findFourList;
 
 		this.events.emit("scene-awake");
 	}
@@ -102,12 +114,20 @@ export default class Pool extends Phaser.Scene {
 	chat_button_icon;
 	/** @type {Phaser.GameObjects.Text} */
 	chat_text;
+	/** @type {Phaser.GameObjects.Sprite} */
+	findFourTable;
+	/** @type {Phaser.GameObjects.Sprite} */
+	findFourBoard;
+	/** @type {Phaser.GameObjects.Container} */
+	findFourTableContainer;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Image>} */
 	displayList;
 	/** @type {Array<any>} */
 	penguinList;
 	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Text>} */
 	chatList;
+	/** @type {Array<Phaser.GameObjects.Sprite|Phaser.GameObjects.Container>} */
+	findFourList;
 
 	/* START-USER-CODE */
 
@@ -128,6 +148,7 @@ export default class Pool extends Phaser.Scene {
 		this.chat_text.setInteractive();
 		this.chat_input.setInteractive();
 		this.dock.setInteractive();
+		this.findFourTableContainer.setInteractive();
 
 		var inputText = "";
 		this.focusedOnChat = false;
@@ -155,6 +176,14 @@ export default class Pool extends Phaser.Scene {
 			if (!_this.chat_input.getBounds().contains(event.x, event.y) && !_this.chat_text.getBounds().contains(event.x, event.y)) {
 				_this.focusedOnChat = false;  // Remove focus when clicking outside
 			}
+		});
+
+		this.findFourTableContainer.on('pointerover', function() {
+			_this.findFourBoard.setTexture("lodge", `table/game_3-hover`);
+		});
+
+		this.findFourTableContainer.on("pointerout", () => {
+			_this.findFourBoard.setTexture("lodge", "table/game_3");
 		});
 
 		this.cursorVisible = false;
