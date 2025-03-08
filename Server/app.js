@@ -85,7 +85,8 @@ io.on('connection', (socket) => {
                         username: penguins[key].username,
                         x: penguins[key].x, 
                         y: penguins[key].y,
-                        direction: penguins[key].direction
+                        direction: penguins[key].direction,
+                        color: penguins[key].color
                     }});
             });
         }
@@ -93,6 +94,15 @@ io.on('connection', (socket) => {
         if(message.action === 'chat')
         {
             console.log("Recieved chat! " + message.payload.msg)
+            var msg = message.payload.msg;
+            if(msg.startsWith('!'))
+            {
+                if(msg.startsWith('!data'))
+                {
+                    console.log(penguins)
+                }
+            }
+
             io.emit('message', { action: "chat", payload: { id: socket.id, msg: message.payload.msg }});
         }
 
