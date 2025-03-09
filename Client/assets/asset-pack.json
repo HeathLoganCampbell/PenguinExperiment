@@ -129,6 +129,12 @@
                 "url": "assets/penguin.json",
                 "path": "assets",
                 "key": "penguin_1"
+            },
+            {
+                "type": "multiatlas",
+                "url": "assets/prompt/prompt.json",
+                "path": "assets/prompt",
+                "key": "prompt"
             }
         ]
     },
