@@ -382,6 +382,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				this.token_blue_1.visible = false;
 			}
 
+			var amIBlue = !this.amIRed;
+			if(amIBlue)
+			{
+				this.token_red_1.visible = false;
+				this.token_blue_1.visible = false;
+			}
+
 			console.log("ysernnammee")
 			console.log(this.red_username)
 			this.red_username.setColor('#fff')
