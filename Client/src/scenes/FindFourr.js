@@ -150,6 +150,14 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.columnscontainer.setInteractive();
 
 		this.state = new Array(6).fill().map(() => new Array(7).fill(0));
+
+		var game = this.scene.sys.game;
+        game.network.events.on("findfour_joinned", (data) => {
+			// data.username
+			// data.team
+			this.blue_username.text = data.blueUsername ?? "Waiting..."
+			this.red_username.text = data.redUsername ?? "Waiting..."
+		})
 		/* END-USER-CTR-CODE */
 	}
 
@@ -374,6 +382,11 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			this.red_username.setColor('#d5f1ff');
 			this.red_username.setStroke('#336699');
 		}
+	}
+
+	join(username, team)
+	{
+		this.scene.game.network.send('findfour_join', { username: this.scene.game.username, team: team })
 	}
 
 	/* END-USER-CODE */

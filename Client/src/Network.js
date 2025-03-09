@@ -67,6 +67,11 @@ export default class Network
                 {
                     this.events.emit(message.action, message.payload)
                 }
+
+                if(message.action === 'findfour_joinned')
+                {
+                    this.events.emit(message.action, message.payload)
+                }
             });
         });
     }

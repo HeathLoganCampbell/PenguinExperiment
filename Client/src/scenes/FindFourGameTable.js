@@ -70,7 +70,7 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 		this.blueSeat = new Seat(this.scene, realX + 41, realY + 134, 3);
 		this.blueSeat.onSat = (peng) => {
 			var findFourGame = new FindFourGame(this.scene);
-			findFourGame.blue_username.text = scene.game.username
+			findFourGame.join(scene.game.username, 'blue')
 			this.scene.add.existing(findFourGame);
 			findFourGame.setDepth(10000)
 			findFourGame.spawn();
@@ -79,7 +79,7 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 		this.redSeat.onSat = (peng) => {
 			var findFourGame = new FindFourGame(this.scene);
 			this.scene.add.existing(findFourGame);
-			findFourGame.red_username.text = scene.game.username
+			findFourGame.join(scene.game.username, 'red')
 			findFourGame.setDepth(10000)
 			findFourGame.spawn();
 			this.sendMessage("Come play!")

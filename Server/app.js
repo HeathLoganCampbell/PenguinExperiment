@@ -11,6 +11,7 @@ app.use(express.static('../Client'));
 
 let penguins = {};
 let seats = [];
+let findFourGame = {}
 
 function getClientIp(socket) {
     const req = socket.request;
@@ -210,6 +211,23 @@ io.on('connection', (socket) => {
         {
             // We should track the status of the seats...
             setSeatStatus(message.payload.x, message.payload.y, true, socket.id)
+        }
+
+        if(message.action === "findfour_join")
+        {
+            var key = socket.id;
+            if(message.payload.team == 'red')
+            {
+                findFourGame['red'] = message.payload.username;
+            }
+
+            if(message.payload.team == 'blue') 
+            {
+                findFourGame['blue'] = message.payload.username;
+            }
+            
+            io.emit('message', { action: "findfour_joinned", payload: { id: socket.id, redUsername: findFourGame['red'], blueUsername: findFourGame['blue'] }});
+            console.log("FindFour > " + penguins[key].username + " joinned as " + message.payload.team);
         }
     });
 });
