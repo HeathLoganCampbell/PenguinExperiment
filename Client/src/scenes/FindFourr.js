@@ -344,6 +344,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	}
 
 	dropToken(token, x, y, value) {
+		token.visible = true;
         let i = 0
 		var _this = this;
         let timer = this.scene.time.addEvent({
