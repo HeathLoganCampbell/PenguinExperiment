@@ -18,7 +18,106 @@ function getClientIp(socket) {
     return req.connection.remoteAddress || req.socket.remoteAddress;
 }
 
-function setSeatStatus(x, y, status, socketId) {
+function getHighestFreeRow(columnIndex)
+{
+    for (let row = findFourGame.state.length - 1; row >= 0; row--) {
+        if (findFourGame.state[row][columnIndex] === 0) {
+            return row;
+        }
+    }
+    return -1;
+}
+
+function hasWonHorz(tokenValue)
+{
+    var tokensInRow = 0;
+    for (let y = findFourGame.state.length - 1; y >= 0; y--) {
+        for (let x = findFourGame.state[y].length - 1; x >= 0; x--) {
+            if (findFourGame.state[y][x] === tokenValue) {
+                tokensInRow++;
+
+                if(tokensInRow == 4)
+                {
+                    return true;
+                }
+            }
+            else {
+                tokensInRow = 0;
+            }
+        }
+
+        tokensInRow = 0;
+    }
+
+    return false;
+}
+
+function hasWonVert(tokenValue)
+{
+    var tokensInRow = 0;
+    for (let x = findFourGame.state[0].length - 1; x >= 0; x--) {
+        for (let y = findFourGame.state.length - 1; y >= 0; y--) {
+            if (findFourGame.state[y][x] === tokenValue) {
+                tokensInRow++;
+
+                if(tokensInRow == 4)
+                {
+                    return true;
+                }
+            }
+            else {
+                tokensInRow = 0;
+            }
+        }
+
+        tokensInRow = 0;
+    }
+
+    return false;
+}
+
+function hasWonDiag(tokenValue) {
+    let rows = findFourGame.state.length;
+    let cols = findFourGame.state[0].length;
+
+    // Check \ diagonal (bottom-left to top-right)
+    for (let y = 0; y <= rows - 4; y++) {
+        for (let x = 0; x <= cols - 4; x++) {
+            if (
+                findFourGame.state[y][x] === tokenValue &&
+                findFourGame.state[y + 1][x + 1] === tokenValue &&
+                findFourGame.state[y + 2][x + 2] === tokenValue &&
+                findFourGame.state[y + 3][x + 3] === tokenValue
+            ) {
+                return true;
+            }
+        }
+    }
+
+    // Check / diagonal (bottom-right to top-left)
+    for (let y = 0; y <= rows - 4; y++) {
+        for (let x = 3; x < cols; x++) {
+            if (
+                findFourGame.state[y][x] === tokenValue &&
+                findFourGame.state[y + 1][x - 1] === tokenValue &&
+                findFourGame.state[y + 2][x - 2] === tokenValue &&
+                findFourGame.state[y + 3][x - 3] === tokenValue
+            ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function hasWon(tokenValue)
+{
+    return hasWonHorz(tokenValue) || hasWonVert(tokenValue) || hasWonDiag(tokenValue);
+}
+
+function setSeatStatus(x, y, status, socketId) 
+{
     let seat = seats.find(s => s.x === x && s.y === y);
     if (!seat) {
         seat = { x, y, filled: status, socketId };
@@ -68,7 +167,8 @@ function isValidHexColor(color) {
     return /^#([0-9A-F]{3}){1,2}$/i.test(color);
 }
 
-function leaveSeat(socketId) {
+function leaveSeat(socketId)
+{
     let seat = seats.find(s => s.socketId === socketId);
     if (seat) {
         seat.status = false;
@@ -264,6 +364,8 @@ io.on('connection', (socket) => {
                 findFourGame.turn = 'red'
             }
 
+            findFourGame.state = new Array(6).fill().map(() => new Array(7).fill(0));
+
             io.emit('message', { action: "findfour_joinned", payload: { id: socket.id, redUsername: findFourGame['red'], blueUsername: findFourGame['blue'] }});
             console.log("FindFour > " + penguins[key].username + " joinned as " + message.payload.team);
         }
@@ -292,7 +394,24 @@ io.on('connection', (socket) => {
 
             var columnIndex = message.payload.columnIndex;
             console.log("FindFour > " + penguins[key].username + " placed a token in row " + columnIndex);
+
+            var x = columnIndex;
+            var y = getHighestFreeRow(columnIndex);
+            findFourGame.state[y][x] = findFourGame.turn == 'red' ? 1 : 2
+            console.log("Game state:")
+            console.log(findFourGame.state)
+            var haveWinner = hasWon(findFourGame.turn == 'red' ? 1 : 2)
+
             io.emit('message', { action: "findfour_placed", payload: { id: socket.id, token: findFourGame.turn, columnIndex: columnIndex }});
+            if(haveWinner)
+            {
+                console.log("WE HAVE A WINNER!!!!!");
+                if(findFourGame.turn == 'red')
+                    gameOver(findFourGame['red'])
+                if(findFourGame.turn == 'blue')
+                    gameOver(findFourGame['blue'])
+            }
+
             if(findFourGame.turn == 'blue')
             {
                 findFourGame.turn = 'red'
