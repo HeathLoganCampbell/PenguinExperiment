@@ -157,6 +157,14 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			// data.team
 			this.blue_username.text = data.blueUsername ?? "Waiting..."
 			this.red_username.text = data.redUsername ?? "Waiting..."
+
+			if(data.blueUsername && data.redUsername)
+			{
+				if(this.amIRed && this.isRedTurn)
+				{
+					this.blockedPlacing = false;
+				}
+			}
 		})
 
 		game.network.events.on("findfour_placed", (data) => {
@@ -240,7 +248,6 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		draggableWindow.start();
 
 		this.isRedTurn = true;
-		this.blockedPlacing = false;
 		this.updateVisibleTokens();
 
 		// let debugGraphics = this.scene.add.graphics();
@@ -259,13 +266,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				if(this.isRedTurn) 
 				{
 					if(this.blockedPlacing) return;
-					this.placeToken('red', columnIndex)
+					// this.placeToken('red', columnIndex)
 					this.scene.game.network.send('findfour_place', { token: 'red', columnIndex: columnIndex })
 				}
 				else 
 				{
 					if(this.blockedPlacing) return;
-					this.placeToken('blue', columnIndex)
+					// this.placeToken('blue', columnIndex)
 					this.scene.game.network.send('findfour_place', {  token: 'blue', columnIndex: columnIndex })
 				}
 			});
@@ -337,12 +344,6 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	}
 
 	dropToken(token, x, y, value) {
-		if(this.blockedPlacing) 
-		{
-			console.log("blocked!")
-			return;
-		}
-		this.blockedPlacing = true;
         let i = 0
 		var _this = this;
         let timer = this.scene.time.addEvent({
@@ -360,7 +361,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 					const tokenPlaced = this.scene.add.sprite(renderX, renderY, "four", this.isRedTurn ?  "counter_1" : "counter_2");
 					this.add(tokenPlaced);
 					_this.isRedTurn = !_this.isRedTurn;
-					_this.blockedPlacing = false;
+					
 					_this.updateVisibleTokens();
                 }
 
@@ -369,14 +370,16 @@ export default class FindFourr extends Phaser.GameObjects.Container {
             repeat: y
         })
     }
-
 	updateVisibleTokens()
-	{
+	{	
 		if(this.isRedTurn)
 		{
 			// reds turn
-			this.token_red_1.visible = true;
-			this.token_blue_1.visible = false;
+			if(this.amIRed)
+			{
+				this.token_red_1.visible = true;
+				this.token_blue_1.visible = false;
+			}
 
 			console.log("ysernnammee")
 			console.log(this.red_username)
@@ -389,8 +392,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		else 
 		{
 			// blues turn
-			this.token_red_1.visible = false;
-			this.token_blue_1.visible = true;
+			var amIBlue = !this.amIRed;
+			if(amIBlue)
+			{
+				this.token_red_1.visible = false;
+				this.token_blue_1.visible = true;
+			}
+			
 
 			console.log("ysernnammee")
 			console.log(this.blue_username)
@@ -400,10 +408,25 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			this.red_username.setColor('#d5f1ff');
 			this.red_username.setStroke('#336699');
 		}
+
+		if(this.amIRed)
+		{
+			if(this.isRedTurn) this.blockedPlacing = false;
+			if(!this.isRedTurn) this.blockedPlacing = true;
+		}
+
+		var amIBlue = !this.amIRed;
+		var isBlueTurn = !this.isRedTurn;
+		if(amIBlue)
+		{
+			if(isBlueTurn) this.blockedPlacing = false;
+			if(!isBlueTurn) this.blockedPlacing = true;
+		}
 	}
 
 	join(username, team)
 	{
+		this.amIRed = team == 'red';
 		this.scene.game.network.send('findfour_join', { username: this.scene.game.username, team: team })
 	}
 

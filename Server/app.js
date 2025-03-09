@@ -257,9 +257,8 @@ io.on('connection', (socket) => {
             if(findFourGame.turn == 'blue')
             {
                 findFourGame.turn = 'red'
-            }
-
-            if(findFourGame.turn == 'red')
+            } 
+            else if(findFourGame.turn == 'red')
             {
                 findFourGame.turn = 'blue'
             }
