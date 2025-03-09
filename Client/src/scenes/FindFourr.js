@@ -175,6 +175,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		game.network.events.on("findfour_gameover", (data) => {
 			console.log("Game over!!!")
 			console.log(this)
+			if(this.droptimer) this.scene.time.removeEvent(this.droptimer)
 			var game = this.scene.sys.game;
 			game.network.events.removeAllListeners("findfour_joinned")
 			game.network.events.removeAllListeners("findfour_placed")
@@ -362,14 +363,14 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		token.visible = true;
         let i = 0
 		var _this = this;
-        let timer = this.scene.time.addEvent({
+        this.droptimer = this.scene.time.addEvent({
             delay: 50,
             callback: () => {
                 token.y = token.y + 49;
 
-                if (i === y) 
+                if (i === y && _this.scene) 
 				{
-                    _this.scene.time.removeEvent(timer)
+                    _this.scene.time.removeEvent(this.droptimer)
 
 					this.state[y][x] = value;
 					var renderX = -165 - (x * -48.5);
