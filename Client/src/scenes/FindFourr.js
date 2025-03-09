@@ -158,6 +158,11 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			this.blue_username.text = data.blueUsername ?? "Waiting..."
 			this.red_username.text = data.redUsername ?? "Waiting..."
 		})
+
+		game.network.events.on("findfour_placed", (data) => {
+			console.log("placing token from network!!!")
+			this.placeToken(data.token, data.columnIndex)
+		})
 		/* END-USER-CTR-CODE */
 	}
 
@@ -250,27 +255,18 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			var columnIndex = 6 - index;
 
 			column.on('pointerdown', () => {
+				console.log("clicked!")
 				if(this.isRedTurn) 
 				{
 					if(this.blockedPlacing) return;
-					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
-					if(heightFreeYPosition == -1) return;
-
-					this.token_red_1.y = -54;
-					this.token_red_1.x = -165 - (columnIndex * -48.5);
-
-					this.dropToken(this.token_red_1, columnIndex, heightFreeYPosition, 1);
+					this.placeToken('red', columnIndex)
+					this.scene.game.network.send('findfour_place', { token: 'red', columnIndex: columnIndex })
 				}
 				else 
 				{
 					if(this.blockedPlacing) return;
-					var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
-					if(heightFreeYPosition == -1) return;
-
-					this.token_blue_1.y = -54;
-					this.token_blue_1.x = -165 - (columnIndex * -48.5);
-
-					this.dropToken(this.token_blue_1, columnIndex, heightFreeYPosition, 2);
+					this.placeToken('blue', columnIndex)
+					this.scene.game.network.send('findfour_place', {  token: 'blue', columnIndex: columnIndex })
 				}
 			});
 
@@ -306,6 +302,28 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				}
 			});
 		});
+	}
+
+	placeToken(tokenColor, columnIndex)
+	{
+		var heightFreeYPosition = this.getHighestFreeRow(columnIndex);
+		if(heightFreeYPosition == -1) return;
+
+		var token = null;
+		if(tokenColor == 'red')
+		{
+			token = this.token_red_1;
+		}
+
+		if(tokenColor == 'blue')
+		{
+			token = this.token_blue_1;
+		}
+
+		token.y = -54;
+		token.x = -165 - (columnIndex * -48.5);
+
+		this.dropToken(token, columnIndex, heightFreeYPosition, 'red' ? 1 : 2);
 	}
 
 	getHighestFreeRow(columnIndex)

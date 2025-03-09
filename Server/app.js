@@ -226,8 +226,45 @@ io.on('connection', (socket) => {
                 findFourGame['blue'] = message.payload.username;
             }
             
+            if(findFourGame['blue'] && findFourGame['red'] && !findFourGame.turn)
+            {
+                findFourGame.turn = 'red'
+            }
+
             io.emit('message', { action: "findfour_joinned", payload: { id: socket.id, redUsername: findFourGame['red'], blueUsername: findFourGame['blue'] }});
             console.log("FindFour > " + penguins[key].username + " joinned as " + message.payload.team);
+        }
+
+        if(message.action === "findfour_place")
+        {
+            var key = socket.id;
+            var username = penguins[key].username;
+            if(findFourGame.turn == 'red' && findFourGame['red'] != username)
+            {
+                console.log(username + " tried to cheat by placing a red token")
+                return;
+            }
+
+            if(findFourGame.turn == 'blue' && findFourGame['blue'] != username)
+            {
+                console.log(username + " tried to cheat by placing a blue token")
+                return;
+            }
+
+            var columnIndex = message.payload.columnIndex;
+            console.log("FindFour > " + penguins[key].username + " placed a token in row " + columnIndex);
+            io.emit('message', { action: "findfour_placed", payload: { id: socket.id, token: findFourGame.turn, columnIndex: columnIndex }});
+            if(findFourGame.turn == 'blue')
+            {
+                findFourGame.turn = 'red'
+            }
+
+            if(findFourGame.turn == 'red')
+            {
+                findFourGame.turn = 'blue'
+            }
+
+            console.log(findFourGame)
         }
     });
 });

@@ -72,6 +72,11 @@ export default class Network
                 {
                     this.events.emit(message.action, message.payload)
                 }
+
+                if(message.action === 'findfour_placed')
+                {
+                    this.events.emit(message.action, message.payload)
+                }
             });
         });
     }
