@@ -267,6 +267,12 @@ io.on('connection', (socket) => {
             console.log("FindFour > " + penguins[key].username + " joinned as " + message.payload.team);
         }
 
+        if(message.action === "findfour_close")
+        {
+            var key = socket.id;
+            checkLeftGame(penguins[key].username)
+        }
+
         if(message.action === "findfour_place")
         {
             var key = socket.id;

@@ -249,7 +249,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				return;
 			}
 
-			_this.destroy();
+			this.scene.game.network.send('findfour_close')
 		});
 
 		draggableWindow.start();
