@@ -171,6 +171,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 			console.log("placing token from network!!!")
 			this.placeToken(data.token, data.columnIndex)
 		})
+
+		game.network.events.on("findfour_gameover", (data) => {
+			console.log("Game over!!!")
+			this.destroy();
+			alert("game over!! " + data.winnerUsername + " won!")
+			if(this.onFinish) this.onFinish();
+		})
 		/* END-USER-CTR-CODE */
 	}
 

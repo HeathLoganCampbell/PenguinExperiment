@@ -33,6 +33,36 @@ function setSeatStatus(x, y, status, socketId) {
     io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
 }
 
+function checkLeftGame(quitterUsername)
+{
+    console.log("FindFour > " + quitterUsername + " left");
+    var didntStart = findFourGame['red'] == null || findFourGame['red'] == undefined || findFourGame['blue'] == null || findFourGame['blue'] == undefined
+    if(didntStart)
+    {
+        // restart game
+        findFourGame = {}
+        return;
+    }
+
+    if(findFourGame['red'] == quitterUsername)
+    {
+        console.log("FindFour > " + findFourGame['blue'] + " won");
+        gameOver(findFourGame['blue'])
+    }
+    else if(findFourGame['blue'] == quitterUsername)
+    {
+        console.log("FindFour > " + findFourGame['red'] + " won");
+        gameOver(findFourGame['red'])
+    }
+}
+
+function gameOver(winnerUsername)
+{
+    io.emit('message', { action: "findfour_gameover", payload: { winnerUsername: winnerUsername }});
+    // Everyone get kicked out of the game
+    findFourGame = {}
+}
+
 function isValidHexColor(color) {
     return /^#([0-9A-F]{3}){1,2}$/i.test(color);
 }
@@ -42,6 +72,8 @@ function leaveSeat(socketId) {
     if (seat) {
         seat.status = false;
         seat.socketId = null;
+
+        checkLeftGame(penguins[socketId].username)
         
         setSeatStatus(seat.x, seat.y, false, null)
     }

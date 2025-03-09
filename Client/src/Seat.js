@@ -24,6 +24,7 @@ export default class Seat
         // taken
         if(this.isFilled) return;
         penguin.moveTo(this.x, this.y)
+        this.penguin = penguin;
         penguin.afterMove = () => {
             // Someone stole your seat lol
             if(this.isFilled) return;
@@ -40,8 +41,15 @@ export default class Seat
         };
     }
 
+    done()
+    {
+        if(!this.penguin) return;
+        this.penguin.moveTo(this.doneX, this.doneY)
+    }
+
     leave()
     {
-         this.isFilled = false;
+        this.isFilled = false;
+        this.penguin = null;
     }
 }

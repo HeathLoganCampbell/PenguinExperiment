@@ -24,14 +24,14 @@ export default class Network
                 }
 
                 if(message.action === 'disconnected')
-                    {
-                        if(_this.socket.id === message.payload.id) return;
-    
-                        var data = {
-                            id: message.payload.id
-                        }
-                        this.events.emit("removePenguin", data)
+                {
+                    if(_this.socket.id === message.payload.id) return;
+
+                    var data = {
+                        id: message.payload.id
                     }
+                    this.events.emit("removePenguin", data)
+                }
 
                 if(message.action === 'move')
                 {
@@ -74,6 +74,11 @@ export default class Network
                 }
 
                 if(message.action === 'findfour_placed')
+                {
+                    this.events.emit(message.action, message.payload)
+                }
+
+                if(message.action === 'findfour_gameover')
                 {
                     this.events.emit(message.action, message.payload)
                 }
