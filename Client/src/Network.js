@@ -18,6 +18,8 @@ export default class Network
             _this.send('login', { username: username })
             this.socket.on('message', (message) => 
             {
+                console.log("[In] " + message.action + ": " + JSON.stringify(message.payload))
+
                 if(message.action === 'connected' || message.action === 'updatePenguin')
                 {
                     this.events.emit('updatePenguin', message.payload)

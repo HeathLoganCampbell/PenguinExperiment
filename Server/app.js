@@ -41,6 +41,7 @@ function checkLeftGame(quitterUsername)
     {
         // restart game
         findFourGame = {}
+        io.emit('message', { action: "findfour_gameover", payload: { winnerUsername: null }});
         return;
     }
 

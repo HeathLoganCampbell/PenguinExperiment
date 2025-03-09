@@ -45,7 +45,7 @@ export default class Seat
     {
         if(!this.penguin) return;
         this.penguin.moveTo(this.doneX, this.doneY)
-        leave();
+        this.leave();
     }
 
     leave()
