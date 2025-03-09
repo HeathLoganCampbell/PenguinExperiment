@@ -139,7 +139,6 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		this.columns = columns;
 
 		/* START-USER-CTR-CODE */
-		this.realScene = scene;
 		this.closebutton.setInteractive();
 		this.column_1.setInteractive();
 		this.column_2.setInteractive();
@@ -152,7 +151,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 
 		this.state = new Array(6).fill().map(() => new Array(7).fill(0));
 
-		var game = this.realScene.sys.game;
+		var game = this.scene.sys.game;
         game.network.events.on("findfour_joinned", (data) => {
 			// data.username
 			// data.team
@@ -176,7 +175,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		game.network.events.on("findfour_gameover", (data) => {
 			console.log("Game over!!!")
 			console.log(this)
-			var game = this.realScene.sys.game;
+			var game = this.scene.sys.game;
 			game.network.events.removeAllListeners("findfour_joinned")
 			game.network.events.removeAllListeners("findfour_placed")
 			game.network.events.removeAllListeners("findfour_gameover")
@@ -283,13 +282,13 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 				{
 					if(this.blockedPlacing) return;
 					// this.placeToken('red', columnIndex)
-					this.realScene.game.network.send('findfour_place', { token: 'red', columnIndex: columnIndex })
+					this.scene.game.network.send('findfour_place', { token: 'red', columnIndex: columnIndex })
 				}
 				else 
 				{
 					if(this.blockedPlacing) return;
 					// this.placeToken('blue', columnIndex)
-					this.realScene.game.network.send('findfour_place', {  token: 'blue', columnIndex: columnIndex })
+					this.scene.game.network.send('findfour_place', {  token: 'blue', columnIndex: columnIndex })
 				}
 			});
 
@@ -363,19 +362,19 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 		token.visible = true;
         let i = 0
 		var _this = this;
-        let timer = this.realScene.time.addEvent({
+        let timer = this.scene.time.addEvent({
             delay: 50,
             callback: () => {
                 token.y = token.y + 49;
 
                 if (i === y) 
 				{
-                    _this.realScene.time.removeEvent(timer)
+                    _this.scene.time.removeEvent(timer)
 
 					this.state[y][x] = value;
 					var renderX = -165 - (x * -48.5);
 					var renderY = -54 + ((y+1) * 49);
-					const tokenPlaced = _this.realScene.add.sprite(renderX, renderY, "four", this.isRedTurn ?  "counter_1" : "counter_2");
+					const tokenPlaced = _this.scene.add.sprite(renderX, renderY, "four", this.isRedTurn ?  "counter_1" : "counter_2");
 					this.add(tokenPlaced);
 					_this.isRedTurn = !_this.isRedTurn;
 					
@@ -451,7 +450,7 @@ export default class FindFourr extends Phaser.GameObjects.Container {
 	join(username, team)
 	{
 		this.amIRed = team == 'red';
-		this.realScene.game.network.send('findfour_join', { username: this.realScene.game.username, team: team })
+		this.scene.game.network.send('findfour_join', { username: this.scene.game.username, team: team })
 	}
 
 	/* END-USER-CODE */
