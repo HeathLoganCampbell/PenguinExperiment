@@ -80,7 +80,10 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			findFourGame.spawn();
 			this.sendMessage("Come play!")
 			findFourGame.onFinish = () => {
-				this.blueSeat.done();
+				if(this.blueSeat.isFilled)
+				{
+					this.blueSeat.done();
+				}
 			}
 		};
 		this.redSeat.onSat = (peng) => {
@@ -91,7 +94,10 @@ export default class FindFourGameTable extends Phaser.GameObjects.Container {
 			findFourGame.spawn();
 			this.sendMessage("Come play!")
 			findFourGame.onFinish = () => {
-				this.redSeat.done();
+				if(this.redSeat.isFilled)
+				{
+					this.redSeat.done();
+				}
 			}
 		};
 

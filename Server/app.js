@@ -72,10 +72,10 @@ function leaveSeat(socketId) {
     if (seat) {
         seat.status = false;
         seat.socketId = null;
-
-        checkLeftGame(penguins[socketId].username)
         
         setSeatStatus(seat.x, seat.y, false, null)
+
+        checkLeftGame(penguins[socketId].username)
     }
 }
 
