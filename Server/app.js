@@ -132,37 +132,6 @@ function setSeatStatus(x, y, status, socketId)
     io.emit('message', { action: "seat", payload: { id: socketId, ...seat }});
 }
 
-function checkLeftGame(quitterUsername)
-{
-    console.log("FindFour > " + quitterUsername + " left");
-    var didntStart = findFourGame['red'] == null || findFourGame['red'] == undefined || findFourGame['blue'] == null || findFourGame['blue'] == undefined
-    if(didntStart)
-    {
-        // restart game
-        findFourGame = {}
-        io.emit('message', { action: "findfour_gameover", payload: { winnerUsername: null }});
-        return;
-    }
-
-    if(findFourGame['red'] == quitterUsername)
-    {
-        console.log("FindFour > " + findFourGame['blue'] + " won");
-        gameOver(findFourGame['blue'])
-    }
-    else if(findFourGame['blue'] == quitterUsername)
-    {
-        console.log("FindFour > " + findFourGame['red'] + " won");
-        gameOver(findFourGame['red'])
-    }
-}
-
-function gameOver(winnerUsername)
-{
-    io.emit('message', { action: "findfour_gameover", payload: { winnerUsername: winnerUsername }});
-    // Everyone get kicked out of the game
-    findFourGame = {}
-}
-
 function isValidHexColor(color) {
     return /^#([0-9A-F]{3}){1,2}$/i.test(color);
 }
@@ -344,84 +313,6 @@ io.on('connection', (socket) => {
         {
             // We should track the status of the seats...
             setSeatStatus(message.payload.x, message.payload.y, true, socket.id)
-        }
-
-        if(message.action === "findfour_join")
-        {
-            var key = socket.id;
-            if(message.payload.team == 'red')
-            {
-                findFourGame['red'] = message.payload.username;
-            }
-
-            if(message.payload.team == 'blue') 
-            {
-                findFourGame['blue'] = message.payload.username;
-            }
-            
-            if(findFourGame['blue'] && findFourGame['red'] && !findFourGame.turn)
-            {
-                findFourGame.turn = 'red'
-            }
-
-            findFourGame.state = new Array(6).fill().map(() => new Array(7).fill(0));
-
-            io.emit('message', { action: "findfour_joinned", payload: { id: socket.id, redUsername: findFourGame['red'], blueUsername: findFourGame['blue'] }});
-            console.log("FindFour > " + penguins[key].username + " joinned as " + message.payload.team);
-        }
-
-        if(message.action === "findfour_close")
-        {
-            var key = socket.id;
-            checkLeftGame(penguins[key].username)
-        }
-
-        if(message.action === "findfour_place")
-        {
-            var key = socket.id;
-            var username = penguins[key].username;
-            if(findFourGame.turn == 'red' && findFourGame['red'] != username)
-            {
-                console.log(username + " tried to cheat by placing a red token")
-                return;
-            }
-
-            if(findFourGame.turn == 'blue' && findFourGame['blue'] != username)
-            {
-                console.log(username + " tried to cheat by placing a blue token")
-                return;
-            }
-
-            var columnIndex = message.payload.columnIndex;
-            console.log("FindFour > " + penguins[key].username + " placed a token in row " + columnIndex);
-
-            var x = columnIndex;
-            var y = getHighestFreeRow(columnIndex);
-            findFourGame.state[y][x] = findFourGame.turn == 'red' ? 1 : 2
-            console.log("Game state:")
-            console.log(findFourGame.state)
-            var haveWinner = hasWon(findFourGame.turn == 'red' ? 1 : 2)
-
-            io.emit('message', { action: "findfour_placed", payload: { id: socket.id, token: findFourGame.turn, columnIndex: columnIndex }});
-            if(haveWinner)
-            {
-                console.log("WE HAVE A WINNER!!!!!");
-                if(findFourGame.turn == 'red')
-                    gameOver(findFourGame['red'])
-                if(findFourGame.turn == 'blue')
-                    gameOver(findFourGame['blue'])
-            }
-
-            if(findFourGame.turn == 'blue')
-            {
-                findFourGame.turn = 'red'
-            } 
-            else if(findFourGame.turn == 'red')
-            {
-                findFourGame.turn = 'blue'
-            }
-
-            console.log(findFourGame)
         }
     });
 });
