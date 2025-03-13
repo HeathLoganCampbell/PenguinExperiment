@@ -6,24 +6,38 @@ class FindFour
         this.blueUsername = "Waiting...";
     }
 
-    join(socket, username, team)
+    assignToTeam(team, username)
     {
-        if(team == 'red')
-        {
-            this.redUsername = username;
+        switch(team) {
+            case 'red':
+                this.redUsername = username;
+                break;
+            case 'blue':
+                this.blueUsername = username;
+                break;
+            default:
+                throw new Error(`Unknown team: ${team}`);
         }
+    }
 
-        if(team == 'blue') 
-        {
-            this.blueUsername = username;
-        }
-        
+    initializeGameState()
+    {
+        findFourGame.state = new Array(6).fill().map(() => new Array(7).fill(0));
+    }
+
+    setInitialTurnIfNeeded()
+    {
         if(this.blueUsername  && this.redUsername && !findFourGame.turn)
         {
             findFourGame.turn = 'red'
         }
+    }
 
-        findFourGame.state = new Array(6).fill().map(() => new Array(7).fill(0));
+    join(socket, username, team)
+    {
+        this.assignToTeam(team, username);
+        this.initializeGameState();
+        this.setInitialTurnIfNeeded();
 
         console.log("FindFour > " + username + " joinned as " + team);
         io.emit('message', { action: "findfour_joinned", payload: { id: socket.id, redUsername: this.redUsername, blueUsername: this.blueUsername }});
