@@ -9,3 +9,5 @@ Commands
 * !puffle
 * !ninja
 * !party
+
+https://youtu.be/CeN-CLbReGQ?si=bsBujzj2bW4Dd_U4
